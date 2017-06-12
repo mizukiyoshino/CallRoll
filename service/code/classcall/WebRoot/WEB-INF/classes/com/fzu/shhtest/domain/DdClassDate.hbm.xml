@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.fzu.shhtest.domain.DdClassDate" table="ddclassdate"
+		catalog="classcall">
+		<id name="classDate">
+			<column name="classDate" />
+		</id>
+
+		<property name="dname">
+			<column name="dname" />
+		</property>
+
+		<property name="state">
+			<column name="state" />
+		</property>
+	</class>
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

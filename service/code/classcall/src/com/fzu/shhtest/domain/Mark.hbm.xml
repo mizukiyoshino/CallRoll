@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.fzu.shhtest.domain.Mark" table="mark" catalog="classcall">
+		<id name="courseName">
+			<column name="courseName" />
+		</id>
+		<property name="ID">
+			<column name="ID" />
+		</property>
+
+		<property name="dailyScore">
+			<column name="dailyScore" />
+		</property>
+
+		<property name="finalScore">
+			<column name="finalScore" />
+		</property>
+
+		<property name="markreserve">
+			<column name="markreserve" />
+		</property>
+	</class>
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

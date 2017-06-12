@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.fzu.shhtest.domain.SchoolInfo" table="schoolinfo"
+		catalog="classcall">
+		<id name="school">
+			<column name="school" />
+		</id>
+		<property name="college">
+			<column name="college" />
+		</property>
+		<property name="department">
+			<column name="department" />
+		</property>
+	</class>
+</hibernate-mapping>

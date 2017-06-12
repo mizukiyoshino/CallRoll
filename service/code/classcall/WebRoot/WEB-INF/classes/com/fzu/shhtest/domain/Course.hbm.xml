@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.fzu.shhtest.domain.Course" table="course"
+		catalog="classcall">
+		<id name="courseName">
+			<column name="courseName" />
+		</id>
+	
+		<property name="dailyWeight">
+			<column name="dailyWeight" />
+		</property>
+
+		<property name="finalWeight">
+			<column name="finalWeight" />
+		</property>
+
+		<property name="picketLine">
+			<column name="picketLine" />
+		</property>
+
+		<property name="classSession">
+			<column name="classSession" />
+		</property>
+
+		<property name="classLocation">
+			<column name="classLocation" />
+		</property>
+
+		<property name="classDate">
+			<column name="classDate" />
+		</property>
+
+		<property name="classOrder">
+			<column name="classOrder" />
+		</property>
+
+		<property name="ID">
+			<column name="ID" />
+		</property>
+
+		<property name="shape">
+			<column name="shape" />
+		</property>
+	</class>
+</hibernate-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

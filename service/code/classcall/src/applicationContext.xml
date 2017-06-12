@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	    http://www.springframework.org/schema/beans/spring-beans-4.1.xsd 
+	    http://www.springframework.org/schema/tx 
+	    http://www.springframework.org/schema/tx/spring-tx.xsd
+	    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+	    http://www.springframework.org/schema/aop 
+	    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd "
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop">
+
+	<!-- 另一种beans <beans xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" 
+		xmlns:tx="http://www.springframework.org/schema/tx" xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-2.0.xsd http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-2.0.xsd"> -->
+	<!-- 另一种配置 class="com.mchange.v2.c3p0.ComboPooledDataSource" -->
+
+<!--#############################   hibernate配置         #####################################-->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/classcall">
+		</property>
+		<property name="username" value="root"></property>
+		<property name="password" value="123456"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<!-- <property name="hibernateProperties"> <props> <prop key="hibernate.current_session_context_class">thread</prop> 
+			</props> </property> -->
+		<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
+	</bean>
+<!--#############################   hibernate配置         #####################################-->
+
+
+
+
+
+<!--#############################   数据库表         #####################################-->
+	<!-- DAO相关 -->
+	<bean scope="prototype" id="personnelDao" class="com.fzu.shhtest.dao.PersonnelDaoImpl"
+		autowire="byName">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- Service相关 -->
+	<bean scope="prototype" id="personnelService"
+		class="com.fzu.shhtest.service.PersonnelServiceImpl" autowire="byName">
+		<property name="personnelDao" ref="personnelDao"></property>
+	</bean>
+	<!-- Action相关 -->
+	<bean scope="prototype" autowire="byName" id="personnelAction"
+		class="com.fzu.shhtest.controller.PersonnelAction">
+		<property name="personnelService" ref="personnelService"></property>
+	</bean>
+
+
+
+	<!-- DAO相关 -->
+	<bean scope="prototype" id="courseDao" class="com.fzu.shhtest.dao.CourseDaoImpl"
+		autowire="byName">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- Service相关 -->
+	<bean scope="prototype" id="courseService"
+		class="com.fzu.shhtest.service.CourseServiceImpl" autowire="byName">
+		<property name="courseDao" ref="courseDao"></property>
+	</bean>
+	<!-- Action相关 -->
+	<bean scope="prototype" autowire="byName" id="courseAction"
+		class="com.fzu.shhtest.controller.CourseAction">
+		<property name="courseService" ref="courseService"></property>
+		<property name="ddClassDateService" ref="ddClassDateService"></property>
+	</bean>
+
+
+	<!-- DAO相关 -->
+	<bean scope="prototype" id="callTheRollDao"
+		class="com.fzu.shhtest.dao.CallTheRollDaoImpl" autowire="byName">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- Service相关 -->
+	<bean scope="prototype" id="callTheRollService"
+		class="com.fzu.shhtest.service.CallTheRollServiceImpl" autowire="byName">
+		<property name="callTheRollDao" ref="callTheRollDao"></property>
+	</bean>
+	<!-- Action相关 -->
+	<bean scope="prototype" autowire="byName" id="callTheRollAction"
+		class="com.fzu.shhtest.controller.CallTheRollAction">
+		<property name="callTheRollService" ref="callTheRollService"></property>
+	</bean>
+
+
+
+	<!-- DAO相关 -->
+	<bean scope="prototype" id="markDao"
+		class="com.fzu.shhtest.dao.MarkDaoImpl" autowire="byName">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- Service相关 -->
+	<bean scope="prototype" id="markService"
+		class="com.fzu.shhtest.service.MarkServiceImpl" autowire="byName">
+		<property name="markDao" ref="markDao"></property>
+	</bean>
+	<!-- Action相关 -->
+	<bean scope="prototype" autowire="byName" id="markAction"
+		class="com.fzu.shhtest.controller.MarkAction">
+		<property name="markService" ref="markService"></property>
+	</bean>
+	
+	
+	
+	<!-- DAO相关 -->
+	<bean scope="prototype" id="questionDao"
+		class="com.fzu.shhtest.dao.QuestionDaoImpl" autowire="byName">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- Service相关 -->
+	<bean scope="prototype" id="questionService"
+		class="com.fzu.shhtest.service.QuestionServiceImpl" autowire="byName">
+		<property name="questionDao" ref="questionDao"></property>
+	</bean>
+	<!-- Action相关 -->
+	<bean scope="prototype" autowire="byName" id="questionAction"
+		class="com.fzu.shhtest.controller.QuestionAction">
+		<property name="questionService" ref="questionService"></property>
+	</bean>
+	
+	
+	
+	<!-- DAO相关 -->
+	<bean scope="prototype" id="schoolInfoDao"
+		class="com.fzu.shhtest.dao.SchoolInfoDaoImpl" autowire="byName">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- Service相关 -->
+	<bean scope="prototype" id="schoolInfoService"
+		class="com.fzu.shhtest.service.SchoolInfoServiceImpl" autowire="byName">
+		<property name="schoolInfoDao" ref="schoolInfoDao"></property>
+	</bean>
+	<!-- Action相关 -->
+	<bean scope="prototype" autowire="byName" id="schoolInfoAction"
+		class="com.fzu.shhtest.controller.SchoolInfoAction">
+		<property name="schoolInfoService" ref="schoolInfoService"></property>
+	</bean>
+<!--#############################   数据库表         #####################################-->
+
+
+
+
+<!--#############################   数据字典         #####################################-->
+	<!-- DAO相关 -->
+	<bean scope="prototype" id="ddRoleDao"
+		class="com.fzu.shhtest.dao.DdRoleDaoImpl" autowire="byName">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- Service相关 -->
+	<bean scope="prototype" id="ddRoleService"
+		class="com.fzu.shhtest.service.DdRoleServiceImpl" autowire="byName">
+		<property name="ddRoleDao" ref="ddRoleDao"></property>
+	</bean>
+	<!-- Action相关 -->
+	<bean scope="prototype" autowire="byName" id="ddRoleAction"
+		class="com.fzu.shhtest.controller.DdRoleAction">
+		<property name="ddRoleService" ref="ddRoleService"></property>
+	</bean>
+	
+	<!-- DAO相关 -->
+	<bean scope="prototype" id="ddMajorDao"
+		class="com.fzu.shhtest.dao.DdMajorDaoImpl" autowire="byName">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- Service相关 -->
+	<bean scope="prototype" id="ddMajorService"
+		class="com.fzu.shhtest.service.DdMajorServiceImpl" autowire="byName">
+		<property name="ddMajorDao" ref="ddMajorDao"></property>
+	</bean>
+	<!-- Action相关 -->
+	<bean scope="prototype" autowire="byName" id="ddMajorAction"
+		class="com.fzu.shhtest.controller.DdMajorAction">
+		<property name="ddMajorService" ref="ddMajorService"></property>
+	</bean>
+	
+	<!-- DAO相关 -->
+	<bean scope="prototype" id="ddClassDateDao"
+		class="com.fzu.shhtest.dao.DdClassDateDaoImpl" autowire="byName">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- Service相关 -->
+	<bean scope="prototype" id="ddClassDateService"
+		class="com.fzu.shhtest.service.DdClassDateServiceImpl" autowire="byName">
+		<property name="ddClassDateDao" ref="ddClassDateDao"></property>
+	</bean>
+	<!-- Action相关 -->
+	<bean scope="prototype" autowire="byName" id="ddClassDateAction"
+		class="com.fzu.shhtest.controller.DdClassDateAction">
+		<property name="ddClassDateService" ref="ddClassDateService"></property>
+	</bean>
+	
+	<!-- DAO相关 -->
+	<bean scope="prototype" id="ddStateDao"
+		class="com.fzu.shhtest.dao.DdStateDaoImpl" autowire="byName">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- Service相关 -->
+	<bean scope="prototype" id="ddStateService"
+		class="com.fzu.shhtest.service.DdStateServiceImpl" autowire="byName">
+		<property name="ddStateDao" ref="ddStateDao"></property>
+	</bean>
+	<!-- Action相关 -->
+	<bean scope="prototype" autowire="byName" id="ddStateAction"
+		class="com.fzu.shhtest.controller.DdStateAction">
+		<property name="ddStateService" ref="ddStateService"></property>
+	</bean>
+<!--#############################   数据字典         #####################################-->
+
+
+
+	<!-- 事务管理 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- 来自openfund/applicationContext.xml -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="add*" timeout="120" rollback-for="Exception"
+				propagation="REQUIRED" />
+			<tx:method name="create*" timeout="120" rollback-for="Exception"
+				propagation="REQUIRED" />
+			<tx:method name="del*" timeout="120" rollback-for="Exception"
+				propagation="REQUIRED" />
+			<tx:method name="save*" timeout="120" rollback-for="Exception"
+				propagation="REQUIRED" />
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- 配置切面 -->
+	<aop:config proxy-target-class="true">
+		<aop:advisor pointcut="execution(* com.fzu.shhtest.dao.*.*(..))"
+			advice-ref="txAdvice" />
+		<aop:advisor pointcut="execution(* com.fzu.shhtest.controller.*.*(..))"
+			advice-ref="txAdvice" />
+	</aop:config>
+	<!-- 来自openfund/applicationContext.xml -->
+</beans>
+
+
+
+
+
+
+
+<!-- 第一种方法配置sessionFactory <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean"> 
+	<property name="configLocation" value="classpath:config/hibernate.cfg.xml"></property> 
+	</bean> 第二种方法配置sessionFactory <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" 
+	destroy-method="close"> <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/> 
+	<property name="url" value="jdbc:oracle:thin:@localhost:1521:wang"/> <property 
+	name="username" value="wang"/> <property name="password" value="wang"/> </bean> 
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean"> 
+	<property name="dataSource" ref="dataSource"/> <property name="hibernateProperties"> 
+	<props> <prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop> 
+	<prop key="hibernate.show_sql">true</prop> </props> </property> <property 
+	name="mappingLocations"> <list> <value>classpath:test/entity/User.hbm.xml</value> 
+	</list> </property> </bean> -->  
