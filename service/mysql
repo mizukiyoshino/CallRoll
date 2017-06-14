@@ -148,7 +148,7 @@ create table schoolinfo
    school               char(20) not null,
    college              char(26) not null,
    department           char(20),
-   primary key (school, college)
+   primary key (school)
 );
 
 alter table calltheroll add constraint FK_Reference_12 foreign key (callstate)
