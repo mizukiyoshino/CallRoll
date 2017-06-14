@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+        .gridStyle {
+            border: 10px solid rgb(212,212,212);
+            width: 120%;
+            height: 500px;
+        }
+        .ngGridMaxPagesNumber {
+            display:inline-block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<section class="content-header">
+    <ol class="breadcrumb">
+        <li><a href="#/"><i class="fa fa-cogs"></i> 系统设置</a></li>
+        <li class="active"><i class="fa fa-list-alt"></i> 课程</li>
+    </ol>
+</section>
+
+<div class="btn-group" role="group" aria-label="工具栏">
+    <button type="button" class="btn btn-default" ng-click="insert()">新增</button>
+    <button type="button" class="btn btn-default" ng-click="update()">修改</button>
+    <button type="button" class="btn btn-default" ng-click="delete()">删除</button>
+</div>
+
+<div class="gridStyle" ng-grid="gridOptions"></div>
+
+
+
+<!--<script src="https://code.angularjs.org/1.6.0/angular.js"></script>-->
+<!--<script type="text/javascript">-->
+<!--var phoneapp = angular.module('phoneApp', []);-->
+<!--phoneapp.controller('getHttpCtrl', function ($scope, $http) {-->
+<!--$http({-->
+<!--method: 'POST',-->
+<!--url: 'http://110.84.175.242:8080/shhTest/teststudentaction/getTestStudentByName',-->
+<!--params: {-->
+<!--"sname": "雷三"-->
+<!--}-->
+
+<!--}).then(function successCallback(response) {-->
+<!--$scope.names = response.data;-->
+<!--Console.log($scope.names);-->
+<!--}, function errorCallback(response) {-->
+<!--$scope.names = "失败"-->
+<!--// 请求失败执行代码-->
+<!--});-->
+<!--});-->
+<!--</script>-->
+
+
+
+
+<!--<div ng-app="phoneApp">-->
+<!--<span ng-controller="getHttpCtrl">-->
+<!--{{names}}-->
+
+<!--</span>-->
+</div>
+</body>
+</html>
