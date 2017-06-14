@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 	<constant name="struts.devMode" value="false" />
@@ -18,6 +18,8 @@
 		<action name="deletePersonnelByID" class="personnelAction" method="deletePersonnelByID" />
 		<action name="createPersonnel" class="personnelAction" method="createPersonnel" />
 		<action name="updatePersonnel" class="personnelAction" method="updatePersonnel" />
+		<action name="CheckPersonnel" class="personnelAction" method="CheckPersonnel" />
+		
 	</package>
 
 	<package name="courseaction" namespace="/courseaction"
@@ -31,14 +33,15 @@
 
 	<package name="callTheRollaction" namespace="/calltherollaction"
 		extends="struts-default,json-default">
-		<action name="getAllCallTheRoll" class="callTheRollAction"
-			method="getAllCallTheRoll" />
-		<action name="getCallTheRollByDate" class="callTheRollAction"
-			method="getCallTheRollByDate" />
-		<action name="getCallTheRollByID" class="callTheRollAction"
-			method="getCallTheRollByID" />
-		<action name="getCallTheRollByCoursename" class="callTheRollAction"
-			method="getCallTheRollByCoursename" />
+		<action name="createCallTheRoll" class="callTheRollAction" method="createCallTheRoll" />
+		<action name="deleteCallTheRollByID" class="callTheRollAction" method="deleteCallTheRollByID" />
+		<action name="updateCallTheRoll" class="callTheRollAction" method="updateCallTheRoll" />
+		
+		<action name="getAllCallTheRoll" class="callTheRollAction" method="getAllCallTheRoll" />
+		<action name="getCallTheRollByDate" class="callTheRollAction" method="getCallTheRollByDate" />
+		<action name="getCallTheRollBetweenDate" class="callTheRollAction" method="getCallTheRollBetweenDate" />
+		<action name="getCallTheRollByID" class="callTheRollAction" method="getCallTheRollByID" />
+		<action name="getCallTheRollByCoursename" class="callTheRollAction" method="getCallTheRollByCoursename" />
 	</package>
 
 	<package name="markaction" namespace="/markaction"
@@ -47,19 +50,17 @@
 		<action name="getMarkByName" class="markAction" method="getMarkByName" />
 		<action name="getMarkByID" class="markAction" method="getMarkByID" />
 		<action name="getMarkByNameAndID" class="markAction" method="getMarkByNameAndID" />
+		<action name="updateMark" class="markAction" method="updateMark" />
+		<action name="createMark" class="markAction" method="createMark" />
 	</package>
 	
 	<package name="questionaction" namespace="/questionaction"
 		extends="struts-default,json-default">
 		<action name="createQuestion" class="questionAction" method="createQuestion" />
 		<action name="deleteQuestionByCourseName" class="questionAction" method="deleteQuestionByCourseName" />
-		<action name="deleteQuestionByID" class="questionAction" method="deleteQuestionByID" />
 		<action name="deleteQuestionByCoursenameAndID" class="questionAction" method="deleteQuestionByCoursenameAndID" />
 		<action name="deleteQuestionByCoursenameAndIDAndDate" class="questionAction" method="deleteQuestionByCoursenameAndIDAndDate" />
 	
-		<action name="updateQuestionByCourseName" class="questionAction" method="updateQuestionByCourseName" />
-		<action name="updateQuestionByID" class="questionAction" method="updateQuestionByID" />
-		<action name="updateQuestionByCoursenameAndID" class="questionAction" method="updateQuestionByCoursenameAndID" />
 		<action name="updateQuestionByCoursenameAndIDAndDate" class="questionAction" method="updateQuestionByCoursenameAndIDAndDate" />
 	
 		<action name="getAllQuestion" class="questionAction" method="getAllQuestion" />
