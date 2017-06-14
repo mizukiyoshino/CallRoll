@@ -11,9 +11,11 @@ import com.fzu.shhtest.domain.DdRole;
 
 public class DdRoleDaoImpl implements DdRoleDao {
 	private SessionFactory sessionFactory;
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
+
 	private Session getSession() {
 		if (sessionFactory == null)
 			return null;
@@ -29,17 +31,26 @@ public class DdRoleDaoImpl implements DdRoleDao {
 
 	@Override
 	public boolean deleteDdRoleByName(String dname) {
-		// TODO Auto-generated method stub
 		Session session = getSession();
-		DdRole ddRole = getDdRoleStateByName(dname);
-		session.delete(ddRole);
+		String hqlString = "DELETE FROM ddrole WHERE dname=?";
+		Query query = session.createSQLQuery(hqlString);
+		query.setString(0,dname);
+		query.executeUpdate();
 		return false;
 	}
 
 	@Override
-	public boolean updateDdRoleStateByName(DdRole ddRole) {
+	public boolean updateDdRoleStateByName(DdRole ddRole, String oldDname) {
 		Session session = getSession();
-		session.update(ddRole);
+		String hqlString = "UPDATE ddrole SET role=?,dname=?,state=? WHERE dname=?";
+		
+		Query query = session.createSQLQuery(hqlString);
+		query.setInteger(0, ddRole.getRole());
+		query.setString(1, ddRole.getDname());
+		query.setString(2, ddRole.getState());
+		query.setString(3, oldDname);
+
+		query.executeUpdate();
 		return false;
 	}
 

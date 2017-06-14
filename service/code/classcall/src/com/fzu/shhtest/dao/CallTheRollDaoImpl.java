@@ -1,5 +1,6 @@
 package com.fzu.shhtest.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -45,7 +46,11 @@ public class CallTheRollDaoImpl implements CallTheRollDao {
 	public boolean updateCallTheRoll(CallTheRoll callTheRoll) {
 		// TODO Auto-generated method stub
 		Session session = getSession();
-		session.update(callTheRoll);
+		CallTheRoll newcallTheRoll = getCallTheRollByAutoId(callTheRoll.getAutoid());
+		newcallTheRoll.setCalldate(callTheRoll.getCalldate());
+		newcallTheRoll.setCallposition(callTheRoll.getCallposition());
+		newcallTheRoll.setCallstate(callTheRoll.getCallstate());
+		session.update(newcallTheRoll);
 		return false;
 	}
 
@@ -63,6 +68,18 @@ public class CallTheRollDaoImpl implements CallTheRollDao {
 		query.setDate(0, date);
 		List<CallTheRoll> list = (List<CallTheRoll>) query.list();
 		return list;
+	}
+
+	public CallTheRoll getCallTheRollByAutoId(long autoid) {
+		Session session = getSession();
+		Query query = session.createQuery("from CallTheRoll where autoid=?");
+		query.setLong(0, autoid);
+		List<CallTheRoll> callTheRoll = (ArrayList<CallTheRoll>) query.list();
+		if(callTheRoll!=null)
+		{
+			return callTheRoll.get(0);
+		}
+		return null;
 	}
 
 	@Override

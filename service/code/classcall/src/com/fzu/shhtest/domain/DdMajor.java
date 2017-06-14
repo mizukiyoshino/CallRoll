@@ -10,19 +10,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "DdMajor", catalog = "classcall")
 public class DdMajor {
-	@Column(name = "dname", nullable = false)
+	@Column(name = "dname")
 	private String dname;
 	@Id
-	@Column(name = "major", nullable = false)
+	@Column(name = "major")
 	private int major;
-	@Column(name = "state", nullable = false)
+	@Column(name = "state")
 	private String state;
-	
-	
-	
-	
-	
-	
 	
 	public String getDname() {
 		return dname;

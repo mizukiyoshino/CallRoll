@@ -23,6 +23,7 @@ import com.opensymphony.xwork2.ActionSupport;
 @SuppressWarnings("serial")
 public class DdMajorAction extends ActionSupport {
 	private DdMajorService ddMajorService;
+
 	public void setDdMajorService(DdMajorService ddMajorService) {
 		this.ddMajorService = ddMajorService;
 	}
@@ -51,7 +52,7 @@ public class DdMajorAction extends ActionSupport {
 		ddMajor.setMajor(Integer.parseInt(major));
 		ddMajor.setState(state);
 		ddMajorService.createDdMajor(ddMajor);
-		
+
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -60,7 +61,35 @@ public class DdMajorAction extends ActionSupport {
 		return null;
 	}
 
-	public String deleteDdMajorByName() throws UnsupportedEncodingException {
+	public String deleteDdMajorByName() throws IOException {
+		// localhost:8080/shhTest/ddMajoraction/deleteDdMajorByName?dname=软件工程
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map<String, String[]> params = request.getParameterMap();
+		Map<String, String> param = new HashMap<String, String>();
+		for (String key : params.keySet()) {
+			String[] values = params.get(key);
+			for (int i = 0; i < values.length; i++) {
+				param.put(key, values[i]);
+			}
+		}
+		String ids = ResultUtils.getRequestParameter(request, "dname");
+
+		Gson gson = new Gson();
+		Map<String, String> rtn = gson.fromJson(ids,
+				new TypeToken<Map<String, String>>() {
+				}.getType());
+		for (Entry<String, String> entry : rtn.entrySet()) {
+			String id = entry.getValue();
+			System.out.println("id   " + id);
+			ddMajorService.deleteDdMajorByName(id);
+		}
+		HttpServletResponse response = ResultUtils
+				.setResponse(ServletActionContext.getResponse());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("state", 1);
+		ResultUtils.toJson(response, map);
+		return null;
+		/*
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String ids = ResultUtils.getRequestParameter(request, "dname");
 		Gson gson = new Gson();
@@ -76,9 +105,29 @@ public class DdMajorAction extends ActionSupport {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("state", 1);
 		return null;
+		*/
 	}
 
 	public String getDdMajorStateByName() throws IOException {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map<String, String[]> params = request.getParameterMap();
+		Map<String, String> param = new HashMap<String, String>();
+		for (String key : params.keySet()) {
+			String[] values = params.get(key);
+			for (int i = 0; i < values.length; i++) {
+				param.put(key, values[i]);
+			}
+		}
+		String dname = ResultUtils.getRequestParameter(request, "dname");
+		System.out.println("dname:  " + dname);
+		DdMajor ddMajor = ddMajorService.getDdMajorStateByName(dname);
+		HttpServletResponse response = ResultUtils
+				.setResponse(ServletActionContext.getResponse());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("ddMajor", ddMajor);
+		ResultUtils.toJson(response, map);
+		return null;
+		/*
 		HttpServletRequest request = ServletActionContext.getRequest();
 		Map<String, String[]> params = request.getParameterMap();
 		Map<String, String> param = new HashMap<String, String>();
@@ -89,10 +138,10 @@ public class DdMajorAction extends ActionSupport {
 				param.put(key, values[i]);
 			}
 		}
-		//String dname = ResultUtils.getPostParameter(param, "dname");
+		// String dname = ResultUtils.getPostParameter(param, "dname");
 		String dname = ResultUtils.getRequestParameter(request, "dname");
-		
-		System.out.println("dname   "+dname);
+
+		System.out.println("dname   " + dname);
 		DdMajor ddMajor = ddMajorService.getDdMajorStateByName(dname);
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
@@ -100,6 +149,7 @@ public class DdMajorAction extends ActionSupport {
 		map.put("ddMajor", ddMajor);
 		ResultUtils.toJson(response, map);
 		return null;
+		*/
 	}
 
 	public String updateDdMajorStateByName() throws IOException {
@@ -113,16 +163,17 @@ public class DdMajorAction extends ActionSupport {
 				param.put(key, values[i]);
 			}
 		}
-		String oldname = ResultUtils.getPostParameter(param, "oldname");
-		String dname = ResultUtils.getPostParameter(param, "dname");
-		String major = ResultUtils.getPostParameter(param, "major");
+		String contentType = request.getHeader("Content-Type");
+		String oldname = ResultUtils.getPostParameter(param, "oldname",contentType);
+		String dname = ResultUtils.getPostParameter(param, "dname",contentType);
+		String major = ResultUtils.getPostParameter(param, "major",contentType);
 		String state = new String("启用");
-		DdMajor ddMajor = new DdMajor();//ddMajorService.getDdMajorStateByName(oldname);
+		DdMajor ddMajor = new DdMajor();// ddMajorService.getDdMajorStateByName(oldname);
 		ddMajor.setDname(dname);
 		ddMajor.setMajor(Integer.parseInt(major));
 		ddMajor.setState(state);
-		ddMajorService.updateDdMajorStateByName(ddMajor,oldname);
-		
+		ddMajorService.updateDdMajorStateByName(ddMajor, oldname);
+
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -142,15 +193,3 @@ public class DdMajorAction extends ActionSupport {
 		return null;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-

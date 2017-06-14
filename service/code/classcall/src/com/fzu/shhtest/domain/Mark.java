@@ -11,11 +11,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Mark", catalog = "classcall")
 public class Mark {	
-	@Column(name = "dailyScore", nullable = false)
+	@Column(name = "dailyScore")
 	private double dailyScore;
-	@Column(name = "finalScore", nullable = false)
+	@Column(name = "finalScore")
 	private double finalScore;
-	@Column(name = "markreserve", nullable = false)
+	@Column(name = "markreserve")
 	private String markreserve;
 	/*
 	private Course course;

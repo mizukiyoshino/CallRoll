@@ -12,6 +12,6 @@ public interface DdStateService {
 	int createDdState(DdState ddState);
 	boolean deleteDdStateByName(String dname);
 	DdState getDdStateStateByName(String dname);
-	boolean updateDdStateStateByName(DdState ddState);
+	boolean updateDdStateStateByName(DdState ddState,String oldname);
 	List getAllDdState();
 }

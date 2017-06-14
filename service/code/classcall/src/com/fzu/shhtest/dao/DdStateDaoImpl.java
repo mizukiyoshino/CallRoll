@@ -29,10 +29,11 @@ public class DdStateDaoImpl implements DdStateDao {
 
 	@Override
 	public boolean deleteDdStateByName(String dname) {
-		// TODO Auto-generated method stub
 		Session session = getSession();
-		DdState ddState = getDdStateStateByName(dname);
-		session.delete(ddState);
+		String hqlString = "DELETE FROM DdState WHERE dname=?";
+		Query query = session.createSQLQuery(hqlString);
+		query.setString(0,dname);
+		query.executeUpdate();
 		return false;
 	}
 
@@ -50,10 +51,17 @@ public class DdStateDaoImpl implements DdStateDao {
 	}
 
 	@Override
-	public boolean updateDdStateStateByName(DdState ddState) {
-		// TODO Auto-generated method stub
+	public boolean updateDdStateStateByName(DdState ddState,String oldDname) {
 		Session session = getSession();
-		session.update(ddState);
+		String hqlString = "UPDATE DdState SET callstate=?,dname=?,state=? WHERE dname=?";
+		
+		Query query = session.createSQLQuery(hqlString);
+		query.setInteger(0, ddState.getCallstate());
+		query.setString(1, ddState.getDname());
+		query.setString(2, ddState.getState());
+		query.setString(3, oldDname);
+
+		query.executeUpdate();
 		return false;
 	}
 

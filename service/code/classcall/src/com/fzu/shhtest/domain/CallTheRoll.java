@@ -17,17 +17,17 @@ import javax.persistence.Table;
 public class CallTheRoll {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "autoid" , nullable = false)
+    @Column(name = "autoid" )
 	private long autoid;
-	@Column(name = "courseName", nullable = false)
+	@Column(name = "courseName")
 	private String courseName;
-	@Column(name = "ID", nullable = false)
+	@Column(name = "ID")
 	private String ID;
-	@Column(name = "callstate", nullable = false)
+	@Column(name = "callstate")
 	private int callstate;
-	@Column(name = "calldate", nullable = false)
+	@Column(name = "calldate")
 	private Date calldate;
-	@Column(name = "callposition", nullable = false)
+	@Column(name = "callposition")
 	private String callposition;
 	
 	

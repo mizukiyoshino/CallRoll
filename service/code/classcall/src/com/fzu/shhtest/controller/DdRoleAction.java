@@ -22,11 +22,9 @@ import com.opensymphony.xwork2.ActionSupport;
 @SuppressWarnings("serial")
 public class DdRoleAction extends ActionSupport {
 	private DdRoleService ddRoleService;
-
 	public void setDdRoleService(DdRoleService ddRoleService) {
 		this.ddRoleService = ddRoleService;
 	}
-
 	public String execute() {
 		return SUCCESS;
 	}
@@ -60,7 +58,8 @@ public class DdRoleAction extends ActionSupport {
 		return null;
 	}
 
-	public String deleteDdRoleByName() throws UnsupportedEncodingException {
+	public String deleteDdRoleByName() throws IOException {
+		//localhost:8080/shhTest/ddRoleaction/deleteDdRoleByName?dname=柯南
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String ids = ResultUtils.getRequestParameter(request, "dname");
 		Gson gson = new Gson();
@@ -69,42 +68,21 @@ public class DdRoleAction extends ActionSupport {
 				}.getType());
 		for (Entry<String, String> entry : rtn.entrySet()) {
 			String id = entry.getValue();
+			System.out.println("id   "+id);
 			ddRoleService.deleteDdRoleByName(id);
 		}
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("state", 1);
+		ResultUtils.toJson(response, map);
 		return null;
 	}
 
 	public String getDdRoleStateByName() throws IOException {
 		HttpServletRequest request = ServletActionContext.getRequest();
-		Map<String, String[]> params = request.getParameterMap();
-		String queryString = "";
-		for (String key : params.keySet()) {
-			String[] values = params.get(key);
-			for (int i = 0; i < values.length; i++) {
-				String value = values[i];
-				queryString += key + "=" + value + "&";
-			}
-		}
-		 // 去掉最后一个空格
-        queryString = queryString.substring(0, queryString.length() - 1);
-        System.out.println("GET " + request.getRequestURL() + " " + queryString);
-        System.out.println(request.getHeader("Content-Type"));
-
-		Map<String, String> param = new HashMap<String, String>();
-
-		for (String key : params.keySet()) {
-			String[] values = params.get(key);
-			for (int i = 0; i < values.length; i++) {
-				param.put(key, values[i]);
-			}
-		}
-		//String dname = ResultUtils.getPostParameter(param, "dname");
+		
 		String dname = ResultUtils.getRequestParameter(request, "dname");
-		//String dname = ResultUtils.getPostParameter(param, "dname",request.getHeader("Content-Type"));
 		System.out.println("dname:  " + dname);
 		DdRole ddRole = ddRoleService.getDdRoleStateByName(dname);
 		HttpServletResponse response = ResultUtils
@@ -126,16 +104,20 @@ public class DdRoleAction extends ActionSupport {
 				param.put(key, values[i]);
 			}
 		}
-		String oldname = ResultUtils.getPostParameter(param, "oldname");
-		String dname = ResultUtils.getPostParameter(param, "dname");
-		String role = ResultUtils.getPostParameter(param, "role");
+		//http://222.76.30.22:8080/shhTest/ddRoleaction/updateDdRoleStateByName
+		//oldname=教师&dname=教师&role=4
+		//application/x-www-form-urlencoded
+		String contentType = request.getHeader("Content-Type");
+		String oldname = ResultUtils.getPostParameter(param, "oldname",contentType);
+		String dname = ResultUtils.getPostParameter(param, "dname",contentType);
+		String role = ResultUtils.getPostParameter(param, "role",contentType);
 		String state = new String("启用");
-		DdRole ddRole = ddRoleService.getDdRoleStateByName(oldname);
-
+		DdRole ddRole = new DdRole();//.getDdRoleStateByName(oldname);
+		System.out.println(oldname+"   "+dname+"        "+role);
 		ddRole.setDname(dname);
 		ddRole.setRole(Integer.parseInt(role));
 		ddRole.setState(state);
-		ddRoleService.updateDdRoleStateByName(ddRole);
+		ddRoleService.updateDdRoleStateByName(ddRole,oldname);
 
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());

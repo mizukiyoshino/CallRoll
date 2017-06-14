@@ -3,7 +3,10 @@ package com.fzu.shhtest.utils;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -105,5 +108,26 @@ public class ResultUtils {
 			// System.out.println(""+id+"   "+brach+"   "+brachfather);
 		}
 		return maplist;
+	}
+	
+	public static Date stringToDate(String stringDate) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		try {
+			date = sdf.parse(stringDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return date;
+	}
+	public static Date stringToDate(String stringDate,String format) {
+		SimpleDateFormat sdf = new SimpleDateFormat(format);
+		Date date = new Date();
+		try {
+			date = sdf.parse(stringDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return date;
 	}
 }

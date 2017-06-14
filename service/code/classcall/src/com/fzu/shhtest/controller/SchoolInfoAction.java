@@ -39,6 +39,7 @@ public class SchoolInfoAction extends ActionSupport {
 				param.put(key, values[i]);
 			}
 		}
+		//school=花椰菜大学&college=花椰菜学院&department=花椰菜系
 		String school = ResultUtils.getPostParameter(param, "school");
 		String college = ResultUtils.getPostParameter(param, "college");
 		String department = ResultUtils.getPostParameter(param, "department");
@@ -56,13 +57,14 @@ public class SchoolInfoAction extends ActionSupport {
 		return null;
 	}
 	
-	public String deleteSchoolInfo(){
+	public String deleteSchoolInfo() throws IOException{
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		schoolInfoService.deleteSchoolInfo();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("state", 1);
+		ResultUtils.toJson(response, map);
 		return null;
 	}
 	
