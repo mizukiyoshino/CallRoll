@@ -89,23 +89,6 @@ public class DdMajorAction extends ActionSupport {
 		map.put("state", 1);
 		ResultUtils.toJson(response, map);
 		return null;
-		/*
-		HttpServletRequest request = ServletActionContext.getRequest();
-		String ids = ResultUtils.getRequestParameter(request, "dname");
-		Gson gson = new Gson();
-		Map<String, String> rtn = gson.fromJson(ids,
-				new TypeToken<Map<String, String>>() {
-				}.getType());
-		for (Entry<String, String> entry : rtn.entrySet()) {
-			String id = entry.getValue();
-			ddMajorService.deleteDdMajorByName(id);
-		}
-		HttpServletResponse response = ResultUtils
-				.setResponse(ServletActionContext.getResponse());
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("state", 1);
-		return null;
-		*/
 	}
 
 	public String getDdMajorStateByName() throws IOException {
@@ -127,29 +110,6 @@ public class DdMajorAction extends ActionSupport {
 		map.put("ddMajor", ddMajor);
 		ResultUtils.toJson(response, map);
 		return null;
-		/*
-		HttpServletRequest request = ServletActionContext.getRequest();
-		Map<String, String[]> params = request.getParameterMap();
-		Map<String, String> param = new HashMap<String, String>();
-
-		for (String key : params.keySet()) {
-			String[] values = params.get(key);
-			for (int i = 0; i < values.length; i++) {
-				param.put(key, values[i]);
-			}
-		}
-		// String dname = ResultUtils.getPostParameter(param, "dname");
-		String dname = ResultUtils.getRequestParameter(request, "dname");
-
-		System.out.println("dname   " + dname);
-		DdMajor ddMajor = ddMajorService.getDdMajorStateByName(dname);
-		HttpServletResponse response = ResultUtils
-				.setResponse(ServletActionContext.getResponse());
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("ddMajor", ddMajor);
-		ResultUtils.toJson(response, map);
-		return null;
-		*/
 	}
 
 	public String updateDdMajorStateByName() throws IOException {

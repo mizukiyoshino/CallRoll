@@ -1,11 +1,8 @@
 package com.fzu.shhtest.domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,12 +25,12 @@ public class Mark {
 		this.course = course;
 	}
 	*/
-	private courseNameAndID cnameAndID;
+	private CourseNameAndID cnameAndID;
 	@EmbeddedId
-	public courseNameAndID getCnameAndID() {
+	public CourseNameAndID getCnameAndID() {
 		return cnameAndID;
 	}
-	public void setCnameAndID(courseNameAndID cnameAndID) {
+	public void setCnameAndID(CourseNameAndID cnameAndID) {
 		this.cnameAndID = cnameAndID;
 	}
 	

@@ -6,19 +6,25 @@ import java.util.List;
 import com.fzu.shhtest.domain.CallTheRoll;
 
 public interface CallTheRollService {
+	// Ôö
 	int createCallTheRoll(CallTheRoll callTheRoll);
 
+	// É¾
 	boolean deleteCallTheRollByID(String ID);
 
+	// ¸Ä
 	boolean updateCallTheRoll(CallTheRoll callTheRoll);
 
+	// ²é
 	List getAllCallTheRoll();
-
 	List getCallTheRollByDate(Date date);
-	
-	List getCallTheRollBetweenDate(Date date1,Date date2);
-	
+	List getCallTheRollBetweenDate(Date date1, Date date2);
 	List getCallTheRollByID(String ID);
-	
 	List getCallTheRollByCoursename(String cname);
+
+	List getAllCallTheRollHql();
+	List getCallTheRollByDateHql(String date);
+	List getCallTheRollBetweenDateHql(String date1, String date2);
+	List getCallTheRollByIDHql(String ID);
+	List getCallTheRollByCoursenameHql(String cname);
 }

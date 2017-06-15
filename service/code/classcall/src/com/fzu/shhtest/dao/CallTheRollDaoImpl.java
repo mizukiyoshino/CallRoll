@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 
 import com.fzu.shhtest.domain.CallTheRoll;
 import com.fzu.shhtest.domain.Personnel;
+import com.fzu.shhtest.utils.ResultUtils;
 
 public class CallTheRollDaoImpl implements CallTheRollDao {
 	private SessionFactory sessionFactory;
@@ -107,6 +108,53 @@ public class CallTheRollDaoImpl implements CallTheRollDao {
 		Query query = session.createQuery("from CallTheRoll where courseName=?");
 		query.setString(0, cname);
 		List<CallTheRoll> list = (List<CallTheRoll>) query.list();
+		return list;
+	}
+	
+	
+	//...........................HQL................................
+	@Override
+	public List getAllCallTheRollHql() {
+		Session session = getSession();
+		String hqlString = "SELECT autoid,courseName,ID,d.dname AS callstate,calldate,callposition FROM calltheroll AS c,ddstate AS d WHERE c.callstate=d.callstate;";
+		Query query = session.createSQLQuery(hqlString);
+		List list = query.list();
+		return list;
+	}
+
+	@Override
+	public List getCallTheRollByDateHql(String date) {
+		Session session = getSession();
+		String hqlString = "SELECT autoid,courseName,ID,d.dname AS callstate,calldate,callposition FROM calltheroll AS c,ddstate AS d WHERE c.callstate=d.callstate AND c.calldate=\'"+date+"\';";
+		Query query = session.createSQLQuery(hqlString);
+		List list = query.list();
+		return list;
+	}
+	
+	@Override
+	public List getCallTheRollBetweenDateHql(String date1, String date2) {
+		Session session = getSession();
+		String hqlString = "SELECT autoid,courseName,ID,d.dname AS callstate,calldate,callposition FROM calltheroll AS c,ddstate AS d WHERE c.callstate=d.callstate AND c.calldate>=\'"+date1+"\' AND c.calldate<=\'"+date2+"\';";
+		Query query = session.createSQLQuery(hqlString);
+		List list = query.list();
+		return list;
+	}
+
+	@Override
+	public List getCallTheRollByIDHql(String ID) {
+		Session session = getSession();
+		String hqlString = "SELECT autoid,courseName,ID,d.dname AS callstate,calldate,callposition FROM calltheroll AS c,ddstate AS d WHERE c.callstate=d.callstate AND c.ID="+ID+";";
+		Query query = session.createSQLQuery(hqlString);
+		List list = query.list();
+		return list;
+	}
+
+	@Override
+	public List getCallTheRollByCoursenameHql(String cname) {
+		Session session = getSession();
+		String hqlString = "SELECT autoid,courseName,ID,d.dname AS callstate,calldate,callposition FROM calltheroll AS c,ddstate AS d WHERE c.callstate=d.callstate AND c.courseName=\'"+cname+"\';";
+		Query query = session.createSQLQuery(hqlString);
+		List list = query.list();
 		return list;
 	}
 }

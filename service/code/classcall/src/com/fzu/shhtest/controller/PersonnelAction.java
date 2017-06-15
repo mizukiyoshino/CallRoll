@@ -161,7 +161,6 @@ public class PersonnelAction extends ActionSupport {
 		 * "x-requested-with,content-type"); // ‘ –Ìƒƒ–©«Î«Û
 		 * response.setContentType("text/html;charset=utf-8");
 		 */
-		System.out.println("this is in personnel");
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();

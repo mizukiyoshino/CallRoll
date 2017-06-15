@@ -21,4 +21,10 @@ public interface CallTheRollDao {
 	List getCallTheRollBetweenDate(Date date1,Date date2);
 	List getCallTheRollByID(String ID);	
 	List getCallTheRollByCoursename(String cname);
+	
+	List getAllCallTheRollHql();
+	List getCallTheRollByDateHql(String date);
+	List getCallTheRollBetweenDateHql(String date1,String date2);
+	List getCallTheRollByIDHql(String ID);	
+	List getCallTheRollByCoursenameHql(String cname);
 }

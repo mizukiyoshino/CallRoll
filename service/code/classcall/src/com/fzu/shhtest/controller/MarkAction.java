@@ -1,12 +1,18 @@
 package com.fzu.shhtest.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts2.ServletActionContext;
+
+import com.fzu.shhtest.domain.CallTheRoll;
+import com.fzu.shhtest.domain.CourseNameAndID;
 import com.fzu.shhtest.domain.Mark;
 import com.fzu.shhtest.service.MarkService;
 import com.fzu.shhtest.utils.ResultUtils;
@@ -22,81 +28,162 @@ public class MarkAction extends ActionSupport {
 	public String execute() {
 		return SUCCESS;
 	}
-	public String createMark() {
-		// TODO Auto-generated method stub
+	public String createMark() throws IOException {
+		//courseName=离散数学&id=160327002&dailyScore=84&finalScore=91
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map<String, String[]> params = request.getParameterMap();
+		Map<String, String> param = new HashMap<String, String>();
+		for (String key : params.keySet()) {
+			String[] values = params.get(key);
+			for (int i = 0; i < values.length; i++) {
+				param.put(key, values[i]);
+			}
+		}
+		String ID = ResultUtils.getPostParameter(param, "id");
+		String courseName = ResultUtils.getPostParameter(param, "courseName");
+		String dailyScore = ResultUtils.getPostParameter(param, "dailyScore");
+		String finalScore = ResultUtils.getPostParameter(param, "finalScore");
 		
+		CourseNameAndID courseNameAndID = new CourseNameAndID();
+		courseNameAndID.setID(ID);
+		courseNameAndID.setCourseName(courseName);
+		Mark mark = new Mark();
+		mark.setDailyScore(Double.parseDouble(dailyScore));
+		mark.setFinalScore(Double.parseDouble(finalScore));
+		mark.setCnameAndID(courseNameAndID);
+		markService.createMark(mark);
 		
+		HttpServletResponse response = ResultUtils
+				.setResponse(ServletActionContext.getResponse());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("state", 1);
+		ResultUtils.toJson(response, map);
 		return null;
 	}
 
-	public String deleteMarkByName() {
-		// TODO Auto-generated method stub
+	public String deleteMarkByName() throws IOException {
+		//http://localhost:8080/shhTest/markaction/deleteMarkByName
+		//courseName=离散数学&id=160327003&dailyScore=84&finalScore=92
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map<String, String[]> params = request.getParameterMap();
+		Map<String, String> param = new HashMap<String, String>();
+		for (String key : params.keySet()) {
+			String[] values = params.get(key);
+			for (int i = 0; i < values.length; i++) {
+				param.put(key, values[i]);
+			}
+		}
+		String courseName = ResultUtils.getPostParameter(param, "courseName");
+		markService.deleteMarkByName(courseName);
+		
+		HttpServletResponse response = ResultUtils
+				.setResponse(ServletActionContext.getResponse());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("state", 1);
+		ResultUtils.toJson(response, map);
 		return null;
 	}
 
-	public String updateMark() {
-		// TODO Auto-generated method stub
+	public String updateMark() throws IOException {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map<String, String[]> params = request.getParameterMap();
+		Map<String, String> param = new HashMap<String, String>();
+		for (String key : params.keySet()) {
+			String[] values = params.get(key);
+			for (int i = 0; i < values.length; i++) {
+				param.put(key, values[i]);
+			}
+		}
+		String ID = ResultUtils.getPostParameter(param, "id");
+		String courseName = ResultUtils.getPostParameter(param, "courseName");
+		String dailyScore = ResultUtils.getPostParameter(param, "dailyScore");
+		String finalScore = ResultUtils.getPostParameter(param, "finalScore");
+		
+		CourseNameAndID courseNameAndID = new CourseNameAndID();
+		courseNameAndID.setID(ID);
+		courseNameAndID.setCourseName(courseName);
+		Mark mark = new Mark();
+		mark.setDailyScore(Double.parseDouble(dailyScore));
+		mark.setFinalScore(Double.parseDouble(finalScore));
+		mark.setCnameAndID(courseNameAndID);
+		markService.updateMark(mark);
+		
+		HttpServletResponse response = ResultUtils
+				.setResponse(ServletActionContext.getResponse());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("state", 1);
+		ResultUtils.toJson(response, map);
 		return null;
 	}
 
 	public String getAllMark() throws IOException {
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setHeader("Access-Control-Allow-Origin", "*"); // 允许哪些url可以跨域请求到本域
-		response.setHeader("Access-Control-Allow-Methods", "GET"); // 允许的请求方法，一般是GET,POST,PUT,DELETE,OPTIONS
-		response.setHeader("Access-Control-Allow-Headers",
-				"x-requested-with,content-type"); // 允许哪些请求
-		response.setContentType("text/html;charset=utf-8");
+		HttpServletResponse response = ResultUtils.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<Mark> list = (List<Mark>) markService
-				.getAllMark();
+		List<Mark> list = (List<Mark>) markService.getAllMark();
 		map.put("marks", list);
 		ResultUtils.toJson(response, map);
 		return null;
 	}
 
 	public String getMarkByName() throws IOException {
-		// TODO Auto-generated method stub
-		HttpServletResponse response = ServletActionContext.getResponse();
-		response.setHeader("Access-Control-Allow-Origin", "*"); // 允许哪些url可以跨域请求到本域
-		response.setHeader("Access-Control-Allow-Methods", "GET"); // 允许的请求方法，一般是GET,POST,PUT,DELETE,OPTIONS
-		response.setHeader("Access-Control-Allow-Headers",
-				"x-requested-with,content-type"); // 允许哪些请求
-		response.setContentType("text/html;charset=utf-8");
 		HttpServletRequest request = ServletActionContext.getRequest();
+		Map<String, String[]> params = request.getParameterMap();
+		Map<String, String> param = new HashMap<String, String>();
+		for (String key : params.keySet()) {
+			String[] values = params.get(key);
+			for (int i = 0; i < values.length; i++) {
+				param.put(key, values[i]);
+			}
+		}
+		String courseName = ResultUtils.getPostParameter(param, "courseName");
+		List<Mark> marks = markService.getMarkByName(courseName);
+		HttpServletResponse response = ResultUtils
+				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
-		String tempcname = "";
-		String cname = "";
-		try {
-			tempcname = request.getParameter("cname");
-
-		} catch (Exception e) {
-			// TODO: handle exception
-			map.put("marks", "null");
-			ResultUtils.toJson(response, map);
-			return null;
-		}
-		if (tempcname != null) {
-			cname = new String(tempcname.getBytes("ISO-8859-1"), "utf-8");
-
-			List<Mark> list = (List<Mark>) markService
-					.getMarkByName(cname);
-			map.put("marks", list);
-			ResultUtils.toJson(response, map);
-		} else {
-			map.put("marks", "null");
-			ResultUtils.toJson(response, map);
-			return null;
-		}
+		map.put("marks", marks);
+		ResultUtils.toJson(response, map);
 		return null;
 	}
 
-	public String getMarkByID() {
-		// TODO Auto-generated method stub
+	public String getMarkByID() throws IOException {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map<String, String[]> params = request.getParameterMap();
+		Map<String, String> param = new HashMap<String, String>();
+		for (String key : params.keySet()) {
+			String[] values = params.get(key);
+			for (int i = 0; i < values.length; i++) {
+				param.put(key, values[i]);
+			}
+		}
+		String ID = ResultUtils.getPostParameter(param, "id");
+		List<Mark> marks = markService.getMarkByID(ID);
+		HttpServletResponse response = ResultUtils
+				.setResponse(ServletActionContext.getResponse());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("marks", marks);
+		ResultUtils.toJson(response, map);
 		return null;
 	}
 
-	public Mark getMarkByNameAndID() {
-		// TODO Auto-generated method stub
+	public Mark getMarkByNameAndID() throws IOException {
+		//courseName=离散数学&id=160327000
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map<String, String[]> params = request.getParameterMap();
+		Map<String, String> param = new HashMap<String, String>();
+		for (String key : params.keySet()) {
+			String[] values = params.get(key);
+			for (int i = 0; i < values.length; i++) {
+				param.put(key, values[i]);
+			}
+		}
+		String ID = ResultUtils.getPostParameter(param, "id");
+		String courseName = ResultUtils.getPostParameter(param, "courseName");
+		Mark mark = markService.getMarkByNameAndID(courseName, ID);
+		HttpServletResponse response = ResultUtils
+				.setResponse(ServletActionContext.getResponse());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("mark", mark);
+		ResultUtils.toJson(response, map);
 		return null;
 	}
 }

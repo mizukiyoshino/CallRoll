@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 	<constant name="struts.devMode" value="false" />
@@ -26,6 +26,9 @@
 		extends="struts-default,json-default">
 		<action name="getAllCourse" class="courseAction" method="getAllCourse" />
 		<action name="getCourseByName" class="courseAction" method="getCourseByName" />
+		<action name="getAllCourseHql" class="courseAction" method="getAllCourseHql" />
+		<action name="getCourseByNameHql" class="courseAction" method="getCourseByNameHql" />
+		
 		<action name="createCourse" class="courseAction" method="createCourse" />
 		<action name="deleteCourseByName" class="courseAction" method="deleteCourseByName" />
 		<action name="updateCourse" class="courseAction" method="updateCourse" />
@@ -42,6 +45,12 @@
 		<action name="getCallTheRollBetweenDate" class="callTheRollAction" method="getCallTheRollBetweenDate" />
 		<action name="getCallTheRollByID" class="callTheRollAction" method="getCallTheRollByID" />
 		<action name="getCallTheRollByCoursename" class="callTheRollAction" method="getCallTheRollByCoursename" />
+	
+		<action name="getAllCallTheRollHql" class="callTheRollAction" method="getAllCallTheRollHql" />
+		<action name="getCallTheRollByDateHql" class="callTheRollAction" method="getCallTheRollByDateHql" />
+		<action name="getCallTheRollBetweenDateHql" class="callTheRollAction" method="getCallTheRollBetweenDateHql" />
+		<action name="getCallTheRollByIDHql" class="callTheRollAction" method="getCallTheRollByIDHql" />
+		<action name="getCallTheRollByCoursenameHql" class="callTheRollAction" method="getCallTheRollByCoursenameHql" />
 	</package>
 
 	<package name="markaction" namespace="/markaction"
@@ -52,6 +61,7 @@
 		<action name="getMarkByNameAndID" class="markAction" method="getMarkByNameAndID" />
 		<action name="updateMark" class="markAction" method="updateMark" />
 		<action name="createMark" class="markAction" method="createMark" />
+		<action name="deleteMarkByName" class="markAction" method="deleteMarkByName" />
 	</package>
 	
 	<package name="questionaction" namespace="/questionaction"

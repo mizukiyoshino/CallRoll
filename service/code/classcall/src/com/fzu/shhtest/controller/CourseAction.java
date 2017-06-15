@@ -32,8 +32,6 @@ public class CourseAction extends ActionSupport {
 	}
 
 	public String createCourse() throws IOException {
-		// TODO Auto-generated method stub
-		
 		HttpServletRequest request = ServletActionContext.getRequest();
 		Map<String, String[]> params = request.getParameterMap();
 		Map<String, String> param = new HashMap<String, String>();
@@ -114,8 +112,7 @@ public class CourseAction extends ActionSupport {
 		String shape = ResultUtils.getPostParameter(param, "shape");
 		System.out.println("courseName is : "+courseName);
 		
-		Course course = courseService.getCourseByName(oldcourseName);
-		System.out.println("update course0 :"+course);
+		Course course = new Course();
 		course.setCourseName(courseName);
 		course.setDailyWeight(Double.parseDouble(dailyWeight));
 		course.setFinalWeight(Double.parseDouble(finalWeight));
@@ -123,14 +120,10 @@ public class CourseAction extends ActionSupport {
 		course.setClassSession(classSession);
 		course.setClassLocation(classLocation);
 		course.setClassDate(Integer.parseInt(classDate));
-		//DdClassDate ddClassDate = ddClassDateService.getDdClassDateStateByValue(Integer.parseInt(classDate));
-		//course.setDdClassDate(ddClassDate);
 		course.setClassOrder(classOrder);
 		course.setID(ID);
 		course.setShape(shape);
 		courseService.updateCourse(course,oldcourseName);
-		System.out.println("update course :"+course);
-		
 		
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
@@ -157,6 +150,46 @@ public class CourseAction extends ActionSupport {
 		Course course = courseService
 				.getCourseByName(cname);
 		map.put("course", course);
+		HttpServletResponse response = ResultUtils
+				.setResponse(ServletActionContext.getResponse());
+		ResultUtils.toJson(response, map);
+		return null;
+	}
+	
+	
+
+	public String getAllCourseHql() throws IOException {
+		HttpServletResponse response = ResultUtils
+				.setResponse(ServletActionContext.getResponse());
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Course> list = (List<Course>) courseService.getAllCourseHql();
+		String[] parameters= {"courseName","ID","dailyWeight","finalWeight","picketLine","classSession","classLocation","classDate","classOrder","shape"};
+		List<Map<String, Object>> maplist = ResultUtils.setResults(list, parameters);//new ArrayList<Map<String, Object>>();
+		
+		
+		map.put("courses", maplist);
+		ResultUtils.toJson(response, map);
+		return null;
+	}
+
+	public String getCourseByNameHql() throws IOException {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map<String, String[]> params = request.getParameterMap();
+		Map<String, String> param = new HashMap<String, String>();
+		for (String key : params.keySet()) {
+			String[] values = params.get(key);
+			for (int i = 0; i < values.length; i++) {
+				param.put(key, values[i]);
+			}
+		}
+		String cname = ResultUtils.getPostParameter(param, "coursename");
+		Map<String, Object> map = new HashMap<String, Object>();
+		List course = courseService
+				.getCourseByNameHql(cname);
+		String[] parameters= {"courseName","ID","dailyWeight","finalWeight","picketLine","classSession","classLocation","classDate","classOrder","shape"};
+		List<Map<String, Object>> maplist = ResultUtils.setResults(course, parameters);//new ArrayList<Map<String, Object>>();
+		
+		map.put("course", maplist);
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		ResultUtils.toJson(response, map);
