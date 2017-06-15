@@ -1,25 +1,19 @@
 {
-  "name": "callroll",
-  "version": "1.0.0",
-  "description": "点名系统",
-  "main": "app.js",
+  "name": "nodeCRM",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mizukiyoshino/CallRoll.git"
-  },
-  "author": "yuanbingjie,huangyichi,zhangmingliang,gaoweiqing",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mizukiyoshino/CallRoll/issues"
-  },
-  "homepage": "https://github.com/mizukiyoshino/CallRoll#readme",
-  "devDependencies": {
-    "bower": "^1.8.0",
-    "gulp": "^3.9.1",
-    "gulp-replace": "^0.5.4",
-    "gulp-sass": "^3.1.0"
+  "dependencies": {
+    "body-parser": "~1.12.4",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "ejs": "~2.3.1",
+    "express": "~4.12.4",
+    "express-session": "~1.11.3",
+    "morgan": "~1.5.3",
+    "serve-favicon": "~2.2.1",
+    "mysql": "~2.7.0"
   }
 }

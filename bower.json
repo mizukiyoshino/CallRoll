@@ -1,27 +1,15 @@
 {
-  "name": "callroll",
-  "description": "点名系统",
-  "main": "app.js",
-  "authors": [
-    "yuanbingjie",
-    "huangyichi",
-    "zhangmingliang",
-    "gaoweiqing"
-  ],
-  "license": "ISC",
-  "homepage": "https://github.com/mizukiyoshino/CallRoll",
-  "private": true,
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
+  "name": "admin",
+  "version": "0.0.1",
   "dependencies": {
-    "bootstrap": "^3.3.7",
-    "jquery": "^3.2.1",
-    "angular": "^1.6.4",
-    "angular-messages": "^1.6.4"
-  }
+    "angular": "~1.2.28",
+    "angular-route": "~1.2.28",
+    "angular-bootstrap": "~0.10.0",
+    "ng-grid": "~2.0.14",
+    "bootstrap": "~3.3.4",
+    "jquery": "~2.1.4",
+    "ionicons": "~2.0.0",
+    "Font-Awesome": "~4.3.0"
+  },
+  "devDependencies": {}
 }

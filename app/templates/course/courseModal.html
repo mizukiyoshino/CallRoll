@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+<form role="form" id="userForm">
+    <div class="modal-header">
+        <div class="modal-title">菜单信息</div>
+    </div>
+    <div class="modal-body">
+        <!--ng-controller="MenuInsertCtrl"-->
+        <fieldset>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="courseName">课程名</label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" id="courseName" ng-model="courses.courseName" ng-maxlength="9">
+                </div>
+                <label class="col-md-2 control-label" for="ID">账号</label>
+                <div class="col-sm-4">
+                    <input class="form-control" id="ID" ng-model="courses.ID">
+                </div>
+            </div>
+                <div class="form-group">
+                <label class="col-md-2 control-label" for="dailyWeight">日常权重</label>
+                <div class="col-sm-4">
+                    <input class="form-control" id="dailyWeight" ng-model="courses.dailyWeight">
+                </div>
+                <label class="col-md-2 control-label" for="finalWeight">期末比重</label>
+                <div class="col-sm-4">
+                    <input class="form-control" id="finalWeight" ng-model="courses.finalWeight">
+                </div>
+                </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="picketLine">旷课警戒数</label>
+                <div class="col-sm-4">
+                    <input class="form-control" id="picketLine" ng-model="courses.picketLine">
+                </div>
+                <label class="col-md-2 control-label" for="classSession">课时节次</label>
+                <div class="col-sm-4">
+                    <input class="form-control" id="classSession" ng-model="courses.classSession">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="classLocation">课程地点</label>
+                <div class="col-sm-4">
+                    <input class="form-control" id="classLocation" ng-model="courses.classLocation">
+                </div>
+                <label class="col-md-2 control-label" for="classDate">课时周序</label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" list="date" id="classDate" ng-model="courses.classDate">
+                    <datalist id="date">
+                        <option value="1">星期一</option>
+                        <option value="2">星期二</option>
+                        <option value="3">星期三</option>
+                        <option value="4">星期四</option>
+                        <option value="5">星期五</option>
+                        <option value="6">星期六</option>
+                        <option value="7">星期日</option>
+                    </datalist>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="classOrder">课时学时</label>
+                <div class="col-sm-4">
+                    <input class="form-control" id="classOrder" ng-model="courses.classOrder">
+                </div>
+                <label class="col-md-2 control-label" for="shape">班级布局</label>
+                <div class="col-sm-4">
+                    <input class="form-control" id="shape" ng-model="courses.shape">
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">保存</button>
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+    </div>
+</form>
+</body>
+</html>

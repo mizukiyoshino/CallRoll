@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <form role="form" id="userForm">
+            <div class="modal-header">
+                <div class="modal-title">菜单信息</div>
+            </div>
+            <div class="modal-body">
+                <!--ng-controller="MenuInsertCtrl"-->
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="ID">学号</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="text" id="ID" ng-model="menu.ID" ng-maxlength="9">
+                        </div>
+                        <label class="col-md-2 control-label" for="Pname">姓名</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" id="Pname" ng-model="menu.Pname">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="Ppassword">密码</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="text" id="Ppassword" ng-model="menu.Ppassword">
+                        </div>
+                        <label class="col-md-2 control-label" for="pclass">班级</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" id="pclass" ng-model="menu.pclass">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="major">专业</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="text" id="major" ng-model="menu.major">
+                        </div>
+                        <label class="col-md-2 control-label" for="role">角色</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="text" id="role" ng-model="menu.role">
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="ok()">保存</button>
+                <button class="btn btn-default" ng-click="cancel()">取消</button>
+            </div>
+        </form>
+    </body>
+</html>
