@@ -205,22 +205,25 @@ public class PersonnelAction extends ActionSupport {
 				param.put(key, values[i]);
 			}
 		}
-
-		String ID = ResultUtils.getPostParameter(param, "id");
-		String Ppassword = ResultUtils.getPostParameter(param, "password");
+		System.out.println("in check1");
+		String contentType = request.getHeader("Content-Type");
+		String ID = ResultUtils.getPostParameter(param, "id",contentType);
+		System.out.println("in check2");
+		String Ppassword = ResultUtils.getPostParameter(param, "password",contentType);
 		Personnel personnel = personnelService.getPersonnelByID(ID);
+		System.out.println("in check3");
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
 		if(personnel == null)
 		{
-			map.put("state", "用户不存在");
+			map.put("state", "0");//用户不存在
 		}
 		else if (!personnel.getPpassword().equals(Ppassword)) {
-			map.put("state", "密码不正确");
+			map.put("state", "-1");//密码不正确
 		}
 		else{
-			map.put("state", "登陆成功");
+			map.put("state", "1");//登陆成功
 		}
 		ResultUtils.toJson(response, map);
 		return null;

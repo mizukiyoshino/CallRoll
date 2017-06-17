@@ -123,6 +123,7 @@ public class CourseAction extends ActionSupport {
 		course.setClassOrder(classOrder);
 		course.setID(ID);
 		course.setShape(shape);
+		System.out.println(course);
 		courseService.updateCourse(course,oldcourseName);
 		
 		HttpServletResponse response = ResultUtils
@@ -144,6 +145,8 @@ public class CourseAction extends ActionSupport {
 	}
 
 	public String getCourseByName() throws IOException {
+		//http://localhost:8080/shhTest/courseaction/getCourseByNameHql
+		//id=160327000&coursename=ÍøÂç¹¤³Ì&bcalldate=2017-06-14&acalldate=2017-06-14&calldate=2017-06-14
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String cname = ResultUtils.getRequestParameter(request, "coursename");
 		Map<String, Object> map = new HashMap<String, Object>();

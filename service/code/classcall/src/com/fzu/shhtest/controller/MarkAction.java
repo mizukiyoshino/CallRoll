@@ -1,8 +1,10 @@
 package com.fzu.shhtest.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -120,6 +122,28 @@ public class MarkAction extends ActionSupport {
 		HttpServletResponse response = ResultUtils.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Mark> list = (List<Mark>) markService.getAllMark();
+		/*
+		List<List<String>> templist = new ArrayList<List<String>>();
+		Iterator it1 = list.iterator();
+		while(it1.hasNext())
+		{
+			Mark tmark = (Mark)it1.next();
+			//System.out.println(((Mark)it1.next()).getDailyScore());
+			List<String> tl = new ArrayList<String>();
+			tl.add(tmark.getCnameAndID().getID());
+			tl.add(tmark.getCnameAndID().getCourseName());
+			tl.add(tmark.getDailyScore()+"");
+			tl.add(tmark.getFinalScore()+"");
+			templist.add(tl);
+		}
+		String[] parameters= {"ID","courseName","dailyScore","finalScore"};
+		List<Map<String, Object>> maplist = ResultUtils.setResults(templist, parameters);//new ArrayList<Map<String, Object>>();
+		
+		map.put("marks", maplist);
+		
+		
+		
+		*/
 		map.put("marks", list);
 		ResultUtils.toJson(response, map);
 		return null;

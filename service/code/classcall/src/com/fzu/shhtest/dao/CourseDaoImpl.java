@@ -43,17 +43,18 @@ public class CourseDaoImpl implements CourseDao {
 	public boolean updateCourse(Course course,String oldcourseName) {
 		Session session = getSession();
 		Course newcourse = getCourseByName(oldcourseName);
-		course.setCourseName(course.getCourseName());
-		course.setDailyWeight(course.getDailyWeight());
-		course.setFinalWeight(course.getFinalWeight());
-		course.setPicketLine(course.getPicketLine());
-		course.setClassSession(course.getClassSession());
-		course.setClassLocation(course.getClassLocation());
-		course.setClassDate(course.getClassDate());
-		course.setClassOrder(course.getClassOrder());
-		course.setID(course.getID());
-		course.setShape(course.getShape());
+		newcourse.setCourseName(course.getCourseName());
+		newcourse.setDailyWeight(course.getDailyWeight());
+		newcourse.setFinalWeight(course.getFinalWeight());
+		newcourse.setPicketLine(course.getPicketLine());
+		newcourse.setClassSession(course.getClassSession());
+		newcourse.setClassLocation(course.getClassLocation());
+		newcourse.setClassDate(course.getClassDate());
+		newcourse.setClassOrder(course.getClassOrder());
+		newcourse.setID(course.getID());
+		newcourse.setShape(course.getShape());
 		session.update(newcourse);
+		System.out.println("in impl"+newcourse);
 		/*
 		Query query = session.createQuery("update Course set courseName=?,ID=?,dailyWeight=?,"
 				+ "finalWeight=?,picketLine=?,classSession=?,classLocation=?,classDate=?,classOrder=?,"
