@@ -34,11 +34,13 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="major">专业</label>
                         <div class="col-sm-4">
-                            <input class="form-control" type="text" id="major" ng-model="menu.major">
+                            <select class="form-control" id="major" ng-model="menu.major" ng-options="c.major as c.dname for c in countries">
+                            </select>{{CourseUpdateCtrl.selected}}
                         </div>
                         <label class="col-md-2 control-label" for="role">角色</label>
                         <div class="col-sm-4">
-                            <input class="form-control" type="text" id="role" ng-model="menu.role">
+                            <select class="form-control" id="role" ng-model="menu.role" ng-options="c1.role as c1.dname for c1 in countries1">
+                            </select>{{CourseUpdateCtrl.selected}}
                         </div>
                     </div>
                 </fieldset>

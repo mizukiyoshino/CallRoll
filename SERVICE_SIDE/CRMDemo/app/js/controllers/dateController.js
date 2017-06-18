@@ -36,9 +36,11 @@ function ClassDateCtrl ($scope, $http, $modal,constantIP){
             method: 'POST',
             url: 'http://'+constantIP+':8080/shhTest/ddClassDateaction/getAllDdClassDate'
         }).success(function(largeLoad) {
+            console.log(largeLoad);
             var obj = $scope.gridOptions.selectedItems;
             obj.splice(0,obj.length);
             $scope.setPagingData(largeLoad.ddClassDates, page, pageSize);
+            console.log(largeLoad.ddClassDates[1].dname);
         });
     };
 
@@ -75,7 +77,7 @@ function ClassDateCtrl ($scope, $http, $modal,constantIP){
     $scope.insert = function(){
         $modal.open({
             templateUrl: "/templates/date/dateModal.html",
-            controller: 'ClassDateInsertCtrl',
+            controller: 'ClassDateInsertCtrl1',
             resolve: {
                 grid: function(){ return $scope; }
             }
@@ -100,6 +102,7 @@ function ClassDateCtrl ($scope, $http, $modal,constantIP){
 
     //删除
     $scope.delete = function(){
+        console.log("删除测试");
         var selectedItems = $scope.gridOptions.selectedItems;
         if(selectedItems.length == 0){
             alert("请至少选择一条记录");
@@ -122,14 +125,16 @@ function ClassDateCtrl ($scope, $http, $modal,constantIP){
             json[i1]=ids[i1];
         }
         JSON.stringify(json);
+        console.log(json);
         $http({
-            method: 'POST',
+            method: 'GET',
             url: 'http://'+constantIP+':8080/shhTest/ddClassDateaction/deleteDdClassDateByName',
             params: {
                 "dname": json
             }
         }).then(function(results){
             //刷新列表
+            console.log("删除测试1");
         }).then(function (response) {
             var grid = $scope;
             grid.getPagedDataAsync(grid.pagingOptions.pageSize, grid.pagingOptions.currentPage);
@@ -153,8 +158,65 @@ function ClassDateInsertCtrl($scope, $modalInstance, $http, grid,constantIP){
             method: 'POST',/*-GET--*/
             url: 'http://'+constantIP+':8080/shhTest/ddClassDateaction/createDdClassDate',
             data:{
-                "dname": $scope.ClassDates.Dname,
-                "classDate": $scope.ClassDates.ClassDate
+                "dname": $scope.ClassDates.dname,
+                "classDate": $scope.ClassDates.classDate
+            },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            transformRequest: function(data) {
+                return $.param(data);
+            }
+        }).success(function(results){
+            //刷新列表
+            grid.getPagedDataAsync(grid.pagingOptions.pageSize, grid.pagingOptions.currentPage);
+            $modalInstance.close();
+        });
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+}
+function ClassDateInsertCtrl($scope, $modalInstance, $http, grid,constantIP){
+
+    $scope.ClassDates={
+    };
+    $scope.ok = function () {
+        $http({
+            method: 'POST',/*-GET--*/
+            url: 'http://'+constantIP+':8080/shhTest/ddClassDateaction/createDdClassDate',
+            data:{
+                "dname": $scope.ClassDates.dname,
+                "classDate": $scope.ClassDates.classDate
+            },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            transformRequest: function(data) {
+                return $.param(data);
+            }
+        }).success(function(results){
+            //刷新列表
+            grid.getPagedDataAsync(grid.pagingOptions.pageSize, grid.pagingOptions.currentPage);
+            $modalInstance.close();
+        });
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+}function ClassDateInsertCtrl1($scope, $modalInstance, $http, grid,constantIP){
+
+    $scope.ClassDates={
+    };
+    $scope.ok = function () {
+        $http({
+            method: 'POST',/*-GET--*/
+            url: 'http://'+constantIP+':8080/shhTest/ddClassDateaction/createDdClassDate',
+            data:{
+                "dname": $scope.ClassDates.dname,
+                "classDate": $scope.ClassDates.classDate
             },
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -182,7 +244,7 @@ function ClassDateInsertCtrl($scope, $modalInstance, $http, grid,constantIP){
  * @param {[type]} grid           [description]
  */
 function ClassDateUpdateCtrl($scope, $modalInstance, $http, grid,$log,constantIP){
-    console.log("iiiiiiiiiiiiiiiiiiiiii"+grid.gridOptions.selectedItems[0].Dname);
+    console.log("iiiiiiiiiiiiiiiiiiiiii"+grid.gridOptions.selectedItems[0].dname);
     var oldClassDatename = "";
     $http({
         method: 'GET',
@@ -204,8 +266,8 @@ function ClassDateUpdateCtrl($scope, $modalInstance, $http, grid,$log,constantIP
             url: 'http://'+constantIP+':8080/shhTest/ddClassDateaction/updateDdClassDateStateByName',
             data: {
                 "oldname":oldClassDatename,
-                "dname": $scope.ClassDates.Dname,
-                "classDate": $scope.ClassDates.ClassDate
+                "dname": $scope.ClassDates.dname,
+                "classDate": $scope.ClassDates.classDate
             },
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'

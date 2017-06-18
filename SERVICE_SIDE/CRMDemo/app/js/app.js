@@ -25,9 +25,12 @@ var phonecatApp = angular.module('app', ['ngRoute', 'ngGrid', 'ui.bootstrap'])
         }).when('/test', {
             templateUrl: '/templates/test/test.html',
             controller: 'TestCtrl'
-        }).when('/log', {
-            templateUrl: '/templates/log/log.html',
+        }).when('/loginO', {
+            templateUrl: '/login.html',
             controller: 'LogCtrl'
+        }).when('/loginN', {
+            templateUrl: '/templates/login/login.html',
+            controller: 'LoginCtrl'
         }).when('/major', {
             templateUrl: '/templates/major/major.html',
             controller: 'MajorCtrl'
@@ -37,9 +40,18 @@ var phonecatApp = angular.module('app', ['ngRoute', 'ngGrid', 'ui.bootstrap'])
         }).when('/date', {
             templateUrl: '/templates/date/date.html',
             controller: 'ClassDateCtrl'
+        }).when('/calltheroll', {
+            templateUrl: '/templates/calltheroll/calltheroll.html',
+            controller: 'CallTheRollCtrl'
         }).when('/info', {
             templateUrl: '/templates/info/info.html',
             controller: 'SchoolInfoCtrl'
+        }).when('/question', {
+            templateUrl: '/templates/question/question.html',
+            controller: 'QuestionCtrl'
+        }).when('/mark', {
+            templateUrl: '/templates/mark/mark.html',
+            controller: 'MarkCtrl'
         }).otherwise({
             redirectTo: '/'
         });
@@ -111,4 +123,4 @@ var phonecatApp = angular.module('app', ['ngRoute', 'ngGrid', 'ui.bootstrap'])
 
 
 
-phonecatApp.constant('constantIP', '222.76.30.22');    //方法3定义全局变量 
+phonecatApp.constant('constantIP', '218.5.46.92');    //方法3定义全局变量 

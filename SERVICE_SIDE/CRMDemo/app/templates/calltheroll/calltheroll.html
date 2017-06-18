@@ -4,32 +4,34 @@
     <meta charset="utf-8">
     <style type="text/css">
         .gridStyle {
-            border: 10px solid rgba(212,212,212,1);
+            border: 10px solid rgb(212,212,212);
             width: 120%;
-            height: 400px;
-            bgcolor:#cccccc;
-
+            height: 500px;
         }
         .ngGridMaxPagesNumber {
             display:inline-block;
             margin-top: 10px;
         }
-
     </style>
 </head>
 <body>
 <section class="content-header">
     <ol class="breadcrumb">
         <li><a href="#/"><i class="fa fa-cogs"></i> 系统设置</a></li>
-        <li class="active"><i class="fa fa-list-alt"></i> 人员表</li>
+        <li class="active"><i class="fa fa-list-alt"></i> 点名表</li>
     </ol>
 </section>
-
-<div class="btn-group" role="group" aria-label="工具栏">
-    <button type="button" class="btn btn-default" ng-click="insert()">新增</button>
-    <button type="button" class="btn btn-default" ng-click="update()">修改</button>
-    <button type="button" class="btn btn-default" ng-click="delete()">删除</button>
+<fieldset>
+    <div class="form-group">
+<label class="col-md-2 control-label" for="Dname">请输入人员ID</label>
+<div class="col-sm-4">
+    <input class="form-control" type="text" id="Dname" ng-model="IDs.ID" ng-maxlength="9">
 </div>
+        <button type="button" ng-click="search()">查询</button>
+        <div>eg.160327001</div>
+</div>
+
+    </fieldset>
 
 <div class="gridStyle" ng-grid="gridOptions"></div>
 

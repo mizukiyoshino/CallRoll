@@ -31,7 +31,7 @@ function CourseCtrl ($scope, $http, $modal,constantIP){
     $scope.getPagedDataAsync = function (pageSize, page, searchText) {
         $http({
             method: 'POST',
-            url: 'http://'+constantIP+':8080/shhTest/courseaction/getAllCourse'
+            url: 'http://'+constantIP+':8080/shhTest/courseaction/getAllCourseHql'
         }).success(function(largeLoad) {
             var obj = $scope.gridOptions.selectedItems;
             obj.splice(0,obj.length);
@@ -211,6 +211,45 @@ function CourseUpdateCtrl($scope, $modalInstance, $http, grid,$log,constantIP){
         }
 
     });
+    $scope.largeLoads={
+    };
+    $scope.countries = new Array();
+    // $scope.countries[]={};
+
+    $http({
+        method: 'POST',
+        url: 'http://'+constantIP+':8080/shhTest/ddClassDateaction/getAllDdClassDate'
+    }).success(function(largeLoad) {
+        $scope.largeLoads=largeLoad;
+        console.log(largeLoad);
+         console.log( $scope.largeLoads.ddClassDates.length);
+        console.log(largeLoad.ddClassDates[1].dname);
+        console.log($scope.largeLoads.ddClassDates);
+        for(var i=0;i<$scope.largeLoads.ddClassDates.length;i++){
+            $scope.countries[i]={"dname":$scope.largeLoads.ddClassDates[i].dname,
+            "classDate":$scope.largeLoads.ddClassDates[i].classDate};
+            // a.add($scope.largeLoads.ddClassDates[i].dname);
+            // a.add($scope.largeLoads.ddClassDates[i].classDate);
+            // $scope.countries[i].add(a);
+        }
+
+    });
+
+   // var j=0;
+   // console.log( $scope.largeLoads.ddClassDates.length);
+
+
+   //     console.log($scope.largeLoads.ddClassDates);
+       // $scope.countries[j++]={dname:i.dname,classDate:i.classDate};
+
+ //   console.log("..........."+$scope.countries);
+/*
+    $scope.countries=[
+        {dname:'周一',classDate:1},
+        {dname:'周2',classDate:2},
+        {dname:'周3',classDate:3},
+    ];
+  */  //$scope.selected=$scope.countries[0];
 
     $scope.ok = function () {
         $http({
@@ -237,7 +276,7 @@ function CourseUpdateCtrl($scope, $modalInstance, $http, grid,$log,constantIP){
             }
         }).success(function(results){
             //刷新列表
-            $log.log(results.state);
+            $log.log("000000000000000"+$scope.courses.classDate);
             console.log($scope.courses.classDate);
             grid.getPagedDataAsync(grid.pagingOptions.pageSize, grid.pagingOptions.currentPage);
             $modalInstance.close();

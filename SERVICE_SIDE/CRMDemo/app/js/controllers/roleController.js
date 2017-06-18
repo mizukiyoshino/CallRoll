@@ -23,6 +23,7 @@ function RoleCtrl ($scope, $http, $modal,constantIP){
     $scope.setPagingData = function(data, page, pageSize){
 
         var pagedData = data.slice((page - 1) * pageSize, page * pageSize);
+        console.log(".................."+pagedData);
         $scope.myData = pagedData;
         $scope.totalServerItems = data.length;
         if (!$scope.$$phase) {
@@ -74,7 +75,7 @@ function RoleCtrl ($scope, $http, $modal,constantIP){
     $scope.insert = function(){
         $modal.open({
             templateUrl: "/templates/role/roleModal.html",
-            controller: 'RoleInsertCtrl',
+            controller: 'RoleInsertCtrl2',
             resolve: {
                 grid: function(){ return $scope; }
             }
@@ -88,19 +89,18 @@ function RoleCtrl ($scope, $http, $modal,constantIP){
             alert("请选择一条记录");
             return;
         }
-        console.log("aaaaaaaaaaaaaaaaaa");
         $modal.open({
             templateUrl: "/templates/role/roleModal.html",
-            controller: 'RoleUpdateCtrl',
+            controller: 'RoleUpdateCtrl1',
             resolve:{
                 grid: function(){ return $scope; }
             }
         });
-        console.log("aaaaaaaaaaaaaaaaaa");
     };
 
     //删除
     $scope.delete = function(){
+        console.log("jijijijijijijijijijijijij");
         var selectedItems = $scope.gridOptions.selectedItems;
         if(selectedItems.length == 0){
             alert("请至少选择一条记录");
@@ -132,6 +132,7 @@ function RoleCtrl ($scope, $http, $modal,constantIP){
             }
         }).then(function(results){
             //刷新列表
+            console.log(json);
         }).then(function (response) {
             var grid = $scope;
             grid.getPagedDataAsync(grid.pagingOptions.pageSize, grid.pagingOptions.currentPage);
@@ -146,17 +147,16 @@ function RoleCtrl ($scope, $http, $modal,constantIP){
  * @param {[type]} $http          [description]
  * @param {[type]} grid           [description]
  */
-function RoleInsertCtrl($scope, $modalInstance, $http, grid,constantIP){
-
-    $scope.roles={
-    };
+function RoleInsertCtrl1($scope, $modalInstance, $http, grid,constantIP){
+    console.log("0000000000000000000000000");
+    $scope.roles={};
     $scope.ok = function () {
         $http({
             method: 'POST',/*-GET--*/
             url: 'http://'+constantIP+':8080/shhTest/ddRoleaction/createDdRole',
             data:{
-                "dname": $scope.roles.Dname,
-                "role": $scope.roles.Role
+                "dname": $scope.roles.dname,
+                "role": $scope.roles.role
             },
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -166,6 +166,7 @@ function RoleInsertCtrl($scope, $modalInstance, $http, grid,constantIP){
             }
         }).success(function(results){
             //刷新列表
+
             grid.getPagedDataAsync(grid.pagingOptions.pageSize, grid.pagingOptions.currentPage);
             $modalInstance.close();
         });
@@ -176,6 +177,35 @@ function RoleInsertCtrl($scope, $modalInstance, $http, grid,constantIP){
     };
 }
 
+function RoleInsertCtrl2($scope, $modalInstance, $http, grid,constantIP){
+    console.log("0000000000000000000000000");
+    $scope.roles={};
+    $scope.ok = function () {
+        $http({
+            method: 'POST',/*-GET--*/
+            url: 'http://'+constantIP+':8080/shhTest/ddRoleaction/createDdRole',
+            data:{
+                "dname": $scope.roles.dname,
+                "role": $scope.roles.role
+            },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            transformRequest: function(data) {
+                return $.param(data);
+            }
+        }).success(function(results){
+            //刷新列表
+
+            grid.getPagedDataAsync(grid.pagingOptions.pageSize, grid.pagingOptions.currentPage);
+            $modalInstance.close();
+        });
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+}
 /**
  * 菜单更新控制
  * @param {[type]} $scope         [description]
@@ -183,8 +213,60 @@ function RoleInsertCtrl($scope, $modalInstance, $http, grid,constantIP){
  * @param {[type]} $http          [description]
  * @param {[type]} grid           [description]
  */
-function RoleUpdateCtrl($scope, $modalInstance, $http, grid,$log,constantIP){
-    
+
+
+function RoleUpdateCtrl1($scope, $modalInstance, $http, grid, $log, constantIP){
+   // $scope.roles = {};
+   // $scope.roles.dname = "11111";
+    console.log("iiiiiiiiiiiiiiiiiiiiii");
+    console.log("这是，更新入口");
+    var oldrolename = "";
+    console.log("iiiiiiiiiiiiiiiiiiiiii");
+    $http({
+        method: 'GET',
+        url: 'http://'+constantIP+':8080/shhTest/ddRoleaction/getDdRoleStateByName',
+        params: {"dname": grid.gridOptions.selectedItems[0].dname}
+    }).success(function(results){
+        console.log("iiiiiiiiiiiiiiiiiiiiii");
+        $log.log(results.ddRole);
+        oldrolename = results.ddRole.dname;
+        $scope.roles = {};
+        for(var key in results.ddRole){
+            $scope.roles[key] = results.ddRole[key];
+            console.log(key);
+        }
+    });
+
+    $scope.ok = function () {
+        $http({
+            method: 'POST',
+            url: 'http://'+constantIP+':8080/shhTest/ddRoleaction/updateDdRoleStateByName',
+            data: {
+                "oldname":oldrolename,
+                "dname": $scope.roles.dname,
+                "role": $scope.roles.role
+            },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            transformRequest: function(data) {
+                return $.param(data);
+            }
+        }).success(function(results){
+            //刷新列表
+            $log.log(results.state);
+            grid.getPagedDataAsync(grid.pagingOptions.pageSize, grid.pagingOptions.currentPage);
+            $modalInstance.close();
+        });
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+}
+
+function RoleUpdateCtrl($scope, $modalInstance, $http, grid, $log, constantIP){
+    console.log("这是，更新入口");
     var oldrolename = "";
     console.log("iiiiiiiiiiiiiiiiiiiiii");
     $http({
@@ -198,16 +280,18 @@ function RoleUpdateCtrl($scope, $modalInstance, $http, grid,$log,constantIP){
         $scope.roles = {};
         for(var key in results.ddRole){
             $scope.roles[key] = roles.ddRole[key];
+            console.log(key);
         }
     });
+
     $scope.ok = function () {
         $http({
             method: 'POST',
             url: 'http://'+constantIP+':8080/shhTest/ddRoleaction/updateDdRoleStateByName',
             data: {
                 "oldname":oldrolename,
-                "dname": $scope.roles.Dname,
-                "role": $scope.roles.Role
+                "dname": $scope.roles.dname,
+                "role": $scope.roles.role
             },
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'

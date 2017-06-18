@@ -37,7 +37,7 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="javascript:;">信息</a></li>
+                            <!--<li><a href="#/information">信息</a></li>-->
                             <li class="divider"></li>
                             <li><a href="javascript:;" ng-click="logout()">退出</a></li>
                         </ul>
@@ -69,36 +69,33 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
+                    <a href="#/menu"><i class="fa fa-fw fa-child"></i>人员表</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-folder"></i> Page one</a>
+                    <a href="#/course"><i class="fa fa-fw fa-calendar"></i>课程表</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-file-o"></i> Second page</a>
+                    <a href="#/calltheroll"><i class="fa fa-fw fa-list"></i>点名表</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-cog"></i> Third page</a>
+                    <a href="#/question"><i class="fa fa-fw fa-question"></i>提问表</a>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-plus"></i> Dropdown <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-plus"></i> 数据字典 <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li class="dropdown-header">Dropdown heading</li>
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li><a href="#">One more separated link</a></li>
+                        <li class="dropdown-header">角色-专业-状态-周序</li>
+                        <li><a href="#/role">角色表</a></li>
+                        <li><a href="#/major">专业表</a></li>
+                        <li><a href="#/state">状态表</a></li>
+                        <li><a href="#/date">周序表</a></li>
+                        <!--<li><a href="#">One more separated link</a></li>-->
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-bank"></i> Page four</a>
+                    <a href="#/about"><i class="fa fa-fw fa-info"></i>关于</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-dropbox"></i> Page 5</a>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-fw fa-twitter"></i> Last page</a>
+                    <a  href="javascript:;" ng-click="logout()"  ng-controller="NavBarController"><i class="fa fa-fw fa-sign-out"></i>退出</a>
                 </li>
             </ul>
         </nav>
@@ -111,54 +108,66 @@
                 <span class="hamb-middle"></span>
                 <span class="hamb-bottom"></span>
             </button>
-    <div class="container">
-        <div class="row">
-            <nav class="navbar navbar-default" role="navigation">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#/menu">menu</a>
-                </div>
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="#/user">user</a>
-                    </div>
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="#/role">role</a>
-                    </div>
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#/course">course</a>
-                </div>
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#/major">major</a>
-                </div>
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#/state">state</a>
-                </div>
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#/date">date</a>
-                </div>
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#/info">SchoolInfo</a>
-                </div>
-                <div class="collapse navbar-collapse" id="">
-                    <ul class="nav navbar-nav">
-                        <!--<li class="active"><a href="#/user">user</a></li>-->
-                        <!--<li><a href="#/role">role</a></li>-->
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#/welcome.html">Welcome</a></li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">3</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">4</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </div>
+    <!--<div class="container">-->
+        <!--<div class="row">-->
+            <!--<nav class="navbar navbar-default" role="navigation">-->
+                <!--<div class="navbar-header">-->
+                    <!--<a class="navbar-brand" href="#/menu">人员表</a>-->
+                <!--</div>-->
+                    <!--<div class="navbar-header">-->
+                        <!--<a class="navbar-brand" href="#/user">user</a>-->
+                    <!--</div>-->
+                    <!--<div class="navbar-header">-->
+                        <!--<a class="navbar-brand" href="#/role">role</a>-->
+                    <!--</div>-->
+                <!--<div class="navbar-header">-->
+                    <!--<a class="navbar-brand" href="#/course">course</a>-->
+                <!--</div>-->
+                <!--<div class="navbar-header">-->
+                    <!--<a class="navbar-brand" href="#/major">major</a>-->
+                <!--</div>-->
+                <!--<div class="navbar-header">-->
+                    <!--<a class="navbar-brand" href="#/state">state</a>-->
+                <!--</div>-->
+                <!--<div class="navbar-header">-->
+                    <!--<a class="navbar-brand" href="#/date">date</a>-->
+                <!--</div>-->
+                <!--<div class="navbar-header">-->
+                    <!--<a class="navbar-brand" href="#/info">SchoolInfo</a>-->
+                <!--</div>-->
+                <!--<div class="navbar-header">-->
+                    <!--<a class="navbar-brand" href="#/calltheroll">calltheroll</a>-->
+                <!--</div>-->
+                <!--<div class="navbar-header">-->
+                    <!--<a class="navbar-brand" href="#/question">question</a>-->
+                <!--</div>-->
+                <!--<div class="navbar-header">-->
+                    <!--<a class="navbar-brand" href="#/mark">mark</a>-->
+                <!--</div>-->
+                <!--<div class="navbar-header">-->
+                    <!--<a class="navbar-brand" href="#/loginN">login</a>-->
+                <!--</div>-->
+                <!--<div class="collapse navbar-collapse" id="">-->
+                    <!--<ul class="nav navbar-nav">-->
+                        <!--&lt;!&ndash;<li class="active"><a href="#/user">user</a></li>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<li><a href="#/role">role</a></li>&ndash;&gt;-->
+                        <!--<li class="dropdown">-->
+                            <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>-->
+                            <!--<ul class="dropdown-menu">-->
+                                <!--<li><a href="#/welcome.html">Welcome</a></li>-->
+                                <!--<li><a href="#">1</a></li>-->
+                                <!--<li><a href="#">2</a></li>-->
+                                <!--<li class="divider"></li>-->
+                                <!--<li><a href="#">3</a></li>-->
+                                <!--<li class="divider"></li>-->
+                                <!--<li><a href="#">4</a></li>-->
+                            <!--</ul>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+            <!--</nav>-->
+        <!--</div>-->
+    <!--</div>-->
         </div>
         <!-- /#page-content-wrapper -->
 
@@ -190,6 +199,11 @@
     <script type="text/javascript" src="js/controllers/stateController.js"></script>
     <script type="text/javascript" src="js/controllers/dateController.js"></script>
     <script type="text/javascript" src="js/controllers/SchoolInfoController.js"></script>
+    <script type="text/javascript" src="js/controllers/CallTheRollController.js"></script>
+    <script type="text/javascript" src="js/controllers/QuestionController.js"></script>
+    <script type="text/javascript" src="js/controllers/markController.js"></script>
+
+    <script type="text/javascript" src="js/controllers/loginController.js"></script>
         <script type="text/javascript" src="js/app.js"></script>
     <!-- /#wrapper -->
 

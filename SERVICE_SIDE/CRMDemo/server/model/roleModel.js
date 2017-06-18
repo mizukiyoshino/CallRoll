@@ -1,9 +1,3 @@
-/* 
-* @Author: chenhao
-* @Date:   2015-07-03 13:48:37
-* @Last Modified by:   chenhao
-* @Last Modified time: 2015-07-05 20:15:29
-*/
 
 'use strict';
 var role = {

@@ -1,9 +1,3 @@
-/* 
-* @Author: chenhao
-* @Date:   2015-07-03 13:47:06
-* @Last Modified by:   chenhao
-* @Last Modified time: 2015-07-05 19:00:22
-*/
 
 'use strict';
 var express = require('express');

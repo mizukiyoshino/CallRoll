@@ -1,9 +1,3 @@
-/* 
-* @Author: chenhao
-* @Date:   2015-07-03 13:50:49
-* @Last Modified by:   chenhao
-* @Last Modified time: 2015-07-06 11:08:37
-*/
 
 'use strict';
 

@@ -51,6 +51,11 @@ body{
 	font-weight: 500;
 	font-size: 1.05em;
 	font-family: "Microsoft YaHei","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif;
+	background-color:rgb(255,255,255);
+	opacity:0.8;
+	/*透明度*/
+	filter:alpha(opacity=70);
+
 }
 a{ color: rgba(255, 255, 255, 0.6);outline: none;text-decoration: none;-webkit-transition: 0.2s;transition: 0.2s;}
 a:hover,a:focus{color:#74777b;text-decoration: none;}
@@ -84,6 +89,7 @@ a:hover,a:focus{color:#74777b;text-decoration: none;}
 	font-size: 2em;
 	line-height: 1;
 	margin-bottom: 0;
+
 }
 .htmleaf-header h1 span {
 	display: block;
@@ -91,6 +97,7 @@ a:hover,a:focus{color:#74777b;text-decoration: none;}
 	font-weight: 400;
 	padding: 0.8em 0 0.5em 0;
 	color: #c3c8cd;
+
 }
 /*nav*/
 .htmleaf-demo a{color: #fff;text-decoration: none;}
@@ -115,6 +122,7 @@ a:hover,a:focus{color:#74777b;text-decoration: none;}
 	width: 2px;
 	height: 100%;
 	background: #dbdbdb;
+
 	content: '';
 	-webkit-transform: rotate3d(0,0,1,22.5deg);
 	transform: rotate3d(0,0,1,22.5deg);

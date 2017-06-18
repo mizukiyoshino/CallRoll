@@ -1,9 +1,3 @@
-/* 
-* @Author: chenhao
-* @Date:   2015-06-09 12:51:03
-* @Last Modified by:   chenhao
-* @Last Modified time: 2015-07-05 18:41:04
-*/
 
 var express = require('express');
 var userService = require('../service/userService.js');

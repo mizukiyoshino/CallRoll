@@ -285,12 +285,14 @@ html {
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.4);
+
   z-index: 1;
 }
 /* SOME DEMO STYLES - NOT REQUIRED */
 body,
 html {
-  background-color: #c4e3f3;
+  background-color: #2669df;
+  background: url('https://www.panc.cc/static/images/33459861_p0.jpg') no-repeat fixed bottom center;background-size: cover;
 }
 body h1,
 body h2,

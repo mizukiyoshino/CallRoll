@@ -205,6 +205,36 @@ function MenuInsertCtrl($scope, $modalInstance, $http, grid,constantIP){/*------
     //      menuIcon:"222"
     //  };
     console.log($scope.menu);
+    // 下拉框专业
+    $scope.largeLoads={
+    };
+    $scope.countries = new Array();
+    $http({
+        method: 'POST',
+        url: 'http://'+constantIP+':8080/shhTest/ddMajoraction/getAllDdMajor'
+    }).success(function(largeLoad) {
+        $scope.largeLoads=largeLoad;
+        for(var i=0;i<$scope.largeLoads.ddMajors.length;i++){
+            $scope.countries[i]={"dname":$scope.largeLoads.ddMajors[i].dname,
+                "major":$scope.largeLoads.ddMajors[i].major};
+        }
+    });
+    // 下拉框专业
+    // 下拉框角色
+    $scope.largeLoads1={
+    };
+    $scope.countries1 = new Array();
+    $http({
+        method: 'POST',
+        url: 'http://'+constantIP+':8080/shhTest/ddRoleaction/getAllDdRole'
+    }).success(function(largeLoad) {
+        $scope.largeLoads1=largeLoad;
+        for(var i=0;i<$scope.largeLoads1.ddRoles.length;i++){
+            $scope.countries1[i]={"dname":$scope.largeLoads1.ddRoles[i].dname,
+                "role":$scope.largeLoads1.ddRoles[i].role};
+        }
+    });
+    //下拉框角色
     $scope.ok = function () {
         console.log($scope.menu.Pname);
         console.log($scope.menu.Ppassword);
@@ -270,7 +300,36 @@ function MenuUpdateCtrl($scope, $modalInstance, $http, grid,$log,constantIP){/*-
             $scope.menu[key] = results.personnel[key];
         }
     });
-
+// 下拉框专业
+    $scope.largeLoads={
+    };
+    $scope.countries = new Array();
+    $http({
+        method: 'POST',
+        url: 'http://'+constantIP+':8080/shhTest/ddMajoraction/getAllDdMajor'
+    }).success(function(largeLoad) {
+        $scope.largeLoads=largeLoad;
+        for(var i=0;i<$scope.largeLoads.ddMajors.length;i++){
+            $scope.countries[i]={"dname":$scope.largeLoads.ddMajors[i].dname,
+                "major":$scope.largeLoads.ddMajors[i].major};
+                 }
+    });
+    // 下拉框专业
+    // 下拉框角色
+    $scope.largeLoads1={
+    };
+    $scope.countries1 = new Array();
+    $http({
+        method: 'POST',
+        url: 'http://'+constantIP+':8080/shhTest/ddRoleaction/getAllDdRole'
+    }).success(function(largeLoad) {
+        $scope.largeLoads1=largeLoad;
+        for(var i=0;i<$scope.largeLoads1.ddRoles.length;i++){
+            $scope.countries1[i]={"dname":$scope.largeLoads1.ddRoles[i].dname,
+                "role":$scope.largeLoads1.ddRoles[i].role};
+        }
+    });
+    //下拉框角色
     $scope.ok = function () {
         $http({
             method: 'POST',

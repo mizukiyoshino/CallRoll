@@ -1,9 +1,3 @@
-/* 
-* @Author: chenhao
-* @Date:   2015-06-09 15:14:38
-* @Last Modified by:   chenhao
-* @Last Modified time: 2015-07-02 13:11:51
-*/
 
 var user = {
     userId : "",    //用户编号

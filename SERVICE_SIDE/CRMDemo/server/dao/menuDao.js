@@ -1,9 +1,4 @@
-/* 
-* @Author: chenhao
-* @Date:   2015-06-11 11:25:04
-* @Last Modified by:   chenhao
-* @Last Modified time: 2015-07-06 11:34:14
-*/
+
 
 var db = require('../database.js');
 var menuModel = require('../model/menuModel.js');

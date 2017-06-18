@@ -150,8 +150,8 @@ function StateInsertCtrl($scope, $modalInstance, $http, grid,constantIP){
             method: 'POST',/*-GET--*/
             url: 'http://'+constantIP+':8080/shhTest/ddStateaction/createDdState',
             data:{
-                "dname": $scope.states.Dname,
-                "callstate": $scope.states.Callstate
+                "dname": $scope.states.callstate,
+                "callstate": $scope.states.callstate
             },
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -201,8 +201,8 @@ function StateUpdateCtrl($scope, $modalInstance, $http, grid,$log,constantIP){
             url: 'http://'+constantIP+':8080/shhTest/ddStateaction/updateDdStateStateByName',
             data: {
                 "oldname":oldstatename,
-                "dname": $scope.states.Dname,
-                "callstate": $scope.states.Callstate
+                "dname": $scope.states.callstate,
+                "callstate": $scope.states.callstate
             },
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'

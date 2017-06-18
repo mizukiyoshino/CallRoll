@@ -1,9 +1,4 @@
-/* 
- * @Author: chenhao
- * @Date:   2015-06-11 14:33:36
- * @Last Modified by:   chenhao
- * @Last Modified time: 2015-07-06 11:16:56
- */
+
 var express = require('express');
 var menuService = require('../service/menuService.js');
 var router = express.Router();

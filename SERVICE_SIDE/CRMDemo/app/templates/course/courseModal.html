@@ -48,16 +48,20 @@
                 </div>
                 <label class="col-md-2 control-label" for="classDate">课时周序</label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="text" list="date" id="classDate" ng-model="courses.classDate">
-                    <datalist id="date">
-                        <option value="1">星期一</option>
-                        <option value="2">星期二</option>
-                        <option value="3">星期三</option>
-                        <option value="4">星期四</option>
-                        <option value="5">星期五</option>
-                        <option value="6">星期六</option>
-                        <option value="7">星期日</option>
-                    </datalist>
+                    <!--<select ng-model="courses.classDate" ng-options="c.dname for c in CourseUpdateCtrl.largeLoads.ddClassDates"></select>-->
+                    <!--<input class="form-control" type="text" list="date" id="classDate" ng-model="courses.classDate">-->
+                    <!--<datalist id="date" ng-options="c.classDate as c.dname for c in countries">-->
+                        <!--&lt;!&ndash;<option value="1" ng-model="largeLoad.ddClassDates[1].dname">星期一</option>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<option value="2">星期二</option>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<option value="3">星期三</option>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<option value="4">星期四</option>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<option value="5">星期五</option>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<option value="6">星期六</option>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<option value="7">星期日</option>&ndash;&gt;-->
+                    <!--</datalist>-->
+                    <select  class="form-control"  id="classDate" ng-model="courses.classDate" ng-options="c.classDate as c.dname for c in countries">
+
+                    </select>{{CourseUpdateCtrl.selected}}
 
                 </div>
             </div>
@@ -70,6 +74,19 @@
                 <div class="col-sm-4">
                     <input class="form-control" id="shape" ng-model="courses.shape">
                 </div>
+            </div>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" list="date1" id="classDate1">
+                <datalist id="date1">
+                    <option  ng-model="ClassDates.classDate" value="1">星期一</option>
+                    <option value="2">星期二</option>
+                    <option value="3">星期三</option>
+                    <option value="4">星期四</option>
+                    <option value="5">星期五</option>
+                    <option value="6">星期六</option>
+                    <option value="7">星期日</option>
+                </datalist>
+
             </div>
         </fieldset>
     </div>

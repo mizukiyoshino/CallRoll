@@ -25,7 +25,9 @@ function SchoolInfoCtrl ($scope, $http, $modal,constantIP){
     };
     $scope.setPagingData = function(data, page, pageSize){
         console.log("data   "+data);
-        var pagedData = data.slice((page - 1) * pageSize, page * pageSize);
+        console.log("info   "+data.length+"   "+data.length);
+        var pagedData = data.slice((page -1) * pageSize, page * pageSize);
+        console.log(".................."+pagedData);
         $scope.myData = pagedData;
         $scope.totalServerItems = data.length;
         if (!$scope.$$phase) {
@@ -158,9 +160,9 @@ function SchoolInfoInsertCtrl($scope, $modalInstance, $http, grid,constantIP){
             method: 'POST',/*-GET--*/
             url: 'http://'+constantIP+':8080/shhTest/schoolInfoaction/createSchoolInfo',
             data:{
-                "school": $scope.SchoolInfos.School,
-                "college": $scope.SchoolInfos.College,
-                "department":$scope.SchoolInfos.Department
+                "school": $scope.SchoolInfos.school,
+                "college": $scope.SchoolInfos.college,
+                "department":$scope.SchoolInfos.department
             },
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -188,15 +190,15 @@ function SchoolInfoInsertCtrl($scope, $modalInstance, $http, grid,constantIP){
  * @param {[type]} grid           [description]
  */
 function SchoolInfoUpdateCtrl($scope, $modalInstance, $http, grid,$log,constantIP){
-    console.log("iiiiiiiiiiiiiiiiiiiiii"+grid.gridOptions.selectedItems[0].School);
+    console.log("iiiiiiiiiiiiiiiiiiiiii"+grid.gridOptions.selectedItems[0].school);
     $scope.ok = function () {
         $http({
             method: 'POST',
             url: 'http://'+constantIP+':8080/shhTest/schoolInfoaction/updateSchoolInfo',
             data: {
-                "school": $scope.SchoolInfos.School,
-                "college": $scope.SchoolInfos.College,
-                "department":$scope.SchoolInfos.Department
+                "school": $scope.SchoolInfos.school,
+                "college": $scope.SchoolInfos.college,
+                "department":$scope.SchoolInfos.department
             },
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'

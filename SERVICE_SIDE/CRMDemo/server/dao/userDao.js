@@ -1,9 +1,4 @@
-/* 
-* @Author: chenhao
-* @Date:   2015-06-11 11:25:04
-* @Last Modified by:   chenhao
-* @Last Modified time: 2015-07-02 13:11:28
-*/
+
 
 var db = require('../database.js');
 var userModel = require('../model/userModel.js');
