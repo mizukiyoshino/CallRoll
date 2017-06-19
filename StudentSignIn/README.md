@@ -1,26 +1,31 @@
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
+Setup
 
-## How to use this template
+Requirements to use this project:
 
-*This template does not work on its own*. The shared files for each starter are found in the [ionic2-app-base repo](https://github.com/ionic-team/ionic2-app-base).
+Node.js (https://nodejs.org/download/)
 
-To use this template, either create a new ionic project using the ionic node.js utility, or copy the files from this repository into the [Starter App Base](https://github.com/ionic-team/ionic2-app-base).
+npm (Node Package Manager, it comes with node.js installation)
 
-### With the Ionic CLI:
+In case you're not with the latest version of npm:
 
-Take the name after `ionic2-starter-`, and that is the name of the template to be used when using the `ionic start` command below:
+$ sudo npm install npm -g
+Cordova & Ionic Cli
 
-```bash
-$ sudo npm install -g ionic cordova
-$ ionic start mySideMenu sidemenu
-```
+To install both of them on your system just launch this command:
 
-Then, to run it, cd into `mySideMenu` and run:
+$ sudo npm install cordova ionic -g
+Install NPM Dependencies
 
-```bash
-$ ionic cordova platform add ios
-$ ionic cordova run ios
-```
+Once you clone this repository, run this command on your terminal to install all needed dependencies:
 
-Substitute ios for android if not on a Mac.
+$ npm install
+Install cordova plugin Dependencies
 
+Run this command on your terminal to install all needed puglins:
+
+$ cordova prepare
+Launching the App
+
+After installing the needed dependencies you are done, launch your app with a simple
+
+$ ionic serve
