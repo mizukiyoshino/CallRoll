@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
+    <ion-title>选择座位</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="position-page">
+  <!--<form (submit)="doSubmit($event)" [formGroup]="langForm">-->
+  <!--&lt;!&ndash;<ion-list radio-group formControlName="langs">&ndash;&gt;-->
+
+  <!--&lt;!&ndash;<ion-list-header>&ndash;&gt;-->
+  <!--&lt;!&ndash;Language&ndash;&gt;-->
+  <!--&lt;!&ndash;</ion-list-header>&ndash;&gt;-->
+
+  <!--&lt;!&ndash;<ion-item>&ndash;&gt;-->
+  <!--&lt;!&ndash;<ion-label>Go</ion-label>&ndash;&gt;-->
+  <!--&lt;!&ndash;<ion-radio value="golang" checked="true"></ion-radio>&ndash;&gt;-->
+  <!--&lt;!&ndash;</ion-item>&ndash;&gt;-->
+  <!--&lt;!&ndash;<ion-item>&ndash;&gt;-->
+  <!--&lt;!&ndash;<ion-label>Rust</ion-label>&ndash;&gt;-->
+  <!--&lt;!&ndash;<ion-radio value="rust"></ion-radio>&ndash;&gt;-->
+  <!--&lt;!&ndash;</ion-item>&ndash;&gt;-->
+  <!--&lt;!&ndash;<ion-item>&ndash;&gt;-->
+  <!--&lt;!&ndash;<ion-label>Python</ion-label>&ndash;&gt;-->
+  <!--&lt;!&ndash;<ion-radio value="python"></ion-radio>&ndash;&gt;-->
+  <!--&lt;!&ndash;</ion-item>&ndash;&gt;-->
+
+  <!--&lt;!&ndash;</ion-list>&ndash;&gt;-->
+  <!--<button ion-button="" type="submit" block>提交选项</button>-->
+  <!--</form>-->
+
+  <ion-list>
+    <ion-item text-wrap *ngFor="let item of newsData">
+      <p>{{ item.Pname}}{{item.ID}}</p>
+    </ion-item>
+  </ion-list>
+
+
+
+</ion-content>
