@@ -19,12 +19,16 @@ Once you clone this repository, run this command on your terminal to install all
 
 
 $ npm install
+
+
 Install cordova plugin Dependencies
 
 Run this command on your terminal to install all needed puglins:
 
 
 $ cordova prepare
+
+
 Launching the App
 
 
