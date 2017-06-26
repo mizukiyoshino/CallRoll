@@ -7,8 +7,8 @@ import {SplashScreen} from '@ionic-native/splash-screen';
 import {HomePage} from '../pages/home/home';
 import {ListPage} from '../pages/list/list';
 import {LoginOnePage} from '../pages/login-one/login-one'
-import { RedditData } from '../providers/reddit-data';
-
+import {RedditData} from '../providers/reddit-data';
+import{GlobalStorage} from '../providers/global-storage'
 
 @Component({
   templateUrl: 'app.html'
@@ -16,15 +16,15 @@ import { RedditData } from '../providers/reddit-data';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginOnePage; //LoginOnePage
+  rootPage: any = HomePage; //LoginOnePage
 
   pages: Array<{title: string, component: any}>;
 
+  // Name: any;
+  // Id: any;
 
 
-
-
-  constructor(public personData:RedditData,
+  constructor(private globalStorage: GlobalStorage, private personData: RedditData,
               public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
@@ -32,7 +32,7 @@ export class MyApp {
     this.pages = [
       {title: '首页', component: HomePage},
       {title: '请假旷课记录', component: ListPage},
-      {title: '登录', component: LoginOnePage}
+      {title: '登出', component: LoginOnePage}
     ];
 
   }
@@ -52,4 +52,15 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
+  // ionViewDidLoad() {
+  //   this.globalStorage.getStorage('stuId').then((res) => {
+  //     console.log('app page: ' + res);
+  //     // this.personData.getPersonById(res).subscribe(
+  //     //   result => {
+  //     //     this.Name = result.personnel.Pname;
+  //     //     this.Id = result.personnel.ID;
+  //     //   }
+  //     // )
+  //   });
+  // }
 }

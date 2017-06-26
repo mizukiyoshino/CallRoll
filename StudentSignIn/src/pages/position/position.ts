@@ -34,13 +34,14 @@ export class PositionPage {
         for(let item of result.personnels) {
           this.newsData.push(item)
         }
-        console.log("Success : "+this.newsData);
+        console.log("position page jsondata Success : "+ result.personnels[0].Pname);
+        console.log("position page jsondata Success : "+this.newsData);
       },
       err =>{
         console.error("Error : "+err);
       } ,
       () => {
-        console.log('getData completed');
+        console.log('position page getData completed');
       }
     );
 
@@ -49,7 +50,7 @@ export class PositionPage {
 
           this.isTrue = result.state;
 
-        console.log("Success : "+this.isTrue);
+        console.log("position Success : "+this.isTrue);
       },
       err =>{
         console.error("Error : "+err);

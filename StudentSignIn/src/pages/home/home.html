@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar color="primary">
+  <ion-navbar color="dark">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -8,6 +8,17 @@
 </ion-header>
 
 <ion-content padding>
+
+  <ion-item color="dark" no-lines="">
+    <h1>个人信息</h1>
+    <ion-avatar item-start="">
+      <img src="assets/img/avatar/marty-avatar.png">
+    </ion-avatar>
+
+    <h2>姓名：{{name}}</h2>
+    <h2>学号：{{id}}</h2>
+
+  </ion-item>
   <!--<h3>Ionic Menu Starter</h3>-->
 
   <!--<p>-->
@@ -16,12 +27,14 @@
 
   <!--<button ion-button secondary menuToggle>Toggle Menu</button>-->
 
-<ion-item>{{stuInf}}</ion-item>
- <ion-list no-lines="">
+<!--<ion-item>{{stuInf}}</ion-item>-->
+ <ion-list no-lines="" class="courses">
    <ion-list-header text-center="" style="font-size: 1.5em;">所选课程</ion-list-header>
-   <button ion-item *ngFor="let course of courses" (click)="courseSelected(course)">
-     {{ course }}
+
+   <button ion-button text-center outline block color="dark" *ngFor="let course of courses" (click)="courseSelected(course)">
+     {{ course.cnameAndID.courseName }}
    </button>
+
  </ion-list>
   <!--<ion-grid>-->
     <!--<ion-row>-->

@@ -12,7 +12,7 @@ import 'rxjs/add/operator/map';
 export class RedditData {
   // const
   // hurl = 'http://17p4n01859.iok.la:15814';
-  hurl = 'http://218.5.46.92:8080';
+  hurl = 'http://222.76.59.23:8080';
 
   constructor(public http: Http) {
     console.log('Hello SignInData Provider');
@@ -30,6 +30,11 @@ export class RedditData {
 
   getPersonById(id) {
     let url = this.hurl + '/shhTest/personnelaction/getPersonnelByID?id=' + id;
+    return this.http.get(url).map(res => res.json());
+  }
+
+  getCoursesById(id) {
+    let url = this.hurl + '/shhTest/markaction/getMarkByID?id=' + id;
     return this.http.get(url).map(res => res.json());
   }
 
