@@ -15,7 +15,7 @@
         <input type="password" placeholder="请输入您的密码" ng-model="loginData.password">
       </label>
     </ul>
-    <div class="row">
+
       <div class="col">
         <button class="button button-assertive  button-block" ng-click="login()">
           登录
@@ -23,21 +23,20 @@
       </div>
       <div class="col">
         <button class="button button-assertive  button-block button-outline" ng-click="togo()">
-          注册新账号
+          验证码登入
         </button>
       </div>
-    </div>
 
-    <div class="row">
-      <a class="button button-small button-clear button-dark" href="#/forgotpassword">
+    <div class="col">
+      <button class="button button-assertive  button-block button-outline" ui-sref="forgetPass">
         忘记密码
-      </a>
+      </button>
     </div>
 
   </ion-content>
 
   <div class="bar bar-footer">
-    <h6 class="title">点名</h6>
+    <h6 class="title">@ 点名啦</h6>
   </div>
 
 </ion-view>
