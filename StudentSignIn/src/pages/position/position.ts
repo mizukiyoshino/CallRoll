@@ -1,7 +1,9 @@
 import {Component} from '@angular/core';
 // import {FormGroup, FormControl} from '@angular/forms';
-import {NavParams} from 'ionic-angular';
+import {NavParams, NavController} from 'ionic-angular';
 import {RedditData} from '../../providers/reddit-data';
+import {SitePage} from "../site/site";
+import {GlobalStorage} from '../../providers/global-storage'
 
 @Component({
   selector: 'page-position',
@@ -15,7 +17,7 @@ export class PositionPage {
 
   homeItem: any;
 
-  constructor(public navParams: NavParams, public redditService: RedditData) {
+  constructor(public globalStorage:GlobalStorage, public navCtrl: NavController, public navParams: NavParams, public redditService: RedditData) {
     // this.langForm = new FormGroup({
     //   "langs": new FormControl({value: 'rust', disabled: false})
     // });
@@ -26,6 +28,11 @@ export class PositionPage {
     // );
 
     this.homeItem = navParams.get('item');
+    console.log('position page con 1' + this.homeItem.cnameAndID.courseName);
+    globalStorage.setStorage('courseName', this.homeItem.cnameAndID.courseName);
+    globalStorage.getStorage('courseName').then(res => {
+      console.log('position page con 2 ' + res);
+    })
   }
 
   // doSubmit(event) {
@@ -68,6 +75,7 @@ export class PositionPage {
 
   choseSiteSign(event, course) {
 
+    this.navCtrl.push(SitePage);
   }
 
   askForLeave(event, course) {

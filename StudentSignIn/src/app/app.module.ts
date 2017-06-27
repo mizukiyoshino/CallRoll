@@ -8,6 +8,7 @@ import {MyApp} from './app.component';
 import {HomePage} from '../pages/home/home';
 import {ListPage} from '../pages/list/list';
 import {LoginOnePage} from "../pages/login-one/login-one";
+import {SitePage} from '../pages/site/site';
 
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
@@ -22,7 +23,8 @@ import {GlobalStorage} from '../providers/global-storage'
     LoginOnePage,
     HomePage,
     ListPage,
-    PositionPage
+    PositionPage,
+    SitePage
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,8 @@ import {GlobalStorage} from '../providers/global-storage'
     LoginOnePage,
     HomePage,
     ListPage,
-    PositionPage
+    PositionPage,
+    SitePage
   ],
   providers: [
     StatusBar,
