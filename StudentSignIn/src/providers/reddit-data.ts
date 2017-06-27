@@ -11,8 +11,8 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class RedditData {
   // const
-  // hurl = 'http://17p4n01859.iok.la:15814';
-  hurl = 'http://222.76.59.23:8080';
+  hurl = 'http://19a5fa39.ngrok.io';
+  // hurl = 'http://222.76.59.23:8080';
 
   constructor(public http: Http) {
     console.log('Hello SignInData Provider');

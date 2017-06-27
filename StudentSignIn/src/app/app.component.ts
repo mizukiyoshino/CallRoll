@@ -16,7 +16,7 @@ import{GlobalStorage} from '../providers/global-storage'
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage; //LoginOnePage
+  rootPage: any = LoginOnePage; //LoginOnePage
 
   pages: Array<{title: string, component: any}>;
 

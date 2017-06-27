@@ -52,6 +52,12 @@ export class LoginOnePage {
 
         if (this.isPass == '1') {
           console.log('setRoot stage');
+          let toast = this.toastCtrl.create({
+            message: '登录成功',
+            duration: 1000,
+            position: 'middle',
+          });
+          toast.present();
           loading.present();
           this.navCtrl.setRoot(HomePage);
         }

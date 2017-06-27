@@ -22,28 +22,31 @@
   <!--<h3>Ionic Menu Starter</h3>-->
 
   <!--<p>-->
-    <!--If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.-->
+  <!--If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.-->
   <!--</p>-->
 
   <!--<button ion-button secondary menuToggle>Toggle Menu</button>-->
 
-<!--<ion-item>{{stuInf}}</ion-item>-->
- <ion-list no-lines="" class="courses">
-   <ion-list-header text-center="" style="font-size: 1.5em;">所选课程</ion-list-header>
+  <!--<ion-item>{{stuInf}}</ion-item>-->
+  <ion-list no-lines="" class="courses">
+    <ion-list-header text-center="" style="font-size: 1.5em;">所选课程</ion-list-header>
 
-   <button ion-button text-center outline block color="dark" *ngFor="let course of courses" (click)="courseSelected(course)">
-     {{ course.cnameAndID.courseName }}
-   </button>
+    <button ion-button text-center block color="dark" *ngFor="let course of courses"
+            (click)="courseSelected($event, course)">
+      {{ course.cnameAndID.courseName }}
+    </button>
 
- </ion-list>
+  </ion-list>
+
+  <p text-center="">选择课程进行签到或请假</p>
   <!--<ion-grid>-->
-    <!--<ion-row>-->
-      <!--<ion-col col-12>This column will take 12 columns</ion-col>-->
-    <!--</ion-row>-->
-    <!--<ion-row>-->
-      <!--<ion-col col-6>This column will take 6 columns</ion-col>-->
-      <!--<ion-col col-6>This column will take 6 columns</ion-col>-->
-    <!--</ion-row>-->
+  <!--<ion-row>-->
+  <!--<ion-col col-12>This column will take 12 columns</ion-col>-->
+  <!--</ion-row>-->
+  <!--<ion-row>-->
+  <!--<ion-col col-6>This column will take 6 columns</ion-col>-->
+  <!--<ion-col col-6>This column will take 6 columns</ion-col>-->
+  <!--</ion-row>-->
   <!--</ion-grid>-->
 
 </ion-content>

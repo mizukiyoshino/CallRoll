@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="arrow-back"></ion-icon>
     </button>
-    <ion-title>选择座位</ion-title>
+    <ion-title>签到或请假</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -32,13 +32,15 @@
   <!--&lt;!&ndash;</ion-list>&ndash;&gt;-->
   <!--<button ion-button="" type="submit" block>提交选项</button>-->
   <!--</form>-->
-
-  <ion-list>
-    <ion-item text-wrap *ngFor="let item of newsData">
-      <p>{{ item.Pname}}{{item.ID}}</p>
-    </ion-item>
-  </ion-list>
-
+  <ion-item no-lines="">所选课程：{{homeItem.cnameAndID.courseName}}</ion-item>
+  <!--<ion-list>-->
+    <!--<ion-item text-wrap *ngFor="let item of newsData">-->
+      <!--<p>{{ item.Pname}}{{item.ID}}</p>-->
+    <!--</ion-item>-->
+  <!--</ion-list>-->
+  <button ion-button block outline color="dark"  (click)="choseSiteSign($event, course)">选择位置签到</button>
+  <br/>
+  <button ion-button block outline color="dark"  (click)="askForLeave($event, course)">请假申请</button>
 
 
 </ion-content>

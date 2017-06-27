@@ -40,7 +40,9 @@ export class HomePage {
 
   }
 
-  courseSelected(course) {
-    this.navCtrl.push(PositionPage)
+  courseSelected(event, course) {
+    this.navCtrl.push(PositionPage,{
+      item:course
+    })
   }
 }
