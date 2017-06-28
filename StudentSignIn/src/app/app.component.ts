@@ -34,7 +34,7 @@ export class MyApp {
     this.pages = [
       {title: '首页', component: HomePage},
       {title: '课堂考勤记录', component: ListPage},
-      {title: '考勤汇总', component: KaoqinPage},
+      // {title: '考勤汇总', component: KaoqinPage},
       {title: '平时表现', component: NormalPage},
       {title: '登出', component: LoginOnePage}
     ];

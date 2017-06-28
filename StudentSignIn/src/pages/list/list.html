@@ -20,6 +20,7 @@
   <!--<div *ngIf="selectedItem" padding>-->
     <!--You navigated here from <b>{{selectedItem.title}}{{selectedItem.note}}</b>-->
   <!--</div>-->
+  <button ion-button="" outline block color="dark" (click)="gotoKaoqin()">查询考勤汇总信息</button>
   <ion-card *ngFor="let item of calltherolls">
     <ion-card-header>
       课程：{{item.courseName}}
