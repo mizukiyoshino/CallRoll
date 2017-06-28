@@ -73,12 +73,13 @@ export class PositionPage {
     // );
   }
 
-  choseSiteSign(event, course) {
+  choseSiteSign() {
 
     this.navCtrl.push(SitePage);
   }
 
-  askForLeave(event, course) {
+  askForLeave() {
+
     console.log('position page askForLeave ' + this.homeItem.cnameAndID.courseName);
   }
 }

@@ -9,6 +9,8 @@ import {ListPage} from '../pages/list/list';
 import {LoginOnePage} from '../pages/login-one/login-one'
 import {RedditData} from '../providers/reddit-data';
 import{GlobalStorage} from '../providers/global-storage'
+import{KaoqinPage} from '../pages/kaoqin/kaoqin'
+import {NormalPage} from '../pages/normal/normal'
 
 @Component({
   templateUrl: 'app.html'
@@ -31,7 +33,9 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       {title: '首页', component: HomePage},
-      {title: '请假旷课记录', component: ListPage},
+      {title: '课堂考勤记录', component: ListPage},
+      {title: '考勤汇总', component: KaoqinPage},
+      {title: '平时表现', component: NormalPage},
       {title: '登出', component: LoginOnePage}
     ];
 

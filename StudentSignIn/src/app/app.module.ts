@@ -9,12 +9,15 @@ import {HomePage} from '../pages/home/home';
 import {ListPage} from '../pages/list/list';
 import {LoginOnePage} from "../pages/login-one/login-one";
 import {SitePage} from '../pages/site/site';
+import{KaoqinPage} from '../pages/kaoqin/kaoqin'
+import {NormalPage} from '../pages/normal/normal'
 
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {PositionPage} from "../pages/position/position";
 import { RedditData} from '../providers/reddit-data';
 import {GlobalStorage} from '../providers/global-storage'
+
 
 
 @NgModule({
@@ -24,7 +27,9 @@ import {GlobalStorage} from '../providers/global-storage'
     HomePage,
     ListPage,
     PositionPage,
-    SitePage
+    SitePage,
+    KaoqinPage,
+    NormalPage
   ],
   imports: [
     BrowserModule,
@@ -39,7 +44,9 @@ import {GlobalStorage} from '../providers/global-storage'
     HomePage,
     ListPage,
     PositionPage,
-    SitePage
+    SitePage,
+    KaoqinPage,
+    NormalPage
   ],
   providers: [
     StatusBar,

@@ -43,4 +43,16 @@ export class RedditData {
     return this.http.get(url).map(res => res.json());
   }
 
+  createCallTheRoll(cn, cs, cd, id, cp) {
+    let url = this.hurl + '/shhTest/calltherollaction/createCallTheRoll?coursename=' + cn + '&callstate=' + cs
+      + '&calldate=' + cd + '&id=' + id + '&callposition=' + cp;
+    console.log(url);
+    return this.http.get(url).map(res => res.json());
+  }
+
+  getCallTheRollByID(id) {
+    let url = this.hurl + '/shhTest/calltherollaction/getCallTheRollByIDHql?id=' + id;
+    return this.http.get(url).map(res => res.json());
+  }
+
 }

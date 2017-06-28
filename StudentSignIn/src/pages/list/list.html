@@ -3,21 +3,30 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>List</ion-title>
+    <ion-title>课堂考勤记录</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-left></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-right>
-        {{item.note}}
-      </div>
-    </button>
-  </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}{{selectedItem.note}}</b>
-  </div>
+  <!--<ion-list>-->
+    <!--<button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">-->
+      <!--<ion-icon [name]="item.icon" item-left></ion-icon>-->
+      <!--{{item.title}}-->
+      <!--<div class="item-note" item-right>-->
+        <!--{{item.note}}-->
+      <!--</div>-->
+    <!--</button>-->
+  <!--</ion-list>-->
+  <!--<div *ngIf="selectedItem" padding>-->
+    <!--You navigated here from <b>{{selectedItem.title}}{{selectedItem.note}}</b>-->
+  <!--</div>-->
+  <ion-card *ngFor="let item of calltherolls">
+    <ion-card-header>
+      课程：{{item.courseName}}
+    </ion-card-header>
+    <ion-card-content>
+      <p>记录类型:{{item.callstate}}</p>
+      <p>日期：{{item.calldate}}</p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
