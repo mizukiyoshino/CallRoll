@@ -2,6 +2,7 @@ package com.fzu.shhtest.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.fzu.shhtest.dao.CallTheRollDao;
 import com.fzu.shhtest.dao.CourseDao;
@@ -62,6 +63,17 @@ public class CallTheRollServiceImpl implements CallTheRollService {
 		return callTheRollDao.getCallTheRollByCoursename(cname);
 	}
 	
+	@Override
+	public List getCallTheRollByIDAndCoursename(String id,String cname) {
+		// TODO Auto-generated method stub
+		return callTheRollDao.getCallTheRollByIDAndCoursename(id,cname);
+	}
+	@Override
+	public List getCallTheRollByIDAndCoursenameHql(String id,String cname) {
+		// TODO Auto-generated method stub
+		return callTheRollDao.getCallTheRollByIDAndCoursenameHql(id,cname);
+	}
+	
 	
 	
 	@Override
@@ -93,4 +105,14 @@ public class CallTheRollServiceImpl implements CallTheRollService {
 		// TODO Auto-generated method stub
 		return callTheRollDao.getCallTheRollByCoursenameHql(cname);
 	}
+	
+	@Override
+	public int countCallTheRoll(int callstate,String coursename,String ID){
+		return callTheRollDao.countCallTheRoll(callstate,coursename,ID);
+	}
+	
+	@Override
+	public Map<String, Map<String, Object>>  countAllCallTheRoll(String coursename,String ID){
+		return callTheRollDao.countAllCallTheRoll(coursename,ID);
+	}	
 }

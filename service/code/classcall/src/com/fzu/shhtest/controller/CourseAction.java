@@ -98,18 +98,19 @@ public class CourseAction extends ActionSupport {
 				param.put(key, values[i]);
 			}
 		}
-		String oldcourseName = ResultUtils.getPostParameter(param, "oldcoursename");
+		String contentType = request.getHeader("Content-Type");
+		String oldcourseName = ResultUtils.getPostParameter(param, "oldcoursename",contentType);
 		System.out.println("oldcourseName is : "+oldcourseName);
-		String courseName = ResultUtils.getPostParameter(param, "coursename");
-		String dailyWeight = ResultUtils.getPostParameter(param, "dailyweight");
-		String finalWeight = ResultUtils.getPostParameter(param, "finalweight");
-		String picketLine = ResultUtils.getPostParameter(param, "picketline");
-		String classSession = ResultUtils.getPostParameter(param, "classsession");
-		String classLocation = ResultUtils.getPostParameter(param, "classlocation");
-		String classDate = ResultUtils.getPostParameter(param, "classdate");
-		String classOrder = ResultUtils.getPostParameter(param, "classorder");
-		String ID = ResultUtils.getPostParameter(param, "id");
-		String shape = ResultUtils.getPostParameter(param, "shape");
+		String courseName = ResultUtils.getPostParameter(param, "coursename",contentType);
+		String dailyWeight = ResultUtils.getPostParameter(param, "dailyweight",contentType);
+		String finalWeight = ResultUtils.getPostParameter(param, "finalweight",contentType);
+		String picketLine = ResultUtils.getPostParameter(param, "picketline",contentType);
+		String classSession = ResultUtils.getPostParameter(param, "classsession",contentType);
+		String classLocation = ResultUtils.getPostParameter(param, "classlocation",contentType);
+		String classDate = ResultUtils.getPostParameter(param, "classdate",contentType);
+		String classOrder = ResultUtils.getPostParameter(param, "classorder",contentType);
+		String ID = ResultUtils.getPostParameter(param, "id",contentType);
+		String shape = ResultUtils.getPostParameter(param, "shape",contentType);
 		System.out.println("courseName is : "+courseName);
 		
 		Course course = new Course();
@@ -185,7 +186,8 @@ public class CourseAction extends ActionSupport {
 				param.put(key, values[i]);
 			}
 		}
-		String cname = ResultUtils.getPostParameter(param, "coursename");
+		String contentType = request.getHeader("Content-Type");
+		String cname = ResultUtils.getPostParameter(param, "coursename",contentType);
 		Map<String, Object> map = new HashMap<String, Object>();
 		List course = courseService
 				.getCourseByNameHql(cname);

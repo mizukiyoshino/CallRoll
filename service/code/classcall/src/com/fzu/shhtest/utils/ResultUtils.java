@@ -27,6 +27,7 @@ public class ResultUtils {
 		response.setContentType("text/json; charset=utf-8");
 		response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setHeader("Access-Control-Allow-Methods", "*");
+		response.setHeader("Access-Control-Allow-Headers","X-Custom-Header,accept,x-requested-with,content-type"); // 允许哪些请求
 		response.setHeader("Cache-Control", "no-cache"); // 取消浏览器缓存
 		PrintWriter out = response.getWriter();
 		out.print(result);

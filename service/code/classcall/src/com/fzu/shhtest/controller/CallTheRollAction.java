@@ -1,6 +1,7 @@
 package com.fzu.shhtest.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -9,23 +10,29 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.nt.NTEventLogAppender;
 import org.apache.struts2.ServletActionContext;
 
 import com.fzu.shhtest.domain.CallTheRoll;
 import com.fzu.shhtest.domain.Course;
+import com.fzu.shhtest.domain.Mark;
 import com.fzu.shhtest.domain.Personnel;
 import com.fzu.shhtest.service.CallTheRollService;
+import com.fzu.shhtest.service.MarkService;
 import com.fzu.shhtest.utils.ResultUtils;
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
 public class CallTheRollAction extends ActionSupport {
 	private CallTheRollService callTheRollService;
-
+	private MarkService markService;
+	
 	public void setCallTheRollService(CallTheRollService callTheRollService) {
 		this.callTheRollService = callTheRollService;
 	}
-
+	public void setMarkService(MarkService markService) {
+		this.markService = markService;
+	}
 	public String execute() {
 		return SUCCESS;
 	}
@@ -41,19 +48,29 @@ public class CallTheRollAction extends ActionSupport {
 				param.put(key, values[i]);
 			}
 		}
-		String courseName = ResultUtils.getPostParameter(param, "coursename");
-		String callstate = ResultUtils.getPostParameter(param, "callstate");
-		String calldate = ResultUtils.getPostParameter(param, "calldate");
-		String ID = ResultUtils.getPostParameter(param, "id");
-		String callposition = ResultUtils.getPostParameter(param, "callposition");
-		
+		System.out.println("in createCallTheRoll");
+		String contentType = request.getHeader("Content-Type");
+		String courseName = ResultUtils.getPostParameter(param, "coursename",
+				contentType);
+		String callstate = ResultUtils.getPostParameter(param, "callstate",
+				contentType);
+		String calldate = ResultUtils.getPostParameter(param, "calldate",
+				contentType);
+		String ID = ResultUtils.getPostParameter(param, "id", contentType);
+		String callposition = ResultUtils.getPostParameter(param,
+				"callposition", contentType);
+		if(calldate.equals("1"))
+		{
+			Date date = new Date();
+			calldate = ""+date.getYear()+"-"+date.getMonth()+"-"+date.getDay();
+		}
 		CallTheRoll callTheRoll = new CallTheRoll();
 		callTheRoll.setCourseName(courseName);
 		callTheRoll.setCallstate(Integer.parseInt(callstate));
-		callTheRoll.setCalldate(new Date(calldate));
+		callTheRoll.setCalldate(ResultUtils.stringToDate(calldate));
 		callTheRoll.setID(ID);
 		callTheRoll.setCallposition(callposition);
-		
+
 		callTheRollService.createCallTheRoll(callTheRoll);
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
@@ -64,8 +81,8 @@ public class CallTheRollAction extends ActionSupport {
 	}
 
 	public String deleteCallTheRollByID() throws IOException {
-		//http://localhost:8080/shhTest/calltherollaction/deleteCallTheRollByID
-		//autoid=1&callstate=3&calldate=2017-06-12&callposition=5*2&id=160327000
+		// http://localhost:8080/shhTest/calltherollaction/deleteCallTheRollByID
+		// autoid=1&callstate=3&calldate=2017-06-12&callposition=5*2&id=160327000
 		HttpServletRequest request = ServletActionContext.getRequest();
 		Map<String, String[]> params = request.getParameterMap();
 		Map<String, String> param = new HashMap<String, String>();
@@ -75,8 +92,9 @@ public class CallTheRollAction extends ActionSupport {
 			for (int i = 0; i < values.length; i++) {
 				param.put(key, values[i]);
 			}
-		}		
-		String ID = ResultUtils.getPostParameter(param, "id");
+		}
+		String contentType = request.getHeader("Content-Type");
+		String ID = ResultUtils.getPostParameter(param, "id", contentType);
 		callTheRollService.deleteCallTheRollByID(ID);
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
@@ -87,8 +105,8 @@ public class CallTheRollAction extends ActionSupport {
 	}
 
 	public String updateCallTheRoll() throws IOException {
-		//http://localhost:8080/shhTest/calltherollaction/updateCallTheRoll
-		//autoid=1&callstate=2&calldate=2017-06-12&callposition=5*2
+		// http://localhost:8080/shhTest/calltherollaction/updateCallTheRoll
+		// autoid=1&callstate=2&calldate=2017-06-12&callposition=5*2
 		HttpServletRequest request = ServletActionContext.getRequest();
 		Map<String, String[]> params = request.getParameterMap();
 		Map<String, String> param = new HashMap<String, String>();
@@ -98,12 +116,17 @@ public class CallTheRollAction extends ActionSupport {
 			for (int i = 0; i < values.length; i++) {
 				param.put(key, values[i]);
 			}
-		}		
-		String autoid = ResultUtils.getPostParameter(param, "autoid");
-		String callstate = ResultUtils.getPostParameter(param, "callstate");
-		String calldate = ResultUtils.getPostParameter(param, "calldate");
-		String callposition = ResultUtils.getPostParameter(param, "callposition");
-		
+		}
+		String contentType = request.getHeader("Content-Type");
+		String autoid = ResultUtils.getPostParameter(param, "autoid",
+				contentType);
+		String callstate = ResultUtils.getPostParameter(param, "callstate",
+				contentType);
+		String calldate = ResultUtils.getPostParameter(param, "calldate",
+				contentType);
+		String callposition = ResultUtils.getPostParameter(param,
+				"callposition", contentType);
+
 		CallTheRoll callTheRoll = new CallTheRoll();
 		callTheRoll.setAutoid(Long.parseLong(autoid));
 		callTheRoll.setCallstate(Integer.parseInt(callstate));
@@ -120,17 +143,19 @@ public class CallTheRollAction extends ActionSupport {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public String getAllCallTheRoll() throws IOException {
-		HttpServletResponse response = ResultUtils.setResponse(ServletActionContext.getResponse());
+		HttpServletResponse response = ResultUtils
+				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<CallTheRoll> list = (List<CallTheRoll>) callTheRollService.getAllCallTheRoll();
+		List<CallTheRoll> list = (List<CallTheRoll>) callTheRollService
+				.getAllCallTheRoll();
 		map.put("calltherolls", list);
 		ResultUtils.toJson(response, map);
 		return null;
 	}
 
 	public String getCallTheRollByDate() throws IOException {
-		//http://localhost:8080/shhTest/calltherollaction/getCallTheRollByDate
-		//id=160327000&coursename=网络工程&calldate=2017-06-14
+		// http://localhost:8080/shhTest/calltherollaction/getCallTheRollByDate
+		// id=160327000&coursename=网络工程&calldate=2017-06-14
 		HttpServletRequest request = ServletActionContext.getRequest();
 		Map<String, String[]> params = request.getParameterMap();
 		Map<String, String> param = new HashMap<String, String>();
@@ -141,9 +166,12 @@ public class CallTheRollAction extends ActionSupport {
 				param.put(key, values[i]);
 			}
 		}
-		String calldate = ResultUtils.getPostParameter(param, "calldate");
+		String contentType = request.getHeader("Content-Type");
+		String calldate = ResultUtils.getPostParameter(param, "calldate",
+				contentType);
 		Date date = ResultUtils.stringToDate(calldate);
-		List<CallTheRoll> callTheRolls = callTheRollService.getCallTheRollByDate(date);
+		List<CallTheRoll> callTheRolls = callTheRollService
+				.getCallTheRollByDate(date);
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -153,7 +181,7 @@ public class CallTheRollAction extends ActionSupport {
 	}
 
 	public String getCallTheRollBetweenDate() throws IOException {
-		//id=160327000&coursename=网络工程&bcalldate=2017-06-14&acalldate=2017-06-14
+		// id=160327000&coursename=网络工程&bcalldate=2017-06-14&acalldate=2017-06-14
 		HttpServletRequest request = ServletActionContext.getRequest();
 		Map<String, String[]> params = request.getParameterMap();
 		Map<String, String> param = new HashMap<String, String>();
@@ -164,11 +192,15 @@ public class CallTheRollAction extends ActionSupport {
 				param.put(key, values[i]);
 			}
 		}
-		String bcalldate = ResultUtils.getPostParameter(param, "bcalldate");//before
-		String acalldate = ResultUtils.getPostParameter(param, "acalldate");//after
+		String contentType = request.getHeader("Content-Type");
+		String bcalldate = ResultUtils.getPostParameter(param, "bcalldate",
+				contentType);// before
+		String acalldate = ResultUtils.getPostParameter(param, "acalldate",
+				contentType);// after
 		Date bdate = ResultUtils.stringToDate(bcalldate);
 		Date adate = ResultUtils.stringToDate(acalldate);
-		List<CallTheRoll> callTheRolls = callTheRollService.getCallTheRollBetweenDate(bdate,adate);
+		List<CallTheRoll> callTheRolls = callTheRollService
+				.getCallTheRollBetweenDate(bdate, adate);
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -188,8 +220,10 @@ public class CallTheRollAction extends ActionSupport {
 				param.put(key, values[i]);
 			}
 		}
-		String ID = ResultUtils.getPostParameter(param, "id");
-		List<CallTheRoll> callTheRolls = callTheRollService.getCallTheRollByID(ID);
+		String contentType = request.getHeader("Content-Type");
+		String ID = ResultUtils.getPostParameter(param, "id", contentType);
+		List<CallTheRoll> callTheRolls = callTheRollService
+				.getCallTheRollByID(ID);
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -209,8 +243,11 @@ public class CallTheRollAction extends ActionSupport {
 				param.put(key, values[i]);
 			}
 		}
-		String cname = ResultUtils.getPostParameter(param, "coursename");
-		List<CallTheRoll> callTheRolls = callTheRollService.getCallTheRollByCoursename(cname);
+		String contentType = request.getHeader("Content-Type");
+		String cname = ResultUtils.getPostParameter(param, "coursename",
+				contentType);
+		List<CallTheRoll> callTheRolls = callTheRollService
+				.getCallTheRollByCoursename(cname);
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -218,27 +255,93 @@ public class CallTheRollAction extends ActionSupport {
 		ResultUtils.toJson(response, map);
 		return null;
 	}
-	
-	
-	
-	//..................HQL..........................................
+
+	public String getCallTheRollByIDAndCoursename() throws IOException {
+		System.out.println("in id and cname");
+		HttpServletRequest request = ServletActionContext.getRequest();
+		// quest.setHeader("Access-Control-Allow-Headers","*"); ;
+		Map<String, String[]> params = request.getParameterMap();
+		Map<String, String> param = new HashMap<String, String>();
+
+		for (String key : params.keySet()) {
+			String[] values = params.get(key);
+			for (int i = 0; i < values.length; i++) {
+				param.put(key, values[i]);
+			}
+		}
+
+		String contentType = request.getHeader("Content-Type");
+		String ID = ResultUtils.getPostParameter(param, "id", contentType);
+		String cname = ResultUtils.getPostParameter(param, "coursename",
+				contentType);
+		System.out.println("cname:  " + cname);
+		List<CallTheRoll> callTheRolls = callTheRollService
+				.getCallTheRollByIDAndCoursename(ID, cname);
+		HttpServletResponse response = ResultUtils
+				.setResponse(ServletActionContext.getResponse());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("callTheRolls", callTheRolls);
+		ResultUtils.toJson(response, map);
+		return null;
+	}
+
+	public String getCallTheRollByIDAndCoursenameHql() throws IOException {
+		// System.out.println("in id and cname");
+		HttpServletRequest request = ServletActionContext.getRequest();
+		// quest.setHeader("Access-Control-Allow-Headers","*"); ;
+		Map<String, String[]> params = request.getParameterMap();
+		Map<String, String> param = new HashMap<String, String>();
+
+		for (String key : params.keySet()) {
+			String[] values = params.get(key);
+			for (int i = 0; i < values.length; i++) {
+				param.put(key, values[i]);
+			}
+		}
+		String contentType = request.getHeader("Content-Type");
+		String ID = ResultUtils.getPostParameter(param, "id", contentType);
+		String cname = ResultUtils.getPostParameter(param, "coursename",
+				contentType);
+		// System.out.println("cname:  "+cname);
+
+		List<CallTheRoll> callTheRolls = callTheRollService
+				.getCallTheRollByIDAndCoursenameHql(ID, cname);
+		String[] parameters = { "autoid", "courseName", "ID", "callstate",
+				"calldate", "callposition" };
+		List<Map<String, Object>> maplist = ResultUtils.setResults(
+				callTheRolls, parameters);// new ArrayList<Map<String,
+											// Object>>();
+
+		HttpServletResponse response = ResultUtils
+				.setResponse(ServletActionContext.getResponse());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("callTheRolls", maplist);
+		ResultUtils.toJson(response, map);
+		return null;
+	}
+
+	// ..................HQL..........................................
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public String getAllCallTheRollHql() throws IOException {
-		HttpServletResponse response = ResultUtils.setResponse(ServletActionContext.getResponse());
+		HttpServletResponse response = ResultUtils
+				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<CallTheRoll> list = (List<CallTheRoll>) callTheRollService.getAllCallTheRollHql();
-		String[] parameters= {"autoid","courseName","ID","callstate","calldate","callposition"};
-		List<Map<String, Object>> maplist = ResultUtils.setResults(list, parameters);//new ArrayList<Map<String, Object>>();
-		
+		List<CallTheRoll> list = (List<CallTheRoll>) callTheRollService
+				.getAllCallTheRollHql();
+		String[] parameters = { "autoid", "courseName", "ID", "callstate",
+				"calldate", "callposition" };
+		List<Map<String, Object>> maplist = ResultUtils.setResults(list,
+				parameters);// new ArrayList<Map<String, Object>>();
+
 		map.put("calltherolls", maplist);
 		ResultUtils.toJson(response, map);
 		return null;
 	}
 
 	public String getCallTheRollByDateHql() throws IOException {
-		//http://localhost:8080/shhTest/calltherollaction/getCallTheRollByDate
-		//id=160327000&coursename=网络工程&calldate=2017-06-14
+		// http://localhost:8080/shhTest/calltherollaction/getCallTheRollByDate
+		// id=160327000&coursename=网络工程&calldate=2017-06-14
 		HttpServletRequest request = ServletActionContext.getRequest();
 		Map<String, String[]> params = request.getParameterMap();
 		Map<String, String> param = new HashMap<String, String>();
@@ -249,22 +352,28 @@ public class CallTheRollAction extends ActionSupport {
 				param.put(key, values[i]);
 			}
 		}
-		String calldate = ResultUtils.getPostParameter(param, "calldate");
+		String contentType = request.getHeader("Content-Type");
+		String calldate = ResultUtils.getPostParameter(param, "calldate",
+				contentType);
 		Date date = ResultUtils.stringToDate(calldate);
-		List<CallTheRoll> callTheRolls = callTheRollService.getCallTheRollByDateHql(calldate);
+		List<CallTheRoll> callTheRolls = callTheRollService
+				.getCallTheRollByDateHql(calldate);
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
-		String[] parameters= {"autoid","courseName","ID","callstate","calldate","callposition"};
-		List<Map<String, Object>> maplist = ResultUtils.setResults(callTheRolls, parameters);//new ArrayList<Map<String, Object>>();
-		
+		String[] parameters = { "autoid", "courseName", "ID", "callstate",
+				"calldate", "callposition" };
+		List<Map<String, Object>> maplist = ResultUtils.setResults(
+				callTheRolls, parameters);// new ArrayList<Map<String,
+											// Object>>();
+
 		map.put("callTheRolls", maplist);
 		ResultUtils.toJson(response, map);
 		return null;
 	}
 
 	public String getCallTheRollBetweenDateHql() throws IOException {
-		//id=160327000&coursename=网络工程&bcalldate=2017-06-14&acalldate=2017-06-14
+		// id=160327000&coursename=网络工程&bcalldate=2017-06-14&acalldate=2017-06-14
 		HttpServletRequest request = ServletActionContext.getRequest();
 		Map<String, String[]> params = request.getParameterMap();
 		Map<String, String> param = new HashMap<String, String>();
@@ -275,16 +384,23 @@ public class CallTheRollAction extends ActionSupport {
 				param.put(key, values[i]);
 			}
 		}
-		String bcalldate = ResultUtils.getPostParameter(param, "bcalldate");//before
-		String acalldate = ResultUtils.getPostParameter(param, "acalldate");//after
+		String contentType = request.getHeader("Content-Type");
+		String bcalldate = ResultUtils.getPostParameter(param, "bcalldate",
+				contentType);// before
+		String acalldate = ResultUtils.getPostParameter(param, "acalldate",
+				contentType);// after
 		Date bdate = ResultUtils.stringToDate(bcalldate);
 		Date adate = ResultUtils.stringToDate(acalldate);
-		List<CallTheRoll> callTheRolls = callTheRollService.getCallTheRollBetweenDateHql(bcalldate,acalldate);
+		List<CallTheRoll> callTheRolls = callTheRollService
+				.getCallTheRollBetweenDateHql(bcalldate, acalldate);
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
-		String[] parameters= {"autoid","courseName","ID","callstate","calldate","callposition"};
-		List<Map<String, Object>> maplist = ResultUtils.setResults(callTheRolls, parameters);//new ArrayList<Map<String, Object>>();
-		
+		String[] parameters = { "autoid", "courseName", "ID", "callstate",
+				"calldate", "callposition" };
+		List<Map<String, Object>> maplist = ResultUtils.setResults(
+				callTheRolls, parameters);// new ArrayList<Map<String,
+											// Object>>();
+
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("callTheRolls", maplist);
 		ResultUtils.toJson(response, map);
@@ -302,14 +418,19 @@ public class CallTheRollAction extends ActionSupport {
 				param.put(key, values[i]);
 			}
 		}
-		String ID = ResultUtils.getPostParameter(param, "id");
-		List<CallTheRoll> callTheRolls = callTheRollService.getCallTheRollByIDHql(ID);
+		String contentType = request.getHeader("Content-Type");
+		String ID = ResultUtils.getPostParameter(param, "id", contentType);
+		List<CallTheRoll> callTheRolls = callTheRollService
+				.getCallTheRollByIDHql(ID);
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
-		String[] parameters= {"autoid","courseName","ID","callstate","calldate","callposition"};
-		List<Map<String, Object>> maplist = ResultUtils.setResults(callTheRolls, parameters);//new ArrayList<Map<String, Object>>();
-		
+		String[] parameters = { "autoid", "courseName", "ID", "callstate",
+				"calldate", "callposition" };
+		List<Map<String, Object>> maplist = ResultUtils.setResults(
+				callTheRolls, parameters);// new ArrayList<Map<String,
+											// Object>>();
+
 		map.put("callTheRolls", maplist);
 		ResultUtils.toJson(response, map);
 		return null;
@@ -326,16 +447,82 @@ public class CallTheRollAction extends ActionSupport {
 				param.put(key, values[i]);
 			}
 		}
-		String cname = ResultUtils.getPostParameter(param, "coursename");
-		List<CallTheRoll> callTheRolls = callTheRollService.getCallTheRollByCoursenameHql(cname);
+		String contentType = request.getHeader("Content-Type");
+		String cname = ResultUtils.getPostParameter(param, "coursename",
+				contentType);
+		List<CallTheRoll> callTheRolls = callTheRollService
+				.getCallTheRollByCoursenameHql(cname);
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
-		String[] parameters= {"autoid","courseName","ID","callstate","calldate","callposition"};
-		List<Map<String, Object>> maplist = ResultUtils.setResults(callTheRolls, parameters);//new ArrayList<Map<String, Object>>();
-		
+		String[] parameters = { "autoid", "courseName", "ID", "callstate",
+				"calldate", "callposition" };
+		List<Map<String, Object>> maplist = ResultUtils.setResults(
+				callTheRolls, parameters);// new ArrayList<Map<String,
+											// Object>>();
+
 		map.put("callTheRolls", maplist);
 		ResultUtils.toJson(response, map);
 		return null;
 	}
+
+	public String countCallTheRoll() throws IOException {
+		//http://localhost:8080/shhTest/calltherollaction/countCallTheRoll?id=160327000&callstate=1&coursename=网络工程
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map<String, String[]> params = request.getParameterMap();
+		Map<String, String> param = new HashMap<String, String>();
+
+		for (String key : params.keySet()) {
+			String[] values = params.get(key);
+			for (int i = 0; i < values.length; i++) {
+				param.put(key, values[i]);
+			}
+		}
+		String contentType = request.getHeader("Content-Type");
+		String callstate = ResultUtils.getPostParameter(param, "callstate",contentType);
+		String coursename = ResultUtils.getPostParameter(param, "coursename",contentType);
+		String ID = ResultUtils.getPostParameter(param, "id",contentType);
+		
+		
+		HttpServletResponse response = ResultUtils.setResponse(ServletActionContext.getResponse());
+		Map<String, Object> map = new HashMap<String, Object>();
+		int countnum = callTheRollService.countCallTheRoll(Integer.parseInt(callstate),coursename,ID);
+		map.put("countnum", countnum);
+		ResultUtils.toJson(response, map);		
+		return null;
+	}
+	
+	
+	public String countAllCallTheRoll() throws IOException {
+		//http://localhost:8080/shhTest/calltherollaction/countCallTheRoll?id=160327000&callstate=1&coursename=网络工程
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map<String, String[]> params = request.getParameterMap();
+		Map<String, String> param = new HashMap<String, String>();
+
+		for (String key : params.keySet()) {
+			String[] values = params.get(key);
+			for (int i = 0; i < values.length; i++) {
+				param.put(key, values[i]);
+			}
+		}
+		String contentType = request.getHeader("Content-Type");
+		String coursename = ResultUtils.getPostParameter(param, "coursename",contentType);
+		
+		List<Mark> marks = markService.getMarkByName(coursename);
+		List<Map<String, Map<String, Object>>> counts = new ArrayList<Map<String, Map<String, Object>>>();
+		for(Mark mark:marks){
+			counts.add(callTheRollService.countAllCallTheRoll(coursename,mark.getCnameAndID().getID()));
+        }
+		System.out.println(counts);
+		
+		
+		HttpServletResponse response = ResultUtils
+				.setResponse(ServletActionContext.getResponse());
+		Map<String, Object> map = new HashMap<String, Object>();
+		//int countnum = callTheRollService.countAllCallTheRoll(coursename);
+		map.put("counts", counts);
+		ResultUtils.toJson(response, map);		
+		return null;
+	}
+	
 }

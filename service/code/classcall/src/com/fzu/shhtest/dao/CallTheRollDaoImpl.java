@@ -2,13 +2,16 @@ package com.fzu.shhtest.dao;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.fzu.shhtest.domain.CallTheRoll;
+import com.fzu.shhtest.domain.DdState;
 import com.fzu.shhtest.domain.Personnel;
 import com.fzu.shhtest.utils.ResultUtils;
 
@@ -110,6 +113,31 @@ public class CallTheRollDaoImpl implements CallTheRollDao {
 		List<CallTheRoll> list = (List<CallTheRoll>) query.list();
 		return list;
 	}
+
+	@Override
+	public List getCallTheRollByIDAndCoursename(String id,String cname) {
+		Session session = getSession();
+		Query query = session.createQuery("from CallTheRoll where ID=? AND courseName=?");
+		query.setString(0, id);
+		query.setString(1, cname);
+		List<CallTheRoll> list = (List<CallTheRoll>) query.list();
+		return list;
+	}
+	
+
+	@Override
+	public List getCallTheRollByIDAndCoursenameHql(String id,String cname) {
+		Session session = getSession();
+		String hqlString = "SELECT autoid,courseName,ID,dname,calldate,callposition FROM calltheroll AS a,ddstate AS d WHERE a.callstate=d.callstate AND ID="+id+" AND courseName=\'"+cname+"\';";
+		Query query = session.createSQLQuery(hqlString);
+		
+		//Session session = getSession();
+		//Query query = session.createQuery("from CallTheRoll where ID=? AND courseName=?");
+		//query.setString(0, id);
+		//query.setString(1, cname);
+		List list = query.list();
+		return list;
+	}
 	
 	
 	//...........................HQL................................
@@ -157,4 +185,32 @@ public class CallTheRollDaoImpl implements CallTheRollDao {
 		List list = query.list();
 		return list;
 	}
+	@Override
+	public int countCallTheRoll(int callstate,String coursename,String ID)
+	{
+		Session session = getSession();
+		String hqlString = "SELECT COUNT(*) FROM calltheroll WHERE ID="+ID+" AND callstate="+callstate+" AND courseName=\'"+coursename+"\';";
+		Query query = session.createSQLQuery(hqlString);
+		List list = query.list();
+		//System.out.println("countCallTheRoll:  "+coursename+"   "+Integer.parseInt(query.getQueryString()));
+		return Integer.parseInt(query.list().get(0).toString());
+	}
+	
+	@Override
+	public Map<String, Map<String, Object>> countAllCallTheRoll(String coursename,String ID){
+		Map<String, Map<String, Object>> maps = new LinkedHashMap<String, Map<String,Object>>();
+		Map<String, Object> map = new LinkedHashMap<String, Object>();
+		Session session = getSession();
+		List list = session.createQuery("from DdState").list();
+		List<DdState> ddStates = (ArrayList<DdState>)list;
+		int count = 0;
+		for(DdState ddState:ddStates)
+		{
+			count = countCallTheRoll(ddState.getCallstate(),coursename,ID);
+			map.put(ddState.getDname(), count);
+		}
+		maps.put(ID, map);
+		return maps;
+	}
+	
 }

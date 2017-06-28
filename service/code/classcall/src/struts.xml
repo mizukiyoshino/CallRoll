@@ -45,7 +45,11 @@
 		<action name="getCallTheRollBetweenDate" class="callTheRollAction" method="getCallTheRollBetweenDate" />
 		<action name="getCallTheRollByID" class="callTheRollAction" method="getCallTheRollByID" />
 		<action name="getCallTheRollByCoursename" class="callTheRollAction" method="getCallTheRollByCoursename" />
-	
+		<action name="getCallTheRollByIDAndCoursename" class="callTheRollAction" method="getCallTheRollByIDAndCoursename" />
+		<action name="getCallTheRollByIDAndCoursenameHql" class="callTheRollAction" method="getCallTheRollByIDAndCoursenameHql" />
+		<action name="countCallTheRoll" class="callTheRollAction" method="countCallTheRoll" />
+		<action name="countAllCallTheRoll" class="callTheRollAction" method="countAllCallTheRoll" />
+		
 		<action name="getAllCallTheRollHql" class="callTheRollAction" method="getAllCallTheRollHql" />
 		<action name="getCallTheRollByDateHql" class="callTheRollAction" method="getCallTheRollByDateHql" />
 		<action name="getCallTheRollBetweenDateHql" class="callTheRollAction" method="getCallTheRollBetweenDateHql" />
@@ -95,7 +99,6 @@
 
 
 <!--#############################   数据字典         #####################################-->
-
 	<package name="ddRoleaction" namespace="/ddRoleaction"
 		extends="struts-default,json-default">
 		<action name="createDdRole" class="ddRoleAction" method="createDdRole" />
@@ -128,7 +131,6 @@
 		<action name="updateDdStateStateByName" class="ddStateAction" method="updateDdStateStateByName" />
 		<action name="getAllDdState" class="ddStateAction" method="getAllDdState" />
 	</package>
-	
 <!--#############################   数据字典         #####################################-->
 
 </struts> 

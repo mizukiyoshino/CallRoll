@@ -41,10 +41,11 @@ public class MarkAction extends ActionSupport {
 				param.put(key, values[i]);
 			}
 		}
-		String ID = ResultUtils.getPostParameter(param, "id");
-		String courseName = ResultUtils.getPostParameter(param, "courseName");
-		String dailyScore = ResultUtils.getPostParameter(param, "dailyScore");
-		String finalScore = ResultUtils.getPostParameter(param, "finalScore");
+		String contentType = request.getHeader("Content-Type");
+		String ID = ResultUtils.getPostParameter(param, "id",contentType);
+		String courseName = ResultUtils.getPostParameter(param, "courseName",contentType);
+		String dailyScore = ResultUtils.getPostParameter(param, "dailyScore",contentType);
+		String finalScore = ResultUtils.getPostParameter(param, "finalScore",contentType);
 		
 		CourseNameAndID courseNameAndID = new CourseNameAndID();
 		courseNameAndID.setID(ID);
@@ -75,7 +76,8 @@ public class MarkAction extends ActionSupport {
 				param.put(key, values[i]);
 			}
 		}
-		String courseName = ResultUtils.getPostParameter(param, "courseName");
+		String contentType = request.getHeader("Content-Type");
+		String courseName = ResultUtils.getPostParameter(param, "courseName",contentType);
 		markService.deleteMarkByName(courseName);
 		
 		HttpServletResponse response = ResultUtils
@@ -96,10 +98,11 @@ public class MarkAction extends ActionSupport {
 				param.put(key, values[i]);
 			}
 		}
-		String ID = ResultUtils.getPostParameter(param, "id");
-		String courseName = ResultUtils.getPostParameter(param, "courseName");
-		String dailyScore = ResultUtils.getPostParameter(param, "dailyScore");
-		String finalScore = ResultUtils.getPostParameter(param, "finalScore");
+		String contentType = request.getHeader("Content-Type");
+		String ID = ResultUtils.getPostParameter(param, "id",contentType);
+		String courseName = ResultUtils.getPostParameter(param, "courseName",contentType);
+		String dailyScore = ResultUtils.getPostParameter(param, "dailyScore",contentType);
+		String finalScore = ResultUtils.getPostParameter(param, "finalScore",contentType);
 		
 		CourseNameAndID courseNameAndID = new CourseNameAndID();
 		courseNameAndID.setID(ID);
@@ -159,7 +162,9 @@ public class MarkAction extends ActionSupport {
 				param.put(key, values[i]);
 			}
 		}
-		String courseName = ResultUtils.getPostParameter(param, "courseName");
+		String contentType = request.getHeader("Content-Type");
+		String courseName = ResultUtils.getPostParameter(param, "courseName",contentType);
+		System.out.println("coursename:   "+courseName);
 		List<Mark> marks = markService.getMarkByName(courseName);
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
@@ -179,7 +184,8 @@ public class MarkAction extends ActionSupport {
 				param.put(key, values[i]);
 			}
 		}
-		String ID = ResultUtils.getPostParameter(param, "id");
+		String contentType = request.getHeader("Content-Type");
+		String ID = ResultUtils.getPostParameter(param, "id",contentType);
 		List<Mark> marks = markService.getMarkByID(ID);
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
@@ -200,8 +206,9 @@ public class MarkAction extends ActionSupport {
 				param.put(key, values[i]);
 			}
 		}
+		String contentType = request.getHeader("Content-Type");
 		String ID = ResultUtils.getPostParameter(param, "id");
-		String courseName = ResultUtils.getPostParameter(param, "courseName");
+		String courseName = ResultUtils.getPostParameter(param, "courseName",contentType);
 		Mark mark = markService.getMarkByNameAndID(courseName, ID);
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());

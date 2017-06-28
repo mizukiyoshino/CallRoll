@@ -235,7 +235,7 @@ public class PersonnelAction extends ActionSupport {
 		Map<String, Object> map = new HashMap<String, Object>();
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String pname = ResultUtils.getRequestParameter(request, "pname");
-				
+		
 		List list = personnelService.getPersonnelByNameHql(pname);
 		String[] parameters= {"ID","Ppassword","Pname","major","role","pclass"};
 		List<Map<String, Object>> maplist = ResultUtils.setResults(list, parameters);//new ArrayList<Map<String, Object>>();
@@ -252,6 +252,8 @@ public class PersonnelAction extends ActionSupport {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String id = ResultUtils.getRequestParameter(request, "id");
 		Personnel personnel = personnelService.getPersonnelByID(id);
+		List<Personnel> personnels = new ArrayList<Personnel>();
+		personnels.add(personnel);
 		map.put("personnel", personnel);
 		ResultUtils.toJson(response, map);
 		return null;
