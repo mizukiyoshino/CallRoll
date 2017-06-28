@@ -9,6 +9,24 @@
 
 <ion-content>
   <h3>选择座位</h3>
-  <p>{{course}}</p>
-  <button ion-button outline color="dark">签到</button>
+  <p>{{c}}</p>
+  <p>第{{row}}排</p>
+  <p>第{{col}}列</p>
+
+  <form (ngSubmit)="sign()">
+    <!--<ion-item *ngFor="let item of cols">{{item}}</ion-item>-->
+    <ion-item>
+      <ion-label>Operating System</ion-label>
+      <ion-select submitText="Okay" cancelText="Nah">
+        <ion-option value="row">row</ion-option>
+
+      </ion-select>
+    </ion-item>
+    <ion-row>
+      <ion-col>
+        <button ion-button outline block type="submit"  color="dark">签到</button>
+      </ion-col>
+    </ion-row>
+  </form>
+  <!--<button ion-button outline color="dark">签到</button>-->
 </ion-content>

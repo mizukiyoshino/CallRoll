@@ -28,11 +28,11 @@ export class PositionPage {
     // );
 
     this.homeItem = navParams.get('item');
-    console.log('position page con 1' + this.homeItem.cnameAndID.courseName);
+    // console.log('position page con 1' + this.homeItem.cnameAndID.courseName);
     globalStorage.setStorage('courseName', this.homeItem.cnameAndID.courseName);
-    globalStorage.getStorage('courseName').then(res => {
-      console.log('position page con 2 ' + res);
-    })
+    // globalStorage.getStorage('courseName').then(res => {
+    //   console.log('position page con 2 ' + res);
+    // })
   }
 
   // doSubmit(event) {

@@ -55,7 +55,7 @@ export class LoginOnePage {
           let toast = this.toastCtrl.create({
             message: '登录成功',
             duration: 1000,
-            position: 'middle',
+            position: 'bottom',
           });
           toast.present();
           loading.present();

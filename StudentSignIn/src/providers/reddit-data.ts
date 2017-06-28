@@ -11,7 +11,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class RedditData {
   // const
-  hurl = 'http://19a5fa39.ngrok.io';
+  hurl = 'http://868179d8.ngrok.io';
   // hurl = 'http://222.76.59.23:8080';
 
   constructor(public http: Http) {
@@ -35,6 +35,11 @@ export class RedditData {
 
   getCoursesById(id) {
     let url = this.hurl + '/shhTest/markaction/getMarkByID?id=' + id;
+    return this.http.get(url).map(res => res.json());
+  }
+
+  getCourseByName(name) {
+    let url = this.hurl + '/shhTest/courseaction/getCourseByName?coursename=' + name;
     return this.http.get(url).map(res => res.json());
   }
 
