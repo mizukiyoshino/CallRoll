@@ -184,8 +184,6 @@ alter table question add constraint FK_Reference_10 foreign key (courseName, ID)
 ########################################################################################################################
 
 
-
-
 ########################################################################################################################
 #数据字典______ddrole
 INSERT INTO ddrole(dname,role) VALUES('系统管理员',1);
@@ -225,8 +223,6 @@ INSERT INTO ddclassdate(dname,classDate) VALUES('星期日',7);
 ########################################################################################################################
 #校园信息表
 INSERT INTO schoolinfo VALUES ('福州大学','数学与计算机学院','计算机系');
-DELETE FROM schoolinfo WHERE school='福州大学';
-
 ########################################################################################################################
 
 
@@ -246,6 +242,7 @@ INSERT INTO personnel (ID,Ppassword,Pname,major,role,pclass) VALUES ('100000000'
 
 #学生---123456789，其中7为专业代码
 INSERT INTO personnel (ID,Ppassword,Pname,major,role,pclass) VALUES ('160327101','160327101','蔡志盛',1,3,1); 
+INSERT INTO personnel (ID,Ppassword,Pname,major,role,pclass) VALUES ('160327102','160327102','沉凡',1,3,1); 
 INSERT INTO personnel (ID,Ppassword,Pname,major,role,pclass) VALUES ('160327103','160327102','罗季芃',1,3,1); 
 INSERT INTO personnel (ID,Ppassword,Pname,major,role,pclass) VALUES ('160327103','160327103','王明辉',1,3,1); 
 INSERT INTO personnel (ID,Ppassword,Pname,major,role,pclass) VALUES ('160327104','160327104','陆玢',1,3,1); 
@@ -461,16 +458,16 @@ INSERT INTO mark (courseName,ID,dailyScore,finalScore) VALUES ('应用密码学�
 
 ########################################################################################################################
 #表____question
-INSERT INTO question (attendanceDate,score,ID,courseName) VALUES ('2017-3-2',85,'160327001','电子技术');
-INSERT INTO question (attendanceDate,score,ID,courseName) VALUES ('2017-3-9',75,'160327001','电子技术');
-INSERT INTO question (attendanceDate,score,ID,courseName) VALUES ('2017-3-16',94,'160327001','电子技术');
-INSERT INTO question (attendanceDate,score,ID,courseName) VALUES ('2017-4-6',100,'160327001','电子技术');
-INSERT INTO question (attendanceDate,score,ID,courseName) VALUES ('2017-4-27',88,'160327001','电子技术');
-INSERT INTO question (attendanceDate,score,ID,courseName) VALUES ('2017-5-4',95,'160327001','电子技术');
+INSERT INTO question (attendanceDate,score,ID,courseName) VALUES ('2017-3-2',85,'160327101','电子技术');
+INSERT INTO question (attendanceDate,score,ID,courseName) VALUES ('2017-3-9',75,'160327101','电子技术');
+INSERT INTO question (attendanceDate,score,ID,courseName) VALUES ('2017-3-16',94,'160327101','电子技术');
+INSERT INTO question (attendanceDate,score,ID,courseName) VALUES ('2017-4-6',100,'160327101','电子技术');
+INSERT INTO question (attendanceDate,score,ID,courseName) VALUES ('2017-4-27',88,'160327101','电子技术');
+INSERT INTO question (attendanceDate,score,ID,courseName) VALUES ('2017-5-4',95,'160327101','电子技术');
 
-INSERT INTO question (attendanceDate,score,ID,courseName) VALUES ('2017-3-9',85,'160327001','电子技术');
-INSERT INTO question (attendanceDate,score,ID,courseName) VALUES ('2017-4-6',91,'160327001','电子技术');
-INSERT INTO question (attendanceDate,score,ID,courseName) VALUES ('2017-4-13',88,'160327001','电子技术');
-INSERT INTO question (attendanceDate,score,ID,courseName) VALUES ('2017-4-20',97,'160327001','电子技术');
-INSERT INTO question (attendanceDate,score,ID,courseName) VALUES ('2017-4-27',75,'160327001','电子技术');
+INSERT INTO question (attendanceDate,score,ID,courseName) VALUES ('2017-3-9',85,'160327102','电子技术');
+INSERT INTO question (attendanceDate,score,ID,courseName) VALUES ('2017-4-6',91,'160327102','电子技术');
+INSERT INTO question (attendanceDate,score,ID,courseName) VALUES ('2017-4-13',88,'160327102','电子技术');
+INSERT INTO question (attendanceDate,score,ID,courseName) VALUES ('2017-4-20',97,'160327102','电子技术');
+INSERT INTO question (attendanceDate,score,ID,courseName) VALUES ('2017-4-27',75,'160327102','电子技术');
 ########################################################################################################################
