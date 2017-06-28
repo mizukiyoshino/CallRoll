@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {NavController, NavParams} from 'ionic-angular';
 import {GlobalStorage} from '../../providers/global-storage'
 import {RedditData} from '../../providers/reddit-data'
+import {KaoqinPage} from "../kaoqin/kaoqin";
 
 @Component({
   selector: 'page-list',
@@ -11,9 +12,9 @@ export class ListPage {
   // selectedItem: any;
   // icons: string[];
   // items: Array<{title: string, note: string, icon: string}>;
-  calltherolls:any;
+  calltherolls: any;
 
-  constructor(public absentData: RedditData, public globalStorage: GlobalStorage,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public absentData: RedditData, public globalStorage: GlobalStorage, public navCtrl: NavController, public navParams: NavParams) {
     // If we navigated to this page, we will have an item available as a nav param
     // this.selectedItem = navParams.get('t');
 
@@ -42,4 +43,7 @@ export class ListPage {
   //     t: item
   //   });
   // }
+  gotoKaoqin() {
+    this.navCtrl.push(KaoqinPage);
+  }
 }

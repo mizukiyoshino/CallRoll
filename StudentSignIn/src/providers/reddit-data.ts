@@ -55,4 +55,9 @@ export class RedditData {
     return this.http.get(url).map(res => res.json());
   }
 
+  countCallTheRoll(id, cs, cn) {
+    let url = this.hurl + '/shhTest/calltherollaction/countCallTheRoll?id=' + id + '&callstate=' + cs +
+      '&coursename=' + cn;
+    return this.http.get(url).map(res => res.json());
+  }
 }
