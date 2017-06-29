@@ -1,5 +1,6 @@
 package com.fzu.shhtest.domain;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -43,4 +44,6 @@ public class DdClassDate {
 	public void setState(String state) {
 		this.state = state;
 	}
+	
+	
 }

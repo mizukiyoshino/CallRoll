@@ -15,8 +15,8 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "autoid" , nullable = false)
 	private long autoid; 
-	@Column(name = "attendanceDate", nullable = false)
-	private Date attendanceDate;
+	@Column(name = "attendanceDatedate", nullable = false)
+	private Date attendanceDatedate;
 	@Column(name = "score", nullable = false)
 	private Double score;
 	@Column(name = "ID", nullable = false)
@@ -43,11 +43,11 @@ public class Question {
 	public void setAutoid(long autoid) {
 		this.autoid = autoid;
 	}
-	public Date getAttendanceDate() {
-		return attendanceDate;
+	public Date getAttendanceDatedate() {
+		return attendanceDatedate;
 	}
-	public void setAttendanceDate(Date attendanceDate) {
-		this.attendanceDate = attendanceDate;
+	public void setAttendanceDatedate(Date attendanceDatedate) {
+		this.attendanceDatedate = attendanceDatedate;
 	}
 	public Double getScore() {
 		return score;

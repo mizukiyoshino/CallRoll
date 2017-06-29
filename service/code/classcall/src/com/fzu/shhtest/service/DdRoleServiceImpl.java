@@ -34,9 +34,9 @@ public class DdRoleServiceImpl implements DdRoleService {
 	}
 
 	@Override
-	public boolean updateDdRoleStateByName(DdRole ddRole,String oldDname) {
+	public boolean updateDdRoleStateByName(DdRole ddRole) {
 		// TODO Auto-generated method stub
-		return ddRoleDao.updateDdRoleStateByName(ddRole,oldDname);
+		return ddRoleDao.updateDdRoleStateByName(ddRole);
 	}
 	
 	@Override

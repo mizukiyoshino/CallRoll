@@ -151,7 +151,7 @@ public class PersonnelAction extends ActionSupport {
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public String getAllPersonnel() throws IOException {
+	public List getAllPersonnel() throws IOException {
 		/*
 		 * HttpServletResponse response = ServletActionContext.getResponse();
 		 * response.setHeader("Access-Control-Allow-Origin", "*"); //
@@ -161,6 +161,7 @@ public class PersonnelAction extends ActionSupport {
 		 * "x-requested-with,content-type"); // 允许哪些请求
 		 * response.setContentType("text/html;charset=utf-8");
 		 */
+		System.out.println("this is in personnel");
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -171,18 +172,20 @@ public class PersonnelAction extends ActionSupport {
 		return null;
 	}
 	
-	public String getAllPersonnelHql() throws IOException {
+	public List getAllPersonnelHql() throws IOException {
 		HttpServletResponse response = ResultUtils.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
+
 		List list = personnelService.getAllPersonnelHql();
 		String[] parameters= {"ID","Ppassword","Pname","major","role","pclass"};
 		List<Map<String, Object>> maplist = ResultUtils.setResults(list, parameters);//new ArrayList<Map<String, Object>>();
+		
 		map.put("personnels", maplist);
 		ResultUtils.toJson(response, map);
 		return null;
 	}
-	
-	public String getPersonnelByName() throws IOException {
+
+	public Personnel getPersonnelByName() throws IOException {
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -194,48 +197,13 @@ public class PersonnelAction extends ActionSupport {
 		return null;
 	}
 	
-	public String CheckPersonnel() throws IOException {
-		HttpServletRequest request = ServletActionContext.getRequest();
-		Map<String, String[]> params = request.getParameterMap();
-		Map<String, String> param = new HashMap<String, String>();
-
-		for (String key : params.keySet()) {
-			String[] values = params.get(key);
-			for (int i = 0; i < values.length; i++) {
-				param.put(key, values[i]);
-			}
-		}
-		System.out.println("in check1");
-		String contentType = request.getHeader("Content-Type");
-		String ID = ResultUtils.getPostParameter(param, "id",contentType);
-		System.out.println("in check2");
-		String Ppassword = ResultUtils.getPostParameter(param, "password",contentType);
-		Personnel personnel = personnelService.getPersonnelByID(ID);
-		System.out.println("in check3");
-		HttpServletResponse response = ResultUtils
-				.setResponse(ServletActionContext.getResponse());
-		Map<String, Object> map = new HashMap<String, Object>();
-		if(personnel == null)
-		{
-			map.put("state", "0");//用户不存在
-		}
-		else if (!personnel.getPpassword().equals(Ppassword)) {
-			map.put("state", "-1");//密码不正确
-		}
-		else{
-			map.put("state", "1");//登陆成功
-		}
-		ResultUtils.toJson(response, map);
-		return null;
-	}
-	
-	public String getPersonnelByNameHql() throws IOException {
+	public Personnel getPersonnelByNameHql() throws IOException {
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String pname = ResultUtils.getRequestParameter(request, "pname");
-		
+				
 		List list = personnelService.getPersonnelByNameHql(pname);
 		String[] parameters= {"ID","Ppassword","Pname","major","role","pclass"};
 		List<Map<String, Object>> maplist = ResultUtils.setResults(list, parameters);//new ArrayList<Map<String, Object>>();
@@ -252,8 +220,6 @@ public class PersonnelAction extends ActionSupport {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String id = ResultUtils.getRequestParameter(request, "id");
 		Personnel personnel = personnelService.getPersonnelByID(id);
-		List<Personnel> personnels = new ArrayList<Personnel>();
-		personnels.add(personnel);
 		map.put("personnel", personnel);
 		ResultUtils.toJson(response, map);
 		return null;

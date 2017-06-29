@@ -34,9 +34,9 @@ public class DdClassDateServiceImpl implements DdClassDateService {
 	}
 
 	@Override
-	public boolean updateDdClassDateStateByName(DdClassDate ddClassDate,String oldDname) {
+	public boolean updateDdClassDateStateByName(DdClassDate ddClassDate) {
 		// TODO Auto-generated method stub
-		return ddClassDateDao.updateDdClassDateStateByName(ddClassDate,oldDname);
+		return ddClassDateDao.updateDdClassDateStateByName(ddClassDate);
 	}
 
 	@Override

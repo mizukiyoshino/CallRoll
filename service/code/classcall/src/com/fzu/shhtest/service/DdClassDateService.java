@@ -13,6 +13,6 @@ public interface DdClassDateService {
 	boolean deleteDdClassDateByName(String dname);
 	DdClassDate getDdClassDateStateByName(String dname);
 	DdClassDate getDdClassDateStateByValue(int value);
-	boolean updateDdClassDateStateByName(DdClassDate ddClassDate,String oldDname);
+	boolean updateDdClassDateStateByName(DdClassDate ddClassDate);
 	List getAllDdClassDate();	
 }

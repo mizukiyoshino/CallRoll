@@ -1,6 +1,5 @@
 package com.fzu.shhtest.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -42,19 +41,7 @@ public class CourseDaoImpl implements CourseDao {
 	@Override
 	public boolean updateCourse(Course course,String oldcourseName) {
 		Session session = getSession();
-		Course newcourse = getCourseByName(oldcourseName);
-		newcourse.setCourseName(course.getCourseName());
-		newcourse.setDailyWeight(course.getDailyWeight());
-		newcourse.setFinalWeight(course.getFinalWeight());
-		newcourse.setPicketLine(course.getPicketLine());
-		newcourse.setClassSession(course.getClassSession());
-		newcourse.setClassLocation(course.getClassLocation());
-		newcourse.setClassDate(course.getClassDate());
-		newcourse.setClassOrder(course.getClassOrder());
-		newcourse.setID(course.getID());
-		newcourse.setShape(course.getShape());
-		session.update(newcourse);
-		System.out.println("in impl"+newcourse);
+		session.update(course);
 		/*
 		Query query = session.createQuery("update Course set courseName=?,ID=?,dailyWeight=?,"
 				+ "finalWeight=?,picketLine=?,classSession=?,classLocation=?,classDate=?,classOrder=?,"
@@ -91,44 +78,6 @@ public class CourseDaoImpl implements CourseDao {
 		List<Course> list = (List<Course>) query.list();
 		if (list.size() > 0)
 			return list.get(0);
-		else
-			return null;
-	}
-	
-	
-	
-	
-	
-	//......................HQL..............................
-	@Override
-	public List getAllCourseHql() {
-		Session session = getSession();
-		String hqlString = "SELECT courseName,ID,dailyWeight,finalWeight,picketLine,classSession,classLocation,d.dname AS classDate,classOrder,shape FROM course AS c,ddclassdate AS d WHERE c.classDate=d.classDate;";
-		Query query = session.createSQLQuery(hqlString);
-		List list = query.list();
-		return list;
-	}
-
-	@Override
-	public List getCourseByNameHql(String cname) {
-		Session session = getSession();
-		String hqlString = "SELECT courseName,ID,dailyWeight,finalWeight,picketLine,classSession,classLocation,d.dname AS classDate,classOrder,shape FROM course AS c,ddclassdate AS d WHERE c.classDate=d.classDate AND courseName=\'"+cname+"\';";
-		Query query = session.createSQLQuery(hqlString);
-		List list = (ArrayList<Course>)query.list();
-		if (list.size() > 0)
-			return list;
-		else
-			return null;
-	}
-	
-	@Override
-	public List getCourseByIDHql(String id){
-		Session session = getSession();
-		String hqlString = "SELECT courseName,ID,dailyWeight,finalWeight,picketLine,classSession,classLocation,d.dname AS classDate,classOrder,shape FROM course AS c,ddclassdate AS d WHERE c.classDate=d.classDate AND ID="+id+";";
-		Query query = session.createSQLQuery(hqlString);
-		List list = (ArrayList<Course>)query.list();
-		if (list.size() > 0)
-			return list;
 		else
 			return null;
 	}

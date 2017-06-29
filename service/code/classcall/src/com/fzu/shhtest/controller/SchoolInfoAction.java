@@ -1,7 +1,6 @@
 package com.fzu.shhtest.controller;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -40,18 +39,13 @@ public class SchoolInfoAction extends ActionSupport {
 				param.put(key, values[i]);
 			}
 		}
-		//school=花椰菜大学&college=花椰菜学院&department=花椰菜系
 		String school = ResultUtils.getPostParameter(param, "school");
 		String college = ResultUtils.getPostParameter(param, "college");
 		String department = ResultUtils.getPostParameter(param, "department");
-		Date date = new Date();
-		System.out.println(date.toString());
-		String starttime = ""+(date.getYear()+1900)+"-"+(date.getMonth()+1)+"-"+date.getDate();
 		SchoolInfo schoolInfo = new SchoolInfo();
 		schoolInfo.setSchool(school);
 		schoolInfo.setCollege(college);
 		schoolInfo.setDepartment(department);
-		schoolInfo.setStarttime(ResultUtils.stringToDate(starttime));
 		schoolInfoService.createSchoolInfo(schoolInfo);
 		
 		HttpServletResponse response = ResultUtils
@@ -62,14 +56,13 @@ public class SchoolInfoAction extends ActionSupport {
 		return null;
 	}
 	
-	public String deleteSchoolInfo() throws IOException{
+	public String deleteSchoolInfo(){
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		schoolInfoService.deleteSchoolInfo();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("state", 1);
-		ResultUtils.toJson(response, map);
 		return null;
 	}
 	
@@ -87,12 +80,10 @@ public class SchoolInfoAction extends ActionSupport {
 		String school = ResultUtils.getPostParameter(param, "school");
 		String college = ResultUtils.getPostParameter(param, "college");
 		String department = ResultUtils.getPostParameter(param, "department");
-		String starttime = ResultUtils.getPostParameter(param, "starttime");
 		SchoolInfo schoolInfo = new SchoolInfo();
 		schoolInfo.setSchool(school);
 		schoolInfo.setCollege(college);
 		schoolInfo.setDepartment(department);
-		schoolInfo.setStarttime(ResultUtils.stringToDate(starttime));
 		schoolInfoService.updateSchoolInfo(schoolInfo);
 		
 		HttpServletResponse response = ResultUtils

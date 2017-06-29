@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.ServletActionContext;
 
 import com.fzu.shhtest.domain.DdClassDate;
-import com.fzu.shhtest.domain.DdRole;
 import com.fzu.shhtest.service.DdClassDateService;
 import com.fzu.shhtest.utils.ResultUtils;
 import com.google.gson.Gson;
@@ -61,12 +60,10 @@ public class DdClassDateAction extends ActionSupport {
 		return null;
 	}
 
-	public String deleteDdClassDateByName() throws IOException {
-		//localhost:8080/shhTest/ddClassDateaction/deleteDdClassDateByName?dname={бо0бо:'╖в┤я'}
+	public String deleteDdRClassDateByName()
+			throws UnsupportedEncodingException {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String ids = ResultUtils.getRequestParameter(request, "dname");
-
-		System.out.println("ids   "+ids);
 		Gson gson = new Gson();
 		Map<String, String> rtn = gson.fromJson(ids,
 				new TypeToken<Map<String, String>>() {
@@ -79,7 +76,6 @@ public class DdClassDateAction extends ActionSupport {
 				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("state", 1);
-		ResultUtils.toJson(response, map);
 		return null;
 	}
 
@@ -87,15 +83,18 @@ public class DdClassDateAction extends ActionSupport {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		Map<String, String[]> params = request.getParameterMap();
 		Map<String, String> param = new HashMap<String, String>();
+
 		for (String key : params.keySet()) {
 			String[] values = params.get(key);
 			for (int i = 0; i < values.length; i++) {
 				param.put(key, values[i]);
 			}
 		}
+		// String dname = ResultUtils.getPostParameter(param, "dname");
 		String dname = ResultUtils.getRequestParameter(request, "dname");
-		System.out.println("dname:  " + dname);
-		DdClassDate ddClassDate = ddClassDateService.getDdClassDateStateByName(dname);
+		DdClassDate ddClassDate = ddClassDateService
+				.getDdClassDateStateByName(dname);
+
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -124,7 +123,7 @@ public class DdClassDateAction extends ActionSupport {
 		ddClassDate.setDname(dname);
 		ddClassDate.setClassDate(Integer.parseInt(classDate));
 		ddClassDate.setState(state);
-		ddClassDateService.updateDdClassDateStateByName(ddClassDate, oldname);
+		ddClassDateService.updateDdClassDateStateByName(ddClassDate);
 
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());

@@ -1,18 +1,21 @@
 package com.fzu.shhtest.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "Mark", catalog = "classcall")
 public class Mark {	
-	@Column(name = "dailyScore")
+	@Column(name = "dailyScore", nullable = false)
 	private double dailyScore;
-	@Column(name = "finalScore")
+	@Column(name = "finalScore", nullable = false)
 	private double finalScore;
-	@Column(name = "markreserve")
+	@Column(name = "markreserve", nullable = false)
 	private String markreserve;
 	/*
 	private Course course;
@@ -25,12 +28,12 @@ public class Mark {
 		this.course = course;
 	}
 	*/
-	private CourseNameAndID cnameAndID;
+	private courseNameAndID cnameAndID;
 	@EmbeddedId
-	public CourseNameAndID getCnameAndID() {
+	public courseNameAndID getCnameAndID() {
 		return cnameAndID;
 	}
-	public void setCnameAndID(CourseNameAndID cnameAndID) {
+	public void setCnameAndID(courseNameAndID cnameAndID) {
 		this.cnameAndID = cnameAndID;
 	}
 	

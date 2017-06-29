@@ -31,9 +31,9 @@ public class DdStateServiceImpl implements DdStateService {
 	}
 
 	@Override
-	public boolean updateDdStateStateByName(DdState ddState,String oldname) {
+	public boolean updateDdStateStateByName(DdState ddState) {
 		// TODO Auto-generated method stub
-		return ddStateDao.updateDdStateStateByName(ddState,oldname);
+		return ddStateDao.updateDdStateStateByName(ddState);
 	}
 
 	@Override

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.fzu.shhtest.domain.DdRole;
 import com.fzu.shhtest.domain.DdState;
 import com.fzu.shhtest.service.DdStateService;
 import com.fzu.shhtest.utils.ResultUtils;
@@ -57,32 +56,21 @@ public class DdStateAction extends ActionSupport {
 		return null;
 	}
 
-	public String deleteDdStateByName() throws IOException {
+	public String deleteDdStateByName() throws UnsupportedEncodingException {
 		HttpServletRequest request = ServletActionContext.getRequest();
-		Map<String, String[]> params = request.getParameterMap();
-		Map<String, String> param = new HashMap<String, String>();
-		for (String key : params.keySet()) {
-			String[] values = params.get(key);
-			for (int i = 0; i < values.length; i++) {
-				param.put(key, values[i]);
-			}
-		}
 		String ids = ResultUtils.getRequestParameter(request, "dname");
-		
 		Gson gson = new Gson();
 		Map<String, String> rtn = gson.fromJson(ids,
 				new TypeToken<Map<String, String>>() {
 				}.getType());
 		for (Entry<String, String> entry : rtn.entrySet()) {
 			String id = entry.getValue();
-			System.out.println("id   "+id);
 			ddStateService.deleteDdStateByName(id);
 		}
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("state", 1);
-		ResultUtils.toJson(response, map);
 		return null;
 	}
 
@@ -90,15 +78,17 @@ public class DdStateAction extends ActionSupport {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		Map<String, String[]> params = request.getParameterMap();
 		Map<String, String> param = new HashMap<String, String>();
+
 		for (String key : params.keySet()) {
 			String[] values = params.get(key);
 			for (int i = 0; i < values.length; i++) {
 				param.put(key, values[i]);
 			}
 		}
+		//String dname = ResultUtils.getPostParameter(param, "dname");
 		String dname = ResultUtils.getRequestParameter(request, "dname");
-		System.out.println("dname:  " + dname);
 		DdState ddState = ddStateService.getDdStateStateByName(dname);
+		
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -118,17 +108,17 @@ public class DdStateAction extends ActionSupport {
 				param.put(key, values[i]);
 			}
 		}
-		String contentType = request.getHeader("Content-Type");
-		String oldname = ResultUtils.getPostParameter(param, "oldname",contentType);
-		String dname = ResultUtils.getPostParameter(param, "dname",contentType);
-		String callstate = ResultUtils.getPostParameter(param, "callstate",contentType);
+		String oldname = ResultUtils.getPostParameter(param, "oldname");
+		String dname = ResultUtils.getPostParameter(param, "dname");
+		String callstate = ResultUtils.getPostParameter(param, "callstate");
 		String state = new String("∆Ù”√");
-		DdState ddState = new DdState();
+		DdState ddState = ddStateService.getDdStateStateByName(oldname);
+
 		ddState.setDname(dname);
 		ddState.setCallstate(Integer.parseInt(callstate));
 		ddState.setState(state);
-		ddStateService.updateDdStateStateByName(ddState,oldname);
-
+		ddStateService.updateDdStateStateByName(ddState);
+		
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();

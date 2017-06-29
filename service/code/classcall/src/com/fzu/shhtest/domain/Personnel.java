@@ -1,28 +1,11 @@
 package com.fzu.shhtest.domain;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "Personnel", catalog = "classcall")
 public class Personnel {
-	@Id
-	@Column(name = "ID")
 	private String ID;
-	@Column(name = "Ppassword")
 	private String Ppassword;
-	@Column(name = "Pname")
 	private String Pname;
-	@Column(name = "major")
 	private int major;
-	@Column(name = "role")
 	private int role;
-	@Column(name = "pclass")
 	private int pclass;
 
 	

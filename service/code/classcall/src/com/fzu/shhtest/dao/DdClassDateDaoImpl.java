@@ -30,11 +30,10 @@ public class DdClassDateDaoImpl implements DdClassDateDao {
 
 	@Override
 	public boolean deleteDdClassDateByName(String dname) {
+		// TODO Auto-generated method stub
 		Session session = getSession();
-		String hqlString = "DELETE FROM DdClassDate WHERE dname=?";
-		Query query = session.createSQLQuery(hqlString);
-		query.setString(0,dname);
-		query.executeUpdate();
+		DdClassDate ddClassDate = getDdClassDateStateByName(dname);
+		session.delete(ddClassDate);
 		return false;
 	}
 
@@ -63,17 +62,9 @@ public class DdClassDateDaoImpl implements DdClassDateDao {
 	}
 
 	@Override
-	public boolean updateDdClassDateStateByName(DdClassDate ddClassDate,String oldDname) {
+	public boolean updateDdClassDateStateByName(DdClassDate ddClassDate) {
 		Session session = getSession();
-		String hqlString = "UPDATE DdClassDate SET classDate=?,dname=?,state=? WHERE dname=?";
-		
-		Query query = session.createSQLQuery(hqlString);
-		query.setInteger(0, ddClassDate.getClassDate());
-		query.setString(1, ddClassDate.getDname());
-		query.setString(2, ddClassDate.getState());
-		query.setString(3, oldDname);
-
-		query.executeUpdate();
+		session.update(ddClassDate);
 		return false;
 	}
 	

@@ -29,11 +29,10 @@ public class DdMajorDaoImpl implements DdMajorDao {
 
 	@Override
 	public boolean deleteDdMajorByName(String dname) {
+		// TODO Auto-generated method stub
 		Session session = getSession();
-		String hqlString = "DELETE FROM DdMajor WHERE dname=?";
-		Query query = session.createSQLQuery(hqlString);
-		query.setString(0,dname);
-		query.executeUpdate();
+		DdMajor ddMajor = getDdMajorStateByName(dname);
+		session.delete(ddMajor);
 		return false;
 	}
 
@@ -51,15 +50,22 @@ public class DdMajorDaoImpl implements DdMajorDao {
 	}
 
 	@Override
-	public boolean updateDdMajorStateByName(DdMajor ddMajor,String oldDname) {		
+	public boolean updateDdMajorStateByName(DdMajor ddMajor,String oldDname) {
+		// TODO Auto-generated method stub
+		//Session session = getSession();
+		//session.update(ddMajor);
 		Session session = getSession();
 		String hqlString = "UPDATE ddmajor SET major=?,dname=?,state=? WHERE dname=?";
 		
+		
+		//hqlString = hqlString+ID;
 		Query query = session.createSQLQuery(hqlString);
 		query.setInteger(0, ddMajor.getMajor());
 		query.setString(1, ddMajor.getDname());
 		query.setString(2, ddMajor.getState());
 		query.setString(3, oldDname);
+		
+		//System.out.println(query.list());
 		query.executeUpdate();
 		return false;
 	}

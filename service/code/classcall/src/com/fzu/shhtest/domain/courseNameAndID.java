@@ -2,7 +2,7 @@ package com.fzu.shhtest.domain;
 
 import java.io.Serializable;
 
-public class CourseNameAndID implements Serializable {
+public class courseNameAndID implements Serializable {
 	private String courseName;
 	private String ID;
 
@@ -25,9 +25,9 @@ public class CourseNameAndID implements Serializable {
 	// 必须要重写的两个方法
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof CourseNameAndID)// 首先判断是否是TeacherPK类型的
+		if (obj instanceof courseNameAndID)// 首先判断是否是TeacherPK类型的
 		{
-			CourseNameAndID pk = (CourseNameAndID) obj;
+			courseNameAndID pk = (courseNameAndID) obj;
 			if (this.ID.equals(pk.getID())
 					&& this.courseName.equals(pk.getCourseName())) {
 				return true;
