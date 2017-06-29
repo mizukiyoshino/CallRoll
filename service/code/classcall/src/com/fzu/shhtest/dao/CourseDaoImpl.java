@@ -120,4 +120,16 @@ public class CourseDaoImpl implements CourseDao {
 		else
 			return null;
 	}
+	
+	@Override
+	public List getCourseByIDHql(String id){
+		Session session = getSession();
+		String hqlString = "SELECT courseName,ID,dailyWeight,finalWeight,picketLine,classSession,classLocation,d.dname AS classDate,classOrder,shape FROM course AS c,ddclassdate AS d WHERE c.classDate=d.classDate AND ID="+id+";";
+		Query query = session.createSQLQuery(hqlString);
+		List list = (ArrayList<Course>)query.list();
+		if (list.size() > 0)
+			return list;
+		else
+			return null;
+	}
 }

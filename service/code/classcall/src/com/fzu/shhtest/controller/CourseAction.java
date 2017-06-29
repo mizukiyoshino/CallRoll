@@ -1,6 +1,7 @@
 package com.fzu.shhtest.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -195,6 +196,31 @@ public class CourseAction extends ActionSupport {
 		List<Map<String, Object>> maplist = ResultUtils.setResults(course, parameters);//new ArrayList<Map<String, Object>>();
 		
 		map.put("course", maplist);
+		HttpServletResponse response = ResultUtils
+				.setResponse(ServletActionContext.getResponse());
+		ResultUtils.toJson(response, map);
+		return null;
+	}
+	
+	public String getCourseByIDHql() throws IOException {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map<String, String[]> params = request.getParameterMap();
+		Map<String, String> param = new HashMap<String, String>();
+		for (String key : params.keySet()) {
+			String[] values = params.get(key);
+			for (int i = 0; i < values.length; i++) {
+				param.put(key, values[i]);
+			}
+		}
+		String contentType = request.getHeader("Content-Type");
+		String id = ResultUtils.getPostParameter(param, "id",contentType);
+		Map<String, Object> map = new HashMap<String, Object>();
+		List course = (ArrayList<Course>)courseService
+				.getCourseByIDHql(id);
+		String[] parameters= {"courseName","ID","dailyWeight","finalWeight","picketLine","classSession","classLocation","classDate","classOrder","shape"};
+		List<Map<String, Object>> maplist = ResultUtils.setResults(course, parameters);//new ArrayList<Map<String, Object>>();
+		
+		map.put("courses", maplist);
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		ResultUtils.toJson(response, map);

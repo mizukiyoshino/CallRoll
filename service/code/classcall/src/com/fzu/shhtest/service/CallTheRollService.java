@@ -23,6 +23,7 @@ public interface CallTheRollService {
 	List getCallTheRollByID(String ID);
 	List getCallTheRollByCoursename(String cname);
 	List getCallTheRollByIDAndCoursename(String id,String cname);
+	List getCallTheRollByIDAndCoursenameAndDate(String id,String cname,Date calldate);	
 	List getCallTheRollByIDAndCoursenameHql(String id,String cname);
 	int countCallTheRoll(int callstate,String coursename,String ID);
 	Map<String, Map<String, Object>> countAllCallTheRoll(String coursename,String ID);

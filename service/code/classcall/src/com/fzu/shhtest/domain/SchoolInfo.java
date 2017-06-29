@@ -1,4 +1,6 @@
 package com.fzu.shhtest.domain;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,6 +16,8 @@ public class SchoolInfo {
 	private String college;
 	@Column(name = "department")
 	private String department;
+	@Column(name = "starttime")
+	private Date starttime;
 	
 	public String getSchool() {
 		return school;
@@ -33,8 +37,14 @@ public class SchoolInfo {
 	public void setDepartment(String department) {
 		this.department = department;
 	}
+	public Date getStarttime() {
+		return starttime;
+	}
+	public void setStarttime(Date starttime) {
+		this.starttime = starttime;
+	}
 	
-
+	
 }
 
 /*

@@ -62,11 +62,16 @@ public class CallTheRollServiceImpl implements CallTheRollService {
 		// TODO Auto-generated method stub
 		return callTheRollDao.getCallTheRollByCoursename(cname);
 	}
-	
+
 	@Override
 	public List getCallTheRollByIDAndCoursename(String id,String cname) {
 		// TODO Auto-generated method stub
 		return callTheRollDao.getCallTheRollByIDAndCoursename(id,cname);
+	}
+	@Override
+	public List getCallTheRollByIDAndCoursenameAndDate(String id,String cname,Date calldate) {
+		// TODO Auto-generated method stub
+		return callTheRollDao.getCallTheRollByIDAndCoursenameAndDate(id,cname,calldate);
 	}
 	@Override
 	public List getCallTheRollByIDAndCoursenameHql(String id,String cname) {

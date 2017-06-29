@@ -18,6 +18,7 @@ public interface CourseService {
 	// ²é
 	List getAllCourse();
 	Course getCourseByName(String cname);
+	List getCourseByIDHql(String id);
 	
 	List getAllCourseHql();
 	List getCourseByNameHql(String cname);

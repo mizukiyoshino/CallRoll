@@ -123,6 +123,16 @@ public class CallTheRollDaoImpl implements CallTheRollDao {
 		List<CallTheRoll> list = (List<CallTheRoll>) query.list();
 		return list;
 	}
+	@Override
+	public List getCallTheRollByIDAndCoursenameAndDate(String id,String cname,Date calldate){
+		Session session = getSession();
+		Query query = session.createQuery("from CallTheRoll where ID=? AND courseName=? AND calldate=?");
+		query.setString(0, id);
+		query.setString(1, cname);
+		query.setDate(1, calldate);
+		List<CallTheRoll> list = (List<CallTheRoll>) query.list();
+		return list;
+	}
 	
 
 	@Override
@@ -162,7 +172,7 @@ public class CallTheRollDaoImpl implements CallTheRollDao {
 	@Override
 	public List getCallTheRollBetweenDateHql(String date1, String date2) {
 		Session session = getSession();
-		String hqlString = "SELECT autoid,courseName,ID,d.dname AS callstate,calldate,callposition FROM calltheroll AS c,ddstate AS d WHERE c.callstate=d.callstate AND c.calldate>=\'"+date1+"\' AND c.calldate<=\'"+date2+"\';";
+		String hqlString = "SELECT autoid,courseName,c.ID,d.dname AS callstate,calldate,callposition,Pname FROM calltheroll AS c,ddstate AS d,Personnel AS p WHERE c.callstate=d.callstate AND c.ID=p.ID AND c.calldate>=\'"+date1+"\' AND c.calldate<=\'"+date2+"\';";
 		Query query = session.createSQLQuery(hqlString);
 		List list = query.list();
 		return list;

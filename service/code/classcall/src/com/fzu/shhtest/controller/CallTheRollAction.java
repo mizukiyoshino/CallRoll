@@ -26,13 +26,15 @@ import com.opensymphony.xwork2.ActionSupport;
 public class CallTheRollAction extends ActionSupport {
 	private CallTheRollService callTheRollService;
 	private MarkService markService;
-	
+
 	public void setCallTheRollService(CallTheRollService callTheRollService) {
 		this.callTheRollService = callTheRollService;
 	}
+
 	public void setMarkService(MarkService markService) {
 		this.markService = markService;
 	}
+
 	public String execute() {
 		return SUCCESS;
 	}
@@ -59,10 +61,12 @@ public class CallTheRollAction extends ActionSupport {
 		String ID = ResultUtils.getPostParameter(param, "id", contentType);
 		String callposition = ResultUtils.getPostParameter(param,
 				"callposition", contentType);
-		if(calldate.equals("1"))
-		{
+		if (calldate.equals("1")) {
 			Date date = new Date();
-			calldate = ""+date.getYear()+"-"+date.getMonth()+"-"+date.getDay();
+			System.out.println(date.toString());
+			calldate = "" + (date.getYear() + 1900) + "-"
+					+ (date.getMonth() + 1) + "-" + date.getDate();
+			System.out.println(date.getMonth());
 		}
 		CallTheRoll callTheRoll = new CallTheRoll();
 		callTheRoll.setCourseName(courseName);
@@ -122,20 +126,40 @@ public class CallTheRollAction extends ActionSupport {
 				contentType);
 		String callstate = ResultUtils.getPostParameter(param, "callstate",
 				contentType);
+		String cname = ResultUtils.getPostParameter(param, "coursename",
+				contentType);
 		String calldate = ResultUtils.getPostParameter(param, "calldate",
 				contentType);
 		String callposition = ResultUtils.getPostParameter(param,
 				"callposition", contentType);
-
+		String id = ResultUtils.getPostParameter(param, "id", contentType);
+		Map<String, Object> map = new HashMap<String, Object>();
+		HttpServletResponse response = ResultUtils
+				.setResponse(ServletActionContext.getResponse());
+		if (calldate.equals("1")) {
+			Date date = new Date();
+			calldate = "" + (date.getYear() + 1900) + "-"
+					+ (date.getMonth() + 1) + "-" + date.getDate();
+		}
+		if (autoid.equals("0")) {//表示学生端签到，否则表示前台管理更新
+			List tcallTheRoll = (ArrayList<CallTheRoll>)callTheRollService.getCallTheRollByIDAndCoursenameAndDate(id, cname, ResultUtils.stringToDate(calldate));
+			if(tcallTheRoll.size()==0){
+				map.put("state", "非签到时间");
+				ResultUtils.toJson(response, map);
+				return null;
+			}
+			else
+				autoid = ((CallTheRoll)tcallTheRoll.get(0)).getID();
+		}
 		CallTheRoll callTheRoll = new CallTheRoll();
 		callTheRoll.setAutoid(Long.parseLong(autoid));
 		callTheRoll.setCallstate(Integer.parseInt(callstate));
 		callTheRoll.setCalldate(ResultUtils.stringToDate(calldate));
 		callTheRoll.setCallposition(callposition);
+		callTheRoll.setCourseName(cname);
+		callTheRoll.setID(id);
 		callTheRollService.updateCallTheRoll(callTheRoll);
-		HttpServletResponse response = ResultUtils
-				.setResponse(ServletActionContext.getResponse());
-		Map<String, Object> map = new HashMap<String, Object>();
+		
 		map.put("state", 1);
 		ResultUtils.toJson(response, map);
 		return null;
@@ -396,7 +420,7 @@ public class CallTheRollAction extends ActionSupport {
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		String[] parameters = { "autoid", "courseName", "ID", "callstate",
-				"calldate", "callposition" };
+				"calldate", "callposition", "pname" };
 		List<Map<String, Object>> maplist = ResultUtils.setResults(
 				callTheRolls, parameters);// new ArrayList<Map<String,
 											// Object>>();
@@ -467,7 +491,7 @@ public class CallTheRollAction extends ActionSupport {
 	}
 
 	public String countCallTheRoll() throws IOException {
-		//http://localhost:8080/shhTest/calltherollaction/countCallTheRoll?id=160327000&callstate=1&coursename=网络工程
+		// http://localhost:8080/shhTest/calltherollaction/countCallTheRoll?id=160327000&callstate=1&coursename=网络工程
 		HttpServletRequest request = ServletActionContext.getRequest();
 		Map<String, String[]> params = request.getParameterMap();
 		Map<String, String> param = new HashMap<String, String>();
@@ -479,49 +503,93 @@ public class CallTheRollAction extends ActionSupport {
 			}
 		}
 		String contentType = request.getHeader("Content-Type");
-		String callstate = ResultUtils.getPostParameter(param, "callstate",contentType);
-		String coursename = ResultUtils.getPostParameter(param, "coursename",contentType);
-		String ID = ResultUtils.getPostParameter(param, "id",contentType);
-		
-		
-		HttpServletResponse response = ResultUtils.setResponse(ServletActionContext.getResponse());
-		Map<String, Object> map = new HashMap<String, Object>();
-		int countnum = callTheRollService.countCallTheRoll(Integer.parseInt(callstate),coursename,ID);
-		map.put("countnum", countnum);
-		ResultUtils.toJson(response, map);		
-		return null;
-	}
-	
-	
-	public String countAllCallTheRoll() throws IOException {
-		//http://localhost:8080/shhTest/calltherollaction/countCallTheRoll?id=160327000&callstate=1&coursename=网络工程
-		HttpServletRequest request = ServletActionContext.getRequest();
-		Map<String, String[]> params = request.getParameterMap();
-		Map<String, String> param = new HashMap<String, String>();
+		String callstate = ResultUtils.getPostParameter(param, "callstate",
+				contentType);
+		String coursename = ResultUtils.getPostParameter(param, "coursename",
+				contentType);
+		String ID = ResultUtils.getPostParameter(param, "id", contentType);
 
-		for (String key : params.keySet()) {
-			String[] values = params.get(key);
-			for (int i = 0; i < values.length; i++) {
-				param.put(key, values[i]);
-			}
-		}
-		String contentType = request.getHeader("Content-Type");
-		String coursename = ResultUtils.getPostParameter(param, "coursename",contentType);
-		
-		List<Mark> marks = markService.getMarkByName(coursename);
-		List<Map<String, Map<String, Object>>> counts = new ArrayList<Map<String, Map<String, Object>>>();
-		for(Mark mark:marks){
-			counts.add(callTheRollService.countAllCallTheRoll(coursename,mark.getCnameAndID().getID()));
-        }
-		System.out.println(counts);
-		
-		
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
-		//int countnum = callTheRollService.countAllCallTheRoll(coursename);
+		int countnum = callTheRollService.countCallTheRoll(
+				Integer.parseInt(callstate), coursename, ID);
+		map.put("countnum", countnum);
+		ResultUtils.toJson(response, map);
+		return null;
+	}
+
+	public String countAllCallTheRoll() throws IOException {
+		// http://localhost:8080/shhTest/calltherollaction/countCallTheRoll?id=160327000&callstate=1&coursename=网络工程
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map<String, String[]> params = request.getParameterMap();
+		Map<String, String> param = new HashMap<String, String>();
+
+		for (String key : params.keySet()) {
+			String[] values = params.get(key);
+			for (int i = 0; i < values.length; i++) {
+				param.put(key, values[i]);
+			}
+		}
+		String contentType = request.getHeader("Content-Type");
+		String coursename = ResultUtils.getPostParameter(param, "coursename",
+				contentType);
+
+		List<Mark> marks = markService.getMarkByName(coursename);
+		List<Map<String, Map<String, Object>>> counts = new ArrayList<Map<String, Map<String, Object>>>();
+		for (Mark mark : marks) {
+			counts.add(callTheRollService.countAllCallTheRoll(coursename, mark
+					.getCnameAndID().getID()));
+		}
+		System.out.println(counts);
+
+		HttpServletResponse response = ResultUtils
+				.setResponse(ServletActionContext.getResponse());
+		Map<String, Object> map = new HashMap<String, Object>();
+		// int countnum = callTheRollService.countAllCallTheRoll(coursename);
 		map.put("counts", counts);
-		ResultUtils.toJson(response, map);		
+		ResultUtils.toJson(response, map);
+		return null;
+	}
+
+	// 根据课程名和日期将当日签到全部置为旷课
+	public String callOverByCoursenameAndDate() throws IOException {
+		// http://localhost:8080/shhTest/calltherollaction/countCallTheRoll?id=160327000&callstate=1&coursename=网络工程
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map<String, String[]> params = request.getParameterMap();
+		Map<String, String> param = new HashMap<String, String>();
+
+		for (String key : params.keySet()) {
+			String[] values = params.get(key);
+			for (int i = 0; i < values.length; i++) {
+				param.put(key, values[i]);
+			}
+		}
+		String contentType = request.getHeader("Content-Type");
+		String coursename = ResultUtils.getPostParameter(param, "coursename",
+				contentType);
+
+		List<Mark> marks = markService.getMarkByName(coursename);
+		List<Map<String, Map<String, Object>>> counts = new ArrayList<Map<String, Map<String, Object>>>();
+		CallTheRoll callTheRoll = null;
+		Date date = new Date();
+		System.out.println(date.toString());
+		String calldate = "" + (date.getYear() + 1900) + "-"
+				+ (date.getMonth() + 1) + "-" + date.getDate();
+		Date cdate = ResultUtils.stringToDate(calldate);
+		for (Mark mark : marks) {
+			callTheRoll = new CallTheRoll(coursename, mark.getCnameAndID()
+					.getID(), 3, cdate, "0*0");
+			callTheRollService.createCallTheRoll(callTheRoll);
+			// counts.add(callTheRollService.createCallTheRoll(callTheRoll);//(coursename,mark.getCnameAndID().getID()));
+		}
+		System.out.println(counts);
+		HttpServletResponse response = ResultUtils
+				.setResponse(ServletActionContext.getResponse());
+		Map<String, Object> map = new HashMap<String, Object>();
+		// int countnum = callTheRollService.countAllCallTheRoll(coursename);
+		map.put("counts", counts);
+		ResultUtils.toJson(response, map);
 		return null;
 	}
 	
