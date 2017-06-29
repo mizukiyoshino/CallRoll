@@ -69,19 +69,39 @@ export class SitePage {
     let w = this.pai + '*' + this.lie;
 
     this.globalStorage.getStorage('stuId').then(res => {
-      console.log('site page ' + this.c + ' ' + res + ' ' + w);
-      this.courseData.updateCallTheRoll(res, w, this.c, 1);
-      console.log('site page final' + this.c + ' ' + res + ' ' + w);
+      // console.log('site page ' + this.c + ' ' + res + ' ' + w);
+      this.courseData.updateCallTheRoll(res, w, this.c, 1).subscribe(r => {
+        console.log(r.state);
+        if(r.state == '1') {
+          let toast = this.toastCtrl.create({
+            message: '签到成功',
+            duration: 1000,
+            position: 'bottom',
+          });
+          toast.present();
+          loading.present();
+        }
+        else {
+          let toast = this.toastCtrl.create({
+            message: '签到失败',
+            duration: 1000,
+            position: 'bottom',
+          });
+          toast.present();
+          loading.present();
+        }
+      });
+      // console.log('site page final' + this.c + ' ' + res + ' ' + w);
     });
 
 
     // console.log('site page ' + w);
-    let toast = this.toastCtrl.create({
-      message: '签到成功',
-      duration: 1000,
-      position: 'bottom',
-    });
-    toast.present();
-    loading.present();
+    // let toast = this.toastCtrl.create({
+    //   message: '签到成功',
+    //   duration: 1000,
+    //   position: 'bottom',
+    // });
+    // toast.present();
+    // loading.present();
   }
 }

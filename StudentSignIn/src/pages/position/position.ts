@@ -85,16 +85,35 @@ export class PositionPage {
     });
     this.globalStorage.getStorage('stuId').then(res => {
 
-      this.redditService.updateCallTheRoll(res, '0*0', this.homeItem.cnameAndID.courseName, 2);
+      this.redditService.updateCallTheRoll(res, '0*0', this.homeItem.cnameAndID.courseName, 2).subscribe(r => {
+        if(r.state == '1') {
+          let toast = this.toastCtrl.create({
+            message: '请假申请成功',
+            duration: 1500,
+            position: 'bottom',
+          });
+          toast.present();
+          loading.present();
+        }
+        else {
+          let toast = this.toastCtrl.create({
+            message: '请假申请失败',
+            duration: 1500,
+            position: 'bottom',
+          });
+          toast.present();
+          loading.present();
+        }
+      });
     });
 
-    let toast = this.toastCtrl.create({
-      message: '请假申请成功',
-      duration: 1500,
-      position: 'bottom',
-    });
-    toast.present();
-    loading.present();
+    // let toast = this.toastCtrl.create({
+    //   message: '请假申请成功',
+    //   duration: 1500,
+    //   position: 'bottom',
+    // });
+    // toast.present();
+    // loading.present();
     // console.log('position page askForLeave ' + this.homeItem.cnameAndID.courseName);
   }
 }
