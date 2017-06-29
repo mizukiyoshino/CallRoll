@@ -83,9 +83,9 @@ export class SitePage {
         }
         else {
           let toast = this.toastCtrl.create({
-            message: '签到失败',
+            message: r.state,
             duration: 1000,
-            position: 'bottom',
+            position: 'middle',
           });
           toast.present();
           loading.present();

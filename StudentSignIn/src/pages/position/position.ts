@@ -97,9 +97,9 @@ export class PositionPage {
         }
         else {
           let toast = this.toastCtrl.create({
-            message: '请假申请失败',
+            message: r.state,
             duration: 1500,
-            position: 'bottom',
+            position: 'middle',
           });
           toast.present();
           loading.present();
