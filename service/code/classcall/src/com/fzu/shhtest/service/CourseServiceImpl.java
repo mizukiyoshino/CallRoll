@@ -43,4 +43,24 @@ public class CourseServiceImpl implements CourseService {
 		// TODO Auto-generated method stub
 		return courseDao.getCourseByName(cname);
 	}
+	
+	
+
+	@Override
+	public List getAllCourseHql() {
+		// TODO Auto-generated method stub
+		return courseDao.getAllCourseHql();
+	}
+
+	@Override
+	public List getCourseByNameHql(String cname) {
+		// TODO Auto-generated method stub
+		return courseDao.getCourseByNameHql(cname);
+	}
+	
+	@Override
+	public List getCourseByIDHql(String id) {
+		// TODO Auto-generated method stub
+		return courseDao.getCourseByIDHql(id);
+	}	
 }

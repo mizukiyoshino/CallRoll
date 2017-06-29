@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -151,7 +152,7 @@ public class PersonnelAction extends ActionSupport {
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public List getAllPersonnel() throws IOException {
+	public String getAllPersonnel() throws IOException {
 		/*
 		 * HttpServletResponse response = ServletActionContext.getResponse();
 		 * response.setHeader("Access-Control-Allow-Origin", "*"); //
@@ -161,7 +162,6 @@ public class PersonnelAction extends ActionSupport {
 		 * "x-requested-with,content-type"); // 允许哪些请求
 		 * response.setContentType("text/html;charset=utf-8");
 		 */
-		System.out.println("this is in personnel");
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -172,20 +172,42 @@ public class PersonnelAction extends ActionSupport {
 		return null;
 	}
 	
-	public List getAllPersonnelHql() throws IOException {
+	public String getAllPersonnelHql() throws IOException {
 		HttpServletResponse response = ResultUtils.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
-
 		List list = personnelService.getAllPersonnelHql();
 		String[] parameters= {"ID","Ppassword","Pname","major","role","pclass"};
 		List<Map<String, Object>> maplist = ResultUtils.setResults(list, parameters);//new ArrayList<Map<String, Object>>();
-		
 		map.put("personnels", maplist);
 		ResultUtils.toJson(response, map);
+		int j=0;
+		Random random=new Random();
+		int[] ran= {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,3,3,3,3,4};
+		//random.nextInt(ran.length)
+		for(int i=0; i<=2; i++){
+			int q = j;
+			int k = i%9;/*
+			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('电子技术','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-3-2','"+(q+1) +"*"+(k+1)+ "');");
+			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('电子技术','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-3-9','"+(q+1) +"*"+(k+1)+ "');");
+			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('电子技术','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-3-16','"+(q+1) +"*"+(k+1)+ "');");
+			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('电子技术','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-3-23','"+(q+1) +"*"+(k+1)+ "');");
+			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('电子技术','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-3-30','"+(q+1) +"*"+(k+1)+ "');");
+			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('电子技术','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-4-6','"+(q+1) +"*"+(k+1)+ "');");
+			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('电子技术','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-4-13','"+(q+1) +"*"+(k+1)+ "');");
+			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('电子技术','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-4-20','"+(q+1) +"*"+(k+1)+ "');");
+			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('电子技术','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-4-27','"+(q+1) +"*"+(k+1)+ "');");
+			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('电子技术','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-5-4','"+(q+1) +"*"+(k+1)+ "');");
+			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('电子技术','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-5-11','"+(q+1) +"*"+(k+1)+ "');");
+			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('电子技术','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-5-18','"+(q+1) +"*"+(k+1)+ "');");
+			System.out.println();*/
+			if(k==8 && i!=0)
+				++j;
+		}
+		
 		return null;
 	}
-
-	public Personnel getPersonnelByName() throws IOException {
+	
+	public String getPersonnelByName() throws IOException {
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -197,13 +219,48 @@ public class PersonnelAction extends ActionSupport {
 		return null;
 	}
 	
-	public Personnel getPersonnelByNameHql() throws IOException {
+	public String CheckPersonnel() throws IOException {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map<String, String[]> params = request.getParameterMap();
+		Map<String, String> param = new HashMap<String, String>();
+
+		for (String key : params.keySet()) {
+			String[] values = params.get(key);
+			for (int i = 0; i < values.length; i++) {
+				param.put(key, values[i]);
+			}
+		}
+		System.out.println("in check1");
+		String contentType = request.getHeader("Content-Type");
+		String ID = ResultUtils.getPostParameter(param, "id",contentType);
+		System.out.println("in check2");
+		String Ppassword = ResultUtils.getPostParameter(param, "password",contentType);
+		Personnel personnel = personnelService.getPersonnelByID(ID);
+		System.out.println("in check3");
+		HttpServletResponse response = ResultUtils
+				.setResponse(ServletActionContext.getResponse());
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(personnel == null)
+		{
+			map.put("state", "0");//用户不存在
+		}
+		else if (!personnel.getPpassword().equals(Ppassword)) {
+			map.put("state", "-1");//密码不正确
+		}
+		else{
+			map.put("state", "1");//登陆成功
+		}
+		ResultUtils.toJson(response, map);
+		return null;
+	}
+	
+	public String getPersonnelByNameHql() throws IOException {
 		HttpServletResponse response = ResultUtils
 				.setResponse(ServletActionContext.getResponse());
 		Map<String, Object> map = new HashMap<String, Object>();
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String pname = ResultUtils.getRequestParameter(request, "pname");
-				
+		
 		List list = personnelService.getPersonnelByNameHql(pname);
 		String[] parameters= {"ID","Ppassword","Pname","major","role","pclass"};
 		List<Map<String, Object>> maplist = ResultUtils.setResults(list, parameters);//new ArrayList<Map<String, Object>>();
@@ -220,6 +277,8 @@ public class PersonnelAction extends ActionSupport {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String id = ResultUtils.getRequestParameter(request, "id");
 		Personnel personnel = personnelService.getPersonnelByID(id);
+		List<Personnel> personnels = new ArrayList<Personnel>();
+		personnels.add(personnel);
 		map.put("personnel", personnel);
 		ResultUtils.toJson(response, map);
 		return null;

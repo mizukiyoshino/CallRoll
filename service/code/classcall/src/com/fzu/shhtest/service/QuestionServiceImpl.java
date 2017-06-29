@@ -23,13 +23,13 @@ public class QuestionServiceImpl implements QuestionService {
 		// TODO Auto-generated method stub
 		return questionDao.deleteQuestionByCourseName(cname);
 	}
-
+	/*
 	@Override
 	public boolean updateQuestionByCourseName(Question question) {
 		// TODO Auto-generated method stub
 		return questionDao.updateQuestionByCourseName(question);
 	}
-
+	*/
 	@Override
 	public List getAllQuestion() {
 		// TODO Auto-generated method stub
@@ -55,16 +55,12 @@ public class QuestionServiceImpl implements QuestionService {
 	}
 
 	@Override
-	public Question getQuestionByCoursenameAndIDAndDate(String cname,String ID,Date date) {
+	public List getQuestionByCoursenameAndIDAndDate(String cname,String ID,Date date) {
 		// TODO Auto-generated method stub
 		return questionDao.getQuestionByCoursenameAndIDAndDate(cname,ID,date);
 	}
 
-	@Override
-	public boolean deleteQuestionByID(String ID) {
-		// TODO Auto-generated method stub
-		return questionDao.deleteQuestionByID(ID);
-	}
+	
 
 	@Override
 	public boolean deleteQuestionByCoursenameAndID(String cname, String ID) {
@@ -78,7 +74,13 @@ public class QuestionServiceImpl implements QuestionService {
 		// TODO Auto-generated method stub
 		return questionDao.deleteQuestionByCoursenameAndIDAndDate(cname, ID, date);
 	}
-
+	
+	/*
+	@Override
+	public boolean deleteQuestionByID(String ID) {
+		// TODO Auto-generated method stub
+		return questionDao.deleteQuestionByID(ID);
+	}
 	@Override
 	public boolean updateQuestionByID(String ID) {
 		// TODO Auto-generated method stub
@@ -90,7 +92,8 @@ public class QuestionServiceImpl implements QuestionService {
 		// TODO Auto-generated method stub
 		return questionDao.updateQuestionByCoursenameAndID(cname, ID);
 	}
-
+	*/
+	
 	@Override
 	public boolean updateQuestionByCoursenameAndIDAndDate(String cname,
 			String ID, Date date) {

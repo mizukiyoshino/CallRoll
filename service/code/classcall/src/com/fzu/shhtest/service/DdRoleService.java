@@ -10,6 +10,6 @@ public interface DdRoleService {
 	int createDdRole(DdRole ddRole);
 	boolean deleteDdRoleByName(String dname);
 	DdRole getDdRoleStateByName(String dname);
-	boolean updateDdRoleStateByName(DdRole ddRole);	
+	boolean updateDdRoleStateByName(DdRole ddRole,String oldDname);	
 	List getAllDdRole();	
 }
