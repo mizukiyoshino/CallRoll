@@ -21,7 +21,7 @@ export class SitePage {
   pai: string;
   lie: string;
 
-  public event = '2017-05-10';
+  public time = '2017-05-10';
 
   constructor(public toastCtrl: ToastController,public loadingCtrl: LoadingController,public courseData: RedditData, public globalStorage: GlobalStorage) {
     globalStorage.getStorage('courseName').then(res => {
@@ -69,7 +69,7 @@ export class SitePage {
     let w = this.pai + '*' + this.lie;
 
     this.globalStorage.getStorage('stuId').then(res => {
-      console.log('site page ' + this.c + ' ' + this.event + ' ' + res + ' ' + w)
+      console.log('site page ' + this.c + ' ' + this.time + ' ' + res + ' ' + w)
       this.courseData.createCallTheRoll(this.c, 1, 1, res, w);
     });
 

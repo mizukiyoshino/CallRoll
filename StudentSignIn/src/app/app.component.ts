@@ -9,7 +9,7 @@ import {ListPage} from '../pages/list/list';
 import {LoginOnePage} from '../pages/login-one/login-one'
 import {RedditData} from '../providers/reddit-data';
 import{GlobalStorage} from '../providers/global-storage'
-import{KaoqinPage} from '../pages/kaoqin/kaoqin'
+// import{KaoqinPage} from '../pages/kaoqin/kaoqin'
 import {NormalPage} from '../pages/normal/normal'
 
 @Component({
