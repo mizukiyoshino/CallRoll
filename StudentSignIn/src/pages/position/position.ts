@@ -79,7 +79,10 @@ export class PositionPage {
   }
 
   askForLeave() {
+    this.globalStorage.getStorage('stuId').then(res => {
 
+      this.redditService.updateCallTheRoll(res, '0*0', this.homeItem.cnameAndID.courseName, 2);
+    });
     console.log('position page askForLeave ' + this.homeItem.cnameAndID.courseName);
   }
 }

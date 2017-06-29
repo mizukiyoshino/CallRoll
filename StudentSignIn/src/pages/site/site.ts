@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-import {LoadingController,ToastController} from 'ionic-angular';
+import {LoadingController, ToastController} from 'ionic-angular';
 import {GlobalStorage} from '../../providers/global-storage'
 import {RedditData} from '../../providers/reddit-data'
 
@@ -21,9 +21,9 @@ export class SitePage {
   pai: string;
   lie: string;
 
-  public time = '2017-05-10';
+  // public time = '2017-05-10';
 
-  constructor(public toastCtrl: ToastController,public loadingCtrl: LoadingController,public courseData: RedditData, public globalStorage: GlobalStorage) {
+  constructor(public toastCtrl: ToastController, public loadingCtrl: LoadingController, public courseData: RedditData, public globalStorage: GlobalStorage) {
     globalStorage.getStorage('courseName').then(res => {
       this.c = res;
       console.log('site page ' + res);
@@ -31,8 +31,8 @@ export class SitePage {
         this.site = result.course.shape.split('*');
         this.row = this.site[0];
         this.col = this.site[1];
-        console.log('site page ' + this.row);
-        console.log('site page ' + this.col);
+        console.log('site page row ' + this.row);
+        console.log('site page col ' + this.col);
         this.cols = [];
         this.rows = [];
         for (let i = 1; i <= this.col; i++) {
@@ -69,8 +69,9 @@ export class SitePage {
     let w = this.pai + '*' + this.lie;
 
     this.globalStorage.getStorage('stuId').then(res => {
-      console.log('site page ' + this.c + ' ' + this.time + ' ' + res + ' ' + w)
-      this.courseData.createCallTheRoll(this.c, 1, 1, res, w);
+      console.log('site page ' + this.c + ' ' + res + ' ' + w);
+      this.courseData.updateCallTheRoll(res, w, this.c, 1);
+      console.log('site page final' + this.c + ' ' + res + ' ' + w);
     });
 
 

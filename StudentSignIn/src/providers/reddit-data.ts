@@ -60,4 +60,21 @@ export class RedditData {
       '&coursename=' + cn;
     return this.http.get(url).map(res => res.json());
   }
+
+  getQuestion(cn, id) {
+    let url = this.hurl + '/shhTest/questionaction/getQuestionByCoursenameAndID?courseName=' + cn + '&id=' + id;
+    return this.http.get(url).map(res => res.json());
+  }
+
+  updateCallTheRoll(id, cp, cn, cs) {
+    let url = this.hurl + '/shhTest/calltherollaction/updateCallTheRoll?calldate=1' + '&id=' + id + '&callposition=' + cp
+      + '&coursename=' + cn + '&callstate=' + cs;
+    console.log(url);
+    return this.http.get(url).map(res => res.json());
+  }
+
+  // getCourseByName(cn) {
+  //   let url = this.hurl + '/shhTest/courseaction/getCourseByName?coursename=' + cn;
+  //   return this.http.get(url).map(res => res.json());
+  // }
 }

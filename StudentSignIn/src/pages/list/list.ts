@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {LoadingController,NavController, NavParams} from 'ionic-angular';
 import {GlobalStorage} from '../../providers/global-storage'
 import {RedditData} from '../../providers/reddit-data'
 import {KaoqinPage} from "../kaoqin/kaoqin";
@@ -13,8 +13,10 @@ export class ListPage {
   // icons: string[];
   // items: Array<{title: string, note: string, icon: string}>;
   calltherolls: any;
+  // backimg:string;
+  // items:Array<{img:string, cn:any, cs:any, cd:any}>;
 
-  constructor(public absentData: RedditData, public globalStorage: GlobalStorage, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public loadingCtrl: LoadingController,public absentData: RedditData, public globalStorage: GlobalStorage, public navCtrl: NavController, public navParams: NavParams) {
     // If we navigated to this page, we will have an item available as a nav param
     // this.selectedItem = navParams.get('t');
 
@@ -30,11 +32,22 @@ export class ListPage {
     //     icon: this.icons[Math.floor(Math.random() * this.icons.length)]
     //   });
     // }
+// this.backimg = 'assets/img/background/background-' + [Math.floor(Math.random() * 4) + 1] + '.jpg';
+
     globalStorage.getStorage('stuId').then(res => {
       absentData.getCallTheRollByID(res).subscribe(result => {
         this.calltherolls = result.callTheRolls;
       })
     });
+    // for(let c of this.calltherolls) {
+    //   this.items.push({
+    //     img:this.backimg,
+    //     cn:c.courseName,
+    //     cs:c.callstate,
+    //     cd:c.calldate
+    //   });
+    // }
+
   }
 
   // itemTapped(event, item) {
@@ -44,6 +57,10 @@ export class ListPage {
   //   });
   // }
   gotoKaoqin() {
+    let loading = this.loadingCtrl.create({
+      duration: 2500
+    });
+    loading.present();
     this.navCtrl.push(KaoqinPage);
   }
 }

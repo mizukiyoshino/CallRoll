@@ -1,5 +1,5 @@
-page-list {
-  .card-background-page {
+page-kaoqin {
+  .kaoqincard {
 
     ion-card {
       position: relative;
@@ -16,9 +16,9 @@ page-list {
     }
 
     .card-subtitle {
-      font-size: 1.3em;
+      font-size: 1.0em;
       position: absolute;
-      top: 55%;
+      top: 60%;
       width: 100%;
       color: #fff;
     }
@@ -26,6 +26,13 @@ page-list {
       font-size: 1.0em;
       position: absolute;
       top: 70%;
+      width: 100%;
+      color: #fff;
+    }
+    .card-subtitle-2 {
+      font-size: 1.0em;
+      position: absolute;
+      top: 80%;
       width: 100%;
       color: #fff;
     }

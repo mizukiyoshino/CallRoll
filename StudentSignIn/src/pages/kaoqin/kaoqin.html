@@ -7,17 +7,23 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="kaoqincard">
   <ion-card *ngFor="let item of record">
-    <ion-card-header>
-      课程：{{item.c.cnameAndID.courseName}}
-    </ion-card-header>
-    <ion-card-content>
-      <p>迟到：{{item.l}}次</p>
-      <p>请假：{{item.q}}次</p>
-      <p>旷课：{{item.k}}次</p>
+    <img src="assets/img/background/background-3.jpg">
+    <!--<img src={{backimg}}>-->
+    <div class="card-title">课程：{{item.c.cnameAndID.courseName}}</div>
+    <div class="card-subtitle">迟到：{{item.l}}次</div>
+    <div class="card-subtitle-1">请假：{{item.q}}次</div>
+    <div class="card-subtitle-2">旷课：{{item.k}}次</div>
+    <!--<ion-card-header>-->
+      <!--课程：{{item.c.cnameAndID.courseName}}-->
+    <!--</ion-card-header>-->
+    <!--<ion-card-content>-->
+      <!--<p>迟到：{{item.l}}次</p>-->
+      <!--<p>请假：{{item.q}}次</p>-->
+      <!--<p>旷课：{{item.k}}次</p>-->
 
-    </ion-card-content>
+    <!--</ion-card-content>-->
   </ion-card>
 
 </ion-content>

@@ -7,7 +7,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="card-background-page">
   <!--<ion-list>-->
     <!--<button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">-->
       <!--<ion-icon [name]="item.icon" item-left></ion-icon>-->
@@ -22,12 +22,17 @@
   <!--</div>-->
   <button ion-button="" outline block color="dark" (click)="gotoKaoqin()">查询考勤汇总信息</button>
   <ion-card *ngFor="let item of calltherolls">
-    <ion-card-header>
-      课程：{{item.courseName}}
-    </ion-card-header>
-    <ion-card-content>
-      <p>记录类型:{{item.callstate}}</p>
-      <p>日期：{{item.calldate}}</p>
-    </ion-card-content>
+    <img src="assets/img/background/background-5.jpg">
+    <!--<img src={{backimg}}>-->
+    <div class="card-title">课程：{{item.courseName}}</div>
+    <div class="card-subtitle">记录类型:{{item.callstate}}</div>
+    <div class="card-subtitle-1">日期：{{item.calldate}}</div>
+    <!--<ion-card-header>-->
+      <!--课程：{{item.courseName}}-->
+    <!--</ion-card-header>-->
+    <!--<ion-card-content>-->
+      <!--<p>记录类型:{{item.callstate}}</p>-->
+      <!--<p>日期：{{item.calldate}}</p>-->
+    <!--</ion-card-content>-->
   </ion-card>
 </ion-content>

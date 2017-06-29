@@ -1,5 +1,5 @@
-page-list {
-  .card-background-page {
+page-normal {
+  .normalpage {
 
     ion-card {
       position: relative;
@@ -12,7 +12,7 @@ page-list {
       font-size: 2.0em;
       width: 100%;
       font-weight: bold;
-      color: #fff;
+      color: #000000;
     }
 
     .card-subtitle {
@@ -20,14 +20,14 @@ page-list {
       position: absolute;
       top: 55%;
       width: 100%;
-      color: #fff;
+      color: #000000;
     }
     .card-subtitle-1 {
       font-size: 1.0em;
       position: absolute;
       top: 70%;
       width: 100%;
-      color: #fff;
+      color: #000000;
     }
   }
 }
