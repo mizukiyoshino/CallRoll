@@ -68,7 +68,7 @@ export class RedditData {
 
   updateCallTheRoll(id, cp, cn, cs) {
     let url = this.hurl + '/shhTest/calltherollaction/updateCallTheRoll?calldate=1' + '&id=' + id + '&callposition=' + cp
-      + '&coursename=' + cn + '&callstate=' + cs;
+      + '&coursename=' + cn + '&callstate=' + cs + '&autoid=0';
     console.log(url);
     return this.http.get(url).map(res => res.json());
   }
