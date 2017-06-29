@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 // import {FormGroup, FormControl} from '@angular/forms';
-import {NavParams, NavController} from 'ionic-angular';
+import {NavParams, NavController,LoadingController, ToastController} from 'ionic-angular';
 import {RedditData} from '../../providers/reddit-data';
 import {SitePage} from "../site/site";
 import {GlobalStorage} from '../../providers/global-storage'
@@ -17,7 +17,8 @@ export class PositionPage {
 
   homeItem: any;
 
-  constructor(public globalStorage:GlobalStorage, public navCtrl: NavController, public navParams: NavParams, public redditService: RedditData) {
+  constructor(public toastCtrl: ToastController, public loadingCtrl: LoadingController,public globalStorage:GlobalStorage,
+              public navCtrl: NavController, public navParams: NavParams, public redditService: RedditData) {
     // this.langForm = new FormGroup({
     //   "langs": new FormControl({value: 'rust', disabled: false})
     // });
@@ -79,10 +80,21 @@ export class PositionPage {
   }
 
   askForLeave() {
+    let loading = this.loadingCtrl.create({
+      duration: 1000
+    });
     this.globalStorage.getStorage('stuId').then(res => {
 
       this.redditService.updateCallTheRoll(res, '0*0', this.homeItem.cnameAndID.courseName, 2);
     });
-    console.log('position page askForLeave ' + this.homeItem.cnameAndID.courseName);
+
+    let toast = this.toastCtrl.create({
+      message: '请假申请成功',
+      duration: 1500,
+      position: 'bottom',
+    });
+    toast.present();
+    loading.present();
+    // console.log('position page askForLeave ' + this.homeItem.cnameAndID.courseName);
   }
 }
