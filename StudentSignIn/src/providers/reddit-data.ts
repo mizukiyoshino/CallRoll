@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map';
  */
 @Injectable()
 export class RedditData {
-  // const
+
   hurl = 'http://868179d8.ngrok.io';
   // hurl = 'http://222.76.59.23:8080';
 

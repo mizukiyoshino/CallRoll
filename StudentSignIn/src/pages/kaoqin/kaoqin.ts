@@ -8,11 +8,11 @@ import {RedditData} from '../../providers/reddit-data'
 })
 
 export class KaoqinPage {
-  qj:string[];
-  kk:string[];
+  // qj:string[];
+  // kk:string[];
   id:any;
   courses:any;
-  record:Array<{c:string, q:string, k:string}>
+  record:Array<{c:string, q:string, k:string, l:string}>
 
   constructor(public courseData: RedditData, public globalStorage: GlobalStorage) {
 
@@ -25,23 +25,24 @@ export class KaoqinPage {
           // for(let item of result.marks) {
           //   this.courses.push(item);
           // }
-          this.qj = [];
-          this.kk = [];
+          // this.qj = [];
+          // this.kk = [];
+          this.record = [];
           for(let item of this.courses) {
             this.courseData.countCallTheRoll(this.id, 2, item.cnameAndID.courseName).subscribe(r1 => {
-              this.qj.push(r1.countnum);
-              console.log('kq page res ' + r1.countnum);
+              this.courseData.countCallTheRoll(this.id, 3, item.cnameAndID.courseName).subscribe(r2 => {
+                this.courseData.countCallTheRoll(this.id, 4, item.cnameAndID.courseName).subscribe(r3 => {
+                  this.record.push({c: item, q: r1.countnum, k: r2.countnum, l:r3.countnum});
+                });
+              });
             });
-            this.courseData.countCallTheRoll(this.id, 3, item.cnameAndID.courseName).subscribe(r2 => {
-              this.kk.push(r2.countnum);
-              console.log('kq page res 2 ' + r2.countnum);
-            });
-            this.record = [];
-            for(let i = 0; i < this.courses.length; i++) {
-              this.record.push({c:this.courses[i], q:this.qj[i], k:this.kk[i]});
-              console.log('kq page 1' + this.qj[i]);
-            }
+
           }
+
+          // for(let i = 0; i < this.courses.length; i++) {
+          //   this.record.push({c:this.courses[i], q:this.qj[i], k:this.kk[i]});
+          //   console.log('kq page 1 ' + i );
+          // }
 
           console.log('kq page 2' + result.marks[0].cnameAndID.courseName);
         }

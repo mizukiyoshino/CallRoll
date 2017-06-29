@@ -70,7 +70,7 @@ export class SitePage {
 
     this.globalStorage.getStorage('stuId').then(res => {
       console.log('site page ' + this.c + ' ' + this.event + ' ' + res + ' ' + w)
-      this.courseData.createCallTheRoll(this.c, 1, this.event, res, w);
+      this.courseData.createCallTheRoll(this.c, 1, 1, res, w);
     });
 
 
