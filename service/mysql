@@ -143,12 +143,13 @@ create table question
 /*==============================================================*/
 /* Table: schoolinfo                                            */
 /*==============================================================*/
-create table schoolinfo
+CREATE TABLE schoolinfo
 (
-   school               char(20) not null,
-   college              char(26) not null,
-   department           char(20),
-   primary key (school)
+   school               CHAR(20) NOT NULL,
+   college              CHAR(26) NOT NULL,
+   department           CHAR(20),
+   starttime            DATE,
+   PRIMARY KEY (school)
 );
 
 alter table calltheroll add constraint FK_Reference_12 foreign key (callstate)
@@ -222,7 +223,7 @@ INSERT INTO ddclassdate(dname,classDate) VALUES('星期日',7);
 
 ########################################################################################################################
 #校园信息表
-INSERT INTO schoolinfo VALUES ('福州大学','数学与计算机学院','计算机系');
+INSERT INTO schoolinfo VALUES ('福州大学','数学与计算机学院','计算机系',"2017-3-6");
 ########################################################################################################################
 
 
