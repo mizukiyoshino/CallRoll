@@ -1,0 +1,94 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>设置课程</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-fab top right edge>
+    <button ion-fab mini><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list>
+      <button ion-fab (click)="judge11();find()"><ion-icon>查</ion-icon></button>
+      <button ion-fab (click)="judge22();find2()"><ion-icon>改</ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+  <!--<ion-grid no-lines="">-->
+  <div *ngIf="due">
+  <ion-grid>
+    <ion-row class="row1">
+      <ion-col>课程名</ion-col>
+      <!--<ion-col class="col" style="background:#0fff;opacity:0.5" >账号</ion-col>-->
+      <ion-col  >日常比重</ion-col>
+      <ion-col >期末比重</ion-col>
+      <ion-col >旷课警戒线</ion-col>
+      <ion-col  >节数</ion-col>
+      <ion-col >地点</ion-col>
+      <ion-col >周序</ion-col>
+      <ion-col >学时</ion-col>
+      <ion-col>班级布局</ion-col>
+    </ion-row>
+
+      <ion-row>
+        <ion-col >{{coursename}}</ion-col>
+        <!--<ion-col>{{ID}}</ion-col>-->
+        <ion-col>{{dailyWeight}}</ion-col>
+        <ion-col>{{finalWeight}}</ion-col>
+        <ion-col>{{picketLine}}</ion-col>
+        <ion-col>{{classSession}}</ion-col>
+        <ion-col>{{classLocation}}</ion-col>
+        <ion-col>{{classDate}}</ion-col>
+        <ion-col>{{classOrder}}</ion-col>
+        <ion-col>{{shape}}</ion-col>
+      </ion-row>
+  </ion-grid>
+    </div>
+
+  <!--选项二-->
+    <div *ngIf="due2" class="show2">
+      <ion-grid>
+      <ion-list>
+        <ion-item>
+          <ion-label fixed>课程名</ion-label>
+          <ion-input [(ngModel)]="coursename" disabled=""></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>日常比重</ion-label>
+          <ion-input [(ngModel)]="dailyWeight"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>旷课警戒线</ion-label>
+          <ion-input [(ngModel)]="picketLine"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>节数</ion-label>
+          <ion-input [(ngModel)]="classSession" disabled=""></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>地点</ion-label>
+          <ion-input [(ngModel)]="classLocation" disabled=""></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>周序</ion-label>
+          <ion-input  [(ngModel)]="classDate" disabled=""></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>学时</ion-label>
+          <ion-input [(ngModel)]="classOrder"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label fixed>班级布局</ion-label>
+          <ion-input [(ngModel)]="shape" disabled=""></ion-input>
+        </ion-item>
+
+      </ion-list>
+        <button ion-button (click)="post()">提交</button>
+      </ion-grid>
+    </div>
+<!--选项二-->
+
+  <!--</ion-grid>-->
+
+</ion-content>

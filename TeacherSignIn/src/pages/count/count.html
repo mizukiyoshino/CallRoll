@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>查看考勤统计</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-fab top right edge>
+    <button ion-fab mini><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list>
+      <button ion-fab (click)="judge11();find()"><ion-icon>查</ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+  <!--<ion-grid no-lines="">-->
+  <div *ngIf="due">
+    <ion-grid>
+      <ion-row class="row1">
+        <ion-col>学号</ion-col>
+        <!--<ion-col class="col" style="background:#0fff;opacity:0.5" >账号</ion-col>-->
+        <ion-col>签到数</ion-col>
+        <ion-col>请教数</ion-col>
+        <ion-col>旷课数</ion-col>
+        <ion-col>迟到数</ion-col>
+      </ion-row>
+
+<div class="show3">
+  <ion-row>
+      <ion-col style="width: 20%">
+        <ion-row *ngFor="let i of this.ID">{{i}}</ion-row>
+      </ion-col><ion-col style="width: 20%">
+        <ion-row *ngFor="let q of this.qiandao">{{q}}</ion-row>
+</ion-col><ion-col style="width: 20%">
+          <ion-row *ngFor="let i2 of this.qingjia">{{i2}}</ion-row>
+</ion-col> <ion-col style="width: 20%">
+            <ion-row *ngFor="let i3 of this.kuangke">{{i3}}</ion-row>
+</ion-col>  <ion-col style="width: 20%">
+              <ion-row *ngFor="let i4 of this.chidao">{{i4}}</ion-row>
+</ion-col>
+    </ion-row>
+</div>
+    </ion-grid>
+  </div>
+
+
+  <!--</ion-grid>-->
+
+</ion-content>

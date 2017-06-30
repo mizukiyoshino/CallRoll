@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>设置签到</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-fab top right edge>
+    <button ion-fab mini><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list>
+      <button ion-fab (click)="judge11()"><ion-icon>图</ion-icon></button>
+      <button ion-fab (click)="judge22()"><ion-icon>表</ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+
+
+  <ion-grid *ngIf="judge1">
+    <ion-row *ngFor="let j of this.hangT">
+      <ion-col *ngFor="let i of this.lieT">
+      <button (click)="question(j+1,i+1)">
+        <ion-icon name="person" *ngIf="position[j][i][1]==1" style="font-size: small"><br/>{{position[j][i][0]}}</ion-icon>
+      <ion-icon name="ios-person-outline" *ngIf="position[j][i][1]==0"><br/></ion-icon>
+      </button>
+      <!--<div *ngIf="position[j][i][1]==1" style="background-color: #2ec95c">{{position[j][i][0]}}</div>-->
+      <!--<div *ngIf="position[j][i][1]!=1" style="background-color: #00c21c"> </div>-->
+    <!--</ion-icon>-->
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+  <button ion-button (click)="find()" *ngIf="judge1"full>刷新</button>
+  <button ion-button (click)="start()" *ngIf="judge1" full>開始簽到</button>
+  <label  *ngIf="judge1">请输入时间(eg.4月6日，2017)</label>
+  <ion-item *ngIf="judge1">
+  <ion-datetime  displayFormat="MMM DD YYYY" [(ngModel)]="bcalldate"  *ngIf="judge1" ></ion-datetime>
+  </ion-item>
+    <button ion-button (click)="test()" *ngIf="judge1" full>历史日期测试</button>
+  <div *ngIf="judge1">白色为旷课；点击可提问打分</div>
+  <ion-item *ngIf="judge2">
+ <ion-badge>查看今天的签到情况</ion-badge>
+  </ion-item>
+  <button ion-button (click)="find2()" *ngIf="judge2">刷新</button>
+  <!--<ion-grid no-lines="">-->
+  <div *ngIf="due2" class="show3">
+  <ion-grid>
+
+    <ion-row class="row1">
+      <ion-col class="col" >姓名</ion-col>
+      <ion-col class="col" >学号</ion-col>
+      <ion-col class="col" >签到时间</ion-col>
+      <ion-col class="col"  >签到位置</ion-col>
+      <ion-col class="col" >签到状态</ion-col>
+    </ion-row>
+
+      <ion-row *ngFor="let r of result2">
+        <ion-col >{{r.pname}}</ion-col>
+        <ion-col >{{r.ID}}</ion-col>
+        <ion-col>{{r.calldate}}</ion-col>
+        <ion-col>{{r.callposition}}</ion-col>
+        <ion-col>{{r.callstate}}</ion-col>
+      </ion-row>
+
+
+  </ion-grid>
+  </div>
+  <!--</ion-grid>-->
+  <ion-content>
+
+  </ion-content>
+</ion-content>

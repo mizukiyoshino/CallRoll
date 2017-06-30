@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>查看考勤历史</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-fab top right edge>
+    <button ion-fab mini><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list>
+      <button ion-fab (click)="judge11()"><ion-icon>ID</ion-icon></button>
+      <button ion-fab (click)="judge22()"><ion-icon>TI</ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+  <ion-item *ngIf="judge1">
+    <ion-label floating>学生ID</ion-label>
+    <ion-input type="text" [(ngModel)]="id"></ion-input>
+  </ion-item>
+  <button ion-button (click)="find()" *ngIf="judge1">按学生ID查询</button>
+  <ion-item *ngIf="judge2">
+    <ion-label>开始时间</ion-label>
+    <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="bcalldate"></ion-datetime>
+  </ion-item>
+    <ion-item *ngIf="judge2">
+    <ion-label>截至时间</ion-label>
+    <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="acalldate"></ion-datetime>
+  </ion-item>
+  <button ion-button (click)="find2()" *ngIf="judge2">按时间查询</button>
+  <!--<ion-grid no-lines="">-->
+  <ion-grid>
+    <ion-row class="row1">
+      <ion-col class="col" >学生ID</ion-col>
+      <ion-col class="col" >签到时间</ion-col>
+      <ion-col class="col"  >签到位置</ion-col>
+      <ion-col class="col" >签到状态</ion-col>
+    </ion-row>
+<div *ngIf="due" class="show3">
+  <ion-row *ngFor="let r of result">
+    <ion-col >{{r.ID}}</ion-col>
+    <ion-col>{{r.calldate}}</ion-col>
+    <ion-col>{{r.callposition}}</ion-col>
+    <ion-col>{{r.callstate}}</ion-col>
+  </ion-row>
+</div>
+    <div *ngIf="due2" class="show3">
+      <ion-row *ngFor="let r of result2">
+        <ion-col >{{r.ID}}</ion-col>
+        <ion-col>{{r.calldate}}</ion-col>
+        <ion-col>{{r.callposition}}</ion-col>
+        <ion-col>{{r.callstate}}</ion-col>
+      </ion-row>
+    </div>
+
+  </ion-grid>
+  <!--</ion-grid>-->
+  <ion-content>
+
+  </ion-content>
+</ion-content>

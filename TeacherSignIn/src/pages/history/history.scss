@@ -1,0 +1,40 @@
+page-history{
+  html, body{
+    padding:0;
+    margin:0;
+    position:relative;
+    color:#fff;
+    letter-spacing:1px;
+    font-family:Georgia, "Times New Roman", Times, serif;
+  }
+  #container{
+    padding-top:20px;
+    width:960px;
+    margin:0 auto;
+  }
+  .row1 ion-col{
+    background:#1569ff;
+    color: #000;
+    font-weight: bold;
+    font: 14px/1.5 'Microsoft YaHei',arial,tahoma,\5b8b\4f53,sans-serif;
+  }
+  .show3 ion-row:nth-child(2n){
+    //background: #30d05f !important;
+    color:#fff;
+    background-color:rgba(0,0,1,0.2);
+  }
+  .show3 ion-row:nth-child(2n-1){
+    color:#000;
+    background-color:rgba(333,222,0,0.2);
+  }
+  //ion-col{
+  //  background:#000000;
+  //  text-align: center;
+  //  border: 1px solid #ffffff;
+  //  color: #ffffff;
+  //  font-weight: 800;
+  //}
+  //ion-row{
+  //  margin-bottom: 5px;
+  //}
+}

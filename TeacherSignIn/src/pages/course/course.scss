@@ -1,0 +1,29 @@
+page-course{
+  html, body{
+    padding:0;
+    margin:0;
+    position:relative;
+    color:#fff;
+    letter-spacing:1px;
+    font-family:Georgia, "Times New Roman", Times, serif;
+  }
+  #container{
+    padding-top:20px;
+    width:960px;
+    margin:0 auto;
+  }
+  .row1 ion-col{
+    background:#1569ff;
+    color: #000;
+    font-weight: bold;
+    font: 14px/1.5 'Microsoft YaHei',arial,tahoma,\5b8b\4f53,sans-serif;
+  }
+  .show2 ion-row:nth-child(2n){
+    background: #000 !important;
+    color:#fff;
+  }
+  .show2 ion-row:nth-child(2n-1){
+    background:#fff  !important;
+    color:#000;
+  }
+}
