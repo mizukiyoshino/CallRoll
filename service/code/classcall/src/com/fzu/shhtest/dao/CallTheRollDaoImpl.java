@@ -240,5 +240,15 @@ public class CallTheRollDaoImpl implements CallTheRollDao {
 		maps.put(ID, map);
 		return maps;
 	}
+	@Override
+	public List getCallTheRollBetweenDateAndCoursename(String date1,
+			String date2, String coursename) {
+		// TODO Auto-generated method stub
+		Session session = getSession();
+		String hqlString = "SELECT autoid,courseName,c.ID,d.dname AS callstate,calldate,callposition,Pname FROM calltheroll AS c,ddstate AS d,Personnel AS p WHERE c.callstate=d.callstate AND c.ID=p.ID AND coursename = \'"+coursename+"\' AND c.calldate>=\'"+date1+"\' AND c.calldate<=\'"+date2+"\';";
+		Query query = session.createSQLQuery(hqlString);
+		List list = query.list();
+		return list;
+	}
 	
 }

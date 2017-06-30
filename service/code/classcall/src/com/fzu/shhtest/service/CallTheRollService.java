@@ -31,6 +31,7 @@ public interface CallTheRollService {
 	List getAllCallTheRollHql();
 	List getCallTheRollByDateHql(String date);
 	List getCallTheRollBetweenDateHql(String date1, String date2);
+	List getCallTheRollBetweenDateAndCoursename(String date1,String date2,String coursename);
 	List getCallTheRollByIDHql(String ID);
 	List getCallTheRollByCoursenameHql(String cname);
 }

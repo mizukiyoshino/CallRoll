@@ -20,6 +20,8 @@ public interface CallTheRollDao {
 	List getAllCallTheRoll();
 	List getCallTheRollByDate(Date date);
 	List getCallTheRollBetweenDate(Date date1,Date date2);
+	
+	
 	List getCallTheRollByID(String ID);	
 	List getCallTheRollByCoursename(String cname);
 	List getCallTheRollByIDAndCoursename(String id,String cname);
@@ -29,9 +31,13 @@ public interface CallTheRollDao {
 	Map<String, Map<String, Object>> countAllCallTheRoll(String coursename,String ID);
 	
 	
+	
 	List getAllCallTheRollHql();
 	List getCallTheRollByDateHql(String date);
 	List getCallTheRollBetweenDateHql(String date1,String date2);
+	List getCallTheRollBetweenDateAndCoursename(String date1,String date2,String coursename);
+	
+	
 	List getCallTheRollByIDHql(String ID);	
 	List getCallTheRollByCoursenameHql(String cname);
 }

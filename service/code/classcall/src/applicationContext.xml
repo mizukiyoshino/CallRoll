@@ -93,6 +93,10 @@
 		class="com.fzu.shhtest.controller.CallTheRollAction">
 		<property name="callTheRollService" ref="callTheRollService"></property>
 	</bean>
+	<bean scope="prototype" autowire="byName" id="callTheRollAndMarkAction"
+		class="com.fzu.shhtest.controller.CallTheRollAction">
+		<property name="markService" ref="markService"></property>
+	</bean>
 
 
 

@@ -120,4 +120,10 @@ public class CallTheRollServiceImpl implements CallTheRollService {
 	public Map<String, Map<String, Object>>  countAllCallTheRoll(String coursename,String ID){
 		return callTheRollDao.countAllCallTheRoll(coursename,ID);
 	}	
+	
+
+	@Override
+	public List getCallTheRollBetweenDateAndCoursename(String date1,String date2,String coursename){
+		return callTheRollDao.getCallTheRollBetweenDateAndCoursename(date1, date2, coursename);
+	}
 }

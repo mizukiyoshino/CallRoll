@@ -18,12 +18,17 @@
 		<action name="deletePersonnelByID" class="personnelAction" method="deletePersonnelByID" />
 		<action name="createPersonnel" class="personnelAction" method="createPersonnel" />
 		<action name="updatePersonnel" class="personnelAction" method="updatePersonnel" />
+		<action name="CheckPersonnel" class="personnelAction" method="CheckPersonnel" />
 	</package>
 
 	<package name="courseaction" namespace="/courseaction"
 		extends="struts-default,json-default">
 		<action name="getAllCourse" class="courseAction" method="getAllCourse" />
 		<action name="getCourseByName" class="courseAction" method="getCourseByName" />
+		<action name="getAllCourseHql" class="courseAction" method="getAllCourseHql" />
+		<action name="getCourseByNameHql" class="courseAction" method="getCourseByNameHql" />
+		<action name="getCourseByIDHql" class="courseAction" method="getCourseByIDHql" />
+		
 		<action name="createCourse" class="courseAction" method="createCourse" />
 		<action name="deleteCourseByName" class="courseAction" method="deleteCourseByName" />
 		<action name="updateCourse" class="courseAction" method="updateCourse" />
@@ -31,14 +36,27 @@
 
 	<package name="callTheRollaction" namespace="/calltherollaction"
 		extends="struts-default,json-default">
-		<action name="getAllCallTheRoll" class="callTheRollAction"
-			method="getAllCallTheRoll" />
-		<action name="getCallTheRollByDate" class="callTheRollAction"
-			method="getCallTheRollByDate" />
-		<action name="getCallTheRollByID" class="callTheRollAction"
-			method="getCallTheRollByID" />
-		<action name="getCallTheRollByCoursename" class="callTheRollAction"
-			method="getCallTheRollByCoursename" />
+		<action name="createCallTheRoll" class="callTheRollAction" method="createCallTheRoll" />
+		<action name="deleteCallTheRollByID" class="callTheRollAction" method="deleteCallTheRollByID" />
+		<action name="updateCallTheRoll" class="callTheRollAction" method="updateCallTheRoll" />
+		
+		<action name="getAllCallTheRoll" class="callTheRollAction" method="getAllCallTheRoll" />
+		<action name="getCallTheRollByDate" class="callTheRollAction" method="getCallTheRollByDate" />
+		<action name="getCallTheRollBetweenDate" class="callTheRollAction" method="getCallTheRollBetweenDate" />
+		<action name="getCallTheRollBetweenDateAndCoursename" class="callTheRollAction" method="getCallTheRollBetweenDateAndCoursename" />
+		<action name="getCallTheRollByID" class="callTheRollAction" method="getCallTheRollByID" />
+		<action name="getCallTheRollByCoursename" class="callTheRollAction" method="getCallTheRollByCoursename" />
+		<action name="getCallTheRollByIDAndCoursename" class="callTheRollAction" method="getCallTheRollByIDAndCoursename" />
+		<action name="getCallTheRollByIDAndCoursenameHql" class="callTheRollAction" method="getCallTheRollByIDAndCoursenameHql" />
+		<action name="countCallTheRoll" class="callTheRollAction" method="countCallTheRoll" />
+		<action name="countAllCallTheRoll" class="callTheRollAction" method="countAllCallTheRoll" />
+		<action name="callOverByCoursenameAndDate" class="callTheRollAction" method="callOverByCoursenameAndDate" />
+				
+		<action name="getAllCallTheRollHql" class="callTheRollAction" method="getAllCallTheRollHql" />
+		<action name="getCallTheRollByDateHql" class="callTheRollAction" method="getCallTheRollByDateHql" />
+		<action name="getCallTheRollBetweenDateHql" class="callTheRollAction" method="getCallTheRollBetweenDateHql" />
+		<action name="getCallTheRollByIDHql" class="callTheRollAction" method="getCallTheRollByIDHql" />
+		<action name="getCallTheRollByCoursenameHql" class="callTheRollAction" method="getCallTheRollByCoursenameHql" />
 	</package>
 
 	<package name="markaction" namespace="/markaction"
@@ -47,19 +65,17 @@
 		<action name="getMarkByName" class="markAction" method="getMarkByName" />
 		<action name="getMarkByID" class="markAction" method="getMarkByID" />
 		<action name="getMarkByNameAndID" class="markAction" method="getMarkByNameAndID" />
+		<action name="updateMark" class="markAction" method="updateMark" />
+		<action name="createMark" class="markAction" method="createMark" />
+		<action name="deleteMarkByName" class="markAction" method="deleteMarkByName" />
 	</package>
 	
 	<package name="questionaction" namespace="/questionaction"
 		extends="struts-default,json-default">
 		<action name="createQuestion" class="questionAction" method="createQuestion" />
 		<action name="deleteQuestionByCourseName" class="questionAction" method="deleteQuestionByCourseName" />
-		<action name="deleteQuestionByID" class="questionAction" method="deleteQuestionByID" />
 		<action name="deleteQuestionByCoursenameAndID" class="questionAction" method="deleteQuestionByCoursenameAndID" />
 		<action name="deleteQuestionByCoursenameAndIDAndDate" class="questionAction" method="deleteQuestionByCoursenameAndIDAndDate" />
-	
-		<action name="updateQuestionByCourseName" class="questionAction" method="updateQuestionByCourseName" />
-		<action name="updateQuestionByID" class="questionAction" method="updateQuestionByID" />
-		<action name="updateQuestionByCoursenameAndID" class="questionAction" method="updateQuestionByCoursenameAndID" />
 		<action name="updateQuestionByCoursenameAndIDAndDate" class="questionAction" method="updateQuestionByCoursenameAndIDAndDate" />
 	
 		<action name="getAllQuestion" class="questionAction" method="getAllQuestion" />
@@ -67,7 +83,7 @@
 		<action name="getQuestionByID" class="questionAction" method="getQuestionByID" />
 		<action name="getQuestionByCoursenameAndID" class="questionAction" method="getQuestionByCoursenameAndID" />
 		<action name="getQuestionByCoursenameAndIDAndDate" class="questionAction" method="getQuestionByCoursenameAndIDAndDate" />
-	</package>
+	</package> 
 	
 	<package name="schoolInfoaction" namespace="/schoolInfoaction"
 		extends="struts-default,json-default">
@@ -84,7 +100,6 @@
 
 
 <!--#############################   数据字典         #####################################-->
-
 	<package name="ddRoleaction" namespace="/ddRoleaction"
 		extends="struts-default,json-default">
 		<action name="createDdRole" class="ddRoleAction" method="createDdRole" />
@@ -117,7 +132,6 @@
 		<action name="updateDdStateStateByName" class="ddStateAction" method="updateDdStateStateByName" />
 		<action name="getAllDdState" class="ddStateAction" method="getAllDdState" />
 	</package>
-	
 <!--#############################   数据字典         #####################################-->
 
 </struts> 

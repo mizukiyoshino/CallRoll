@@ -12,26 +12,39 @@
 		<property name="hibernate.hbm2ddl.auto">update</property>
 		<!--<property name="hibernate.current_session_context_class">thread</property> -->
 
-		<mapping resource="com/fzu/shhtest/domain/DdRole.hbm.xml" />
+
+		<!-- <mapping resource="com/fzu/shhtest/domain/DdRole.hbm.xml" />-->
+		<mapping class="com.fzu.shhtest.domain.DdRole" />
+		
 		<!-- <mapping resource="com/fzu/shhtest/domain/DdMajor.hbm.xml" />-->
 		<mapping class="com.fzu.shhtest.domain.DdMajor" />
+		
 		<!-- <mapping resource="com/fzu/shhtest/domain/DdClassDate.hbm.xml" /> -->
 		<mapping class="com.fzu.shhtest.domain.DdClassDate" />
-		<mapping resource="com/fzu/shhtest/domain/DdState.hbm.xml" />
+		
+		<!-- <mapping resource="com/fzu/shhtest/domain/DdState.hbm.xml" /> -->
+		<mapping class="com.fzu.shhtest.domain.DdState" />
 
 
-		<mapping resource="com/fzu/shhtest/domain/Personnel.hbm.xml" />
+
+		<!-- <mapping resource="com/fzu/shhtest/domain/Personnel.hbm.xml" /> -->
+		<mapping class="com.fzu.shhtest.domain.Personnel" />
+		
 		<!-- <mapping resource="com/fzu/shhtest/domain/Course.hbm.xml" /> -->
 		<mapping class="com.fzu.shhtest.domain.Course" />
+		
 		<!-- <mapping resource="com/fzu/shhtest/domain/Question.hbm.xml" /> -->
 		<mapping class="com.fzu.shhtest.domain.Question" />
+		
 		<!-- <mapping resource="com/fzu/shhtest/domain/CallTheRoll.hbm.xml" /> -->
 		<mapping class="com.fzu.shhtest.domain.CallTheRoll" />
+		
 		<!-- <mapping resource="com/fzu/shhtest/domain/Mark.hbm.xml" /> -->
 		<mapping class="com.fzu.shhtest.domain.Mark" />
 
 
-		<mapping resource="com/fzu/shhtest/domain/SchoolInfo.hbm.xml" />
+		<!-- <mapping resource="com/fzu/shhtest/domain/SchoolInfo.hbm.xml" />-->
+		<mapping class="com.fzu.shhtest.domain.SchoolInfo" />
 
 
 	</session-factory>

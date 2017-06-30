@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.ServletActionContext;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.dialect.Ingres10Dialect;
 
 import com.fzu.shhtest.domain.Personnel;
 import com.fzu.shhtest.service.PersonnelService;
@@ -180,29 +181,56 @@ public class PersonnelAction extends ActionSupport {
 		List<Map<String, Object>> maplist = ResultUtils.setResults(list, parameters);//new ArrayList<Map<String, Object>>();
 		map.put("personnels", maplist);
 		ResultUtils.toJson(response, map);
+		
+		
+		
+		
+		/*
+		 * 产生INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('机器学习理论','160327149',3,'2017-3-2','6*4');
 		int j=0;
 		Random random=new Random();
 		int[] ran= {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,3,3,3,3,4};
-		//random.nextInt(ran.length)
-		for(int i=0; i<=2; i++){
+		
+		for(int i=9; i<=55; i++){
 			int q = j;
-			int k = i%9;/*
-			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('电子技术','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-3-2','"+(q+1) +"*"+(k+1)+ "');");
-			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('电子技术','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-3-9','"+(q+1) +"*"+(k+1)+ "');");
-			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('电子技术','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-3-16','"+(q+1) +"*"+(k+1)+ "');");
-			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('电子技术','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-3-23','"+(q+1) +"*"+(k+1)+ "');");
-			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('电子技术','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-3-30','"+(q+1) +"*"+(k+1)+ "');");
-			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('电子技术','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-4-6','"+(q+1) +"*"+(k+1)+ "');");
-			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('电子技术','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-4-13','"+(q+1) +"*"+(k+1)+ "');");
-			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('电子技术','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-4-20','"+(q+1) +"*"+(k+1)+ "');");
-			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('电子技术','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-4-27','"+(q+1) +"*"+(k+1)+ "');");
-			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('电子技术','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-5-4','"+(q+1) +"*"+(k+1)+ "');");
-			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('电子技术','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-5-11','"+(q+1) +"*"+(k+1)+ "');");
-			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('电子技术','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-5-18','"+(q+1) +"*"+(k+1)+ "');");
-			System.out.println();*/
+			int k = i%9;
+			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('机器学习理论','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-3-2','"+(q+1) +"*"+(k+1)+ "');");
+			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('机器学习理论','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-3-9','"+(q+1) +"*"+(k+1)+ "');");
+			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('机器学习理论','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-3-16','"+(q+1) +"*"+(k+1)+ "');");
+			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('机器学习理论','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-3-23','"+(q+1) +"*"+(k+1)+ "');");
+			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('机器学习理论','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-3-30','"+(q+1) +"*"+(k+1)+ "');");
+			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('机器学习理论','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-4-6','"+(q+1) +"*"+(k+1)+ "');");
+			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('机器学习理论','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-4-13','"+(q+1) +"*"+(k+1)+ "');");
+			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('机器学习理论','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-4-20','"+(q+1) +"*"+(k+1)+ "');");
+			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('机器学习理论','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-4-27','"+(q+1) +"*"+(k+1)+ "');");
+			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('机器学习理论','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-5-4','"+(q+1) +"*"+(k+1)+ "');");
+			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('机器学习理论','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-5-11','"+(q+1) +"*"+(k+1)+ "');");
+			System.out.println("INSERT INTO calltheroll (courseName,ID,callstate,calldate,callposition) VALUES ('机器学习理论','1603271"+(i+1)+"',"+ran[random.nextInt(ran.length)]+",'2017-5-18','"+(q+1) +"*"+(k+1)+ "');");
+			System.out.println();
 			if(k==8 && i!=0)
 				++j;
 		}
+		*/
+		
+		/*
+		 * 产生INSERT INTO question (attendanceDate,score,ID,courseName) VALUES ('2017-3-23',81,'160327109','机器学习理论');
+		int j=0;
+		Random random=new Random();
+		String[] dates = {"2017-3-2","2017-3-9","2017-3-16","2017-3-23","2017-3-30","2017-4-6","2017-4-13",
+				"2017-4-20","2017-4-26","2017-5-4","2017-5-11","2017-5-18","2017-5-25","2017-6-2","2017-6-9","2017-6-16"};
+		
+		int[][] ran_dates={{1,5,7,8,12},{2,7,9,15},{3,4,7,9,14,15},{4,7,9,10},{3,5,6,12}
+						,{1,4,7,9,11},{3,8,15},{2,4,6,8,11},{2,3,4,8,9,14,15}};
+		
+		for(int i=10; i<=55; i++){
+			int k = random.nextInt(ran_dates.length);
+			for(int t=0; t<ran_dates[k].length; t++)
+			{
+				System.out.println("INSERT INTO question (attendanceDate,score,ID,courseName) VALUES ('"+dates[ran_dates[k][t]]+"',"+(70+random.nextInt(30))+",'1603271"+i+"','机器学习理论');");	
+			}
+			System.out.println();
+		}
+		*/
 		
 		return null;
 	}

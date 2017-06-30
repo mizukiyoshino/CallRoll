@@ -236,36 +236,7 @@ public class CallTheRollAction extends ActionSupport {
 		ResultUtils.toJson(response, map);
 		return null;
 	}
-	public String getCallTheRollBetweenDateAndCoursename() throws IOException {
-		// id=160327000&coursename=网络工程&bcalldate=2017-06-14&acalldate=2017-06-14
-		HttpServletRequest request = ServletActionContext.getRequest();
-		Map<String, String[]> params = request.getParameterMap();
-		Map<String, String> param = new HashMap<String, String>();
-
-		for (String key : params.keySet()) {
-			String[] values = params.get(key);
-			for (int i = 0; i < values.length; i++) {
-				param.put(key, values[i]);
-			}
-		}
-		String contentType = request.getHeader("Content-Type");
-		String bcalldate = ResultUtils.getPostParameter(param, "bcalldate",
-				contentType);// before
-		String acalldate = ResultUtils.getPostParameter(param, "acalldate",
-				contentType);// after
-		String cname = ResultUtils.getPostParameter(param, "coursename",
-				contentType);// after
-		Date bdate = ResultUtils.stringToDate(bcalldate);
-		Date adate = ResultUtils.stringToDate(acalldate);
-		List<CallTheRoll> callTheRolls = callTheRollService
-				.getCallTheRollBetweenDate(bdate, adate);
-		HttpServletResponse response = ResultUtils
-				.setResponse(ServletActionContext.getResponse());
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("callTheRolls", callTheRolls);
-		ResultUtils.toJson(response, map);
-		return null;
-	}
+	
 
 	public String getCallTheRollByID() throws IOException {
 		HttpServletRequest request = ServletActionContext.getRequest();
@@ -447,8 +418,8 @@ public class CallTheRollAction extends ActionSupport {
 				contentType);// before
 		String acalldate = ResultUtils.getPostParameter(param, "acalldate",
 				contentType);// after
-		Date bdate = ResultUtils.stringToDate(bcalldate);
-		Date adate = ResultUtils.stringToDate(acalldate);
+		//Date bdate = ResultUtils.stringToDate(bcalldate);
+		//Date adate = ResultUtils.stringToDate(acalldate);
 		List<CallTheRoll> callTheRolls = callTheRollService
 				.getCallTheRollBetweenDateHql(bcalldate, acalldate);
 		HttpServletResponse response = ResultUtils
@@ -464,6 +435,42 @@ public class CallTheRollAction extends ActionSupport {
 		ResultUtils.toJson(response, map);
 		return null;
 	}
+	public String getCallTheRollBetweenDateAndCoursename() throws IOException {
+		// id=160327000&coursename=网络工程&bcalldate=2017-06-14&acalldate=2017-06-14
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map<String, String[]> params = request.getParameterMap();
+		Map<String, String> param = new HashMap<String, String>();
+
+		for (String key : params.keySet()) {
+			String[] values = params.get(key);
+			for (int i = 0; i < values.length; i++) {
+				param.put(key, values[i]);
+			}
+		}
+		String contentType = request.getHeader("Content-Type");
+		String bcalldate = ResultUtils.getPostParameter(param, "bcalldate",
+				contentType);// before
+		String acalldate = ResultUtils.getPostParameter(param, "acalldate",
+				contentType);// after
+		String cname = ResultUtils.getPostParameter(param, "coursename",
+				contentType);// after
+		Date bdate = ResultUtils.stringToDate(bcalldate);
+		Date adate = ResultUtils.stringToDate(acalldate);
+		List<CallTheRoll> callTheRolls = callTheRollService.getCallTheRollBetweenDateAndCoursename(bcalldate, acalldate,cname);
+		HttpServletResponse response = ResultUtils
+				.setResponse(ServletActionContext.getResponse());
+		String[] parameters = { "autoid", "courseName", "ID", "callstate",
+				"calldate", "callposition", "pname" };
+		List<Map<String, Object>> maplist = ResultUtils.setResults(
+				callTheRolls, parameters);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("callTheRolls", maplist);
+		ResultUtils.toJson(response, map);
+		return null;
+	}
+	
+	
 
 	public String getCallTheRollByIDHql() throws IOException {
 		HttpServletRequest request = ServletActionContext.getRequest();
@@ -571,10 +578,17 @@ public class CallTheRollAction extends ActionSupport {
 				contentType);
 
 		List<Mark> marks = markService.getMarkByName(coursename);
+		if(marks==null)
+			System.out.println("null of marks : "+marks.size());
+		else
+			System.out.println("yes of marks : "+marks.size());
 		List<Map<String, Map<String, Object>>> counts = new ArrayList<Map<String, Map<String, Object>>>();
+		System.out.println("size of marks : "+marks.size());
 		for (Mark mark : marks) {
-			counts.add(callTheRollService.countAllCallTheRoll(coursename, mark
-					.getCnameAndID().getID()));
+			Map<String, Map<String, Object>> tttmap= callTheRollService.countAllCallTheRoll(coursename, mark
+					.getCnameAndID().getID());
+			
+			counts.add(tttmap);
 		}
 		System.out.println(counts);
 
