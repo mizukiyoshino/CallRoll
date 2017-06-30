@@ -1,1 +1,9 @@
-service read me
+database.xlsx-------------------描述表的功能信息
+
+mysql_createtable---------------创新数据库表
+
+mysql_inittable-----------------初始化数据表的测试数据
+
+code----------------------------存放服务器(ssh)代码
+
+
