@@ -1,0 +1,185 @@
+/*==============================================================*/
+/* DBMS name:      MySQL 5.0                                    */
+/* Created on:     2017/6/10 15:03:41                           */
+/*==============================================================*/
+
+
+drop table if exists DdclassDate;
+
+drop table if exists Ddmajor;
+
+drop table if exists Ddrole;
+
+drop table if exists Ddstate;
+
+drop table if exists calltheroll;
+
+drop table if exists course;
+
+drop table if exists mark;
+
+drop table if exists personnel;
+
+drop table if exists question;
+
+drop table if exists schoolinfo;
+
+/*==============================================================*/
+/* Table: DdclassDate                                           */
+/*==============================================================*/
+create table DdclassDate
+(
+   dname                char(8),
+   classDate            int not null,
+   state                char(6) default '启用',
+   primary key (classDate)
+);
+
+/*==============================================================*/
+/* Table: Ddmajor                                               */
+/*==============================================================*/
+create table Ddmajor
+(
+   dname                char(16),
+   major                int not null,
+   state                char(6) default '启用',
+   primary key (major)
+);
+
+/*==============================================================*/
+/* Table: Ddrole                                                */
+/*==============================================================*/
+create table Ddrole
+(
+   dname                char(10),
+   role                 int not null,
+   state                char(6) default '启用',
+   primary key (role)
+);
+
+/*==============================================================*/
+/* Table: Ddstate                                               */
+/*==============================================================*/
+create table Ddstate
+(
+   dname                char(10),
+   callstate            int not null,
+   state                char(6) default '启用',
+   primary key (callstate)
+);
+
+/*==============================================================*/
+/* Table: calltheroll                                           */
+/*==============================================================*/
+create table calltheroll
+(
+   autoid               bigint not null auto_increment,
+   courseName           char(20),
+   ID                   char(12),
+   callstate            int,
+   calldate             date,
+   callposition         char(7),
+   primary key (autoid)
+);
+
+/*==============================================================*/
+/* Table: course                                                */
+/*==============================================================*/
+create table course
+(
+   courseName           char(20) not null,
+   ID                   char(12),
+   dailyWeight          double,
+   finalWeight          double,
+   picketLine           int,
+   classSession         char(6),
+   classLocation        char(16),
+   classDate            int,
+   classOrder           char(6),
+   shape                char(7),
+   primary key (courseName)
+);
+
+/*==============================================================*/
+/* Table: mark                                                  */
+/*==============================================================*/
+create table mark
+(
+   courseName           char(20) not null,
+   ID                   char(12) not null,
+   dailyScore           double,
+   finalScore           double,
+   markreserve          char(50),
+   primary key (courseName, ID)
+);
+
+/*==============================================================*/
+/* Table: personnel                                             */
+/*==============================================================*/
+create table personnel
+(
+   ID                   char(12) not null,
+   Ppassword            char(12),
+   Pname                char(12),
+   major                int,
+   role                 int,
+   pclass               int,
+   primary key (ID)
+);
+
+/*==============================================================*/
+/* Table: question                                              */
+/*==============================================================*/
+create table question
+(
+   autoid               bigint not null auto_increment,
+   courseName           char(20),
+   ID                   char(12),
+   attendanceDate       date,
+   score                double,
+   primary key (autoid)
+);
+
+/*==============================================================*/
+/* Table: schoolinfo                                            */
+/*==============================================================*/
+CREATE TABLE schoolinfo
+(
+   school               CHAR(20) NOT NULL,
+   college              CHAR(26) NOT NULL,
+   department           CHAR(20),
+   starttime            DATE,
+   PRIMARY KEY (school)
+);
+
+alter table calltheroll add constraint FK_Reference_12 foreign key (callstate)
+      references Ddstate (callstate) on delete cascade on update cascade;
+
+alter table calltheroll add constraint FK_Reference_5 foreign key (ID)
+      references personnel (ID) on delete cascade on update cascade;
+
+alter table calltheroll add constraint FK_Reference_6 foreign key (courseName)
+      references course (courseName) on delete cascade on update cascade;
+
+alter table course add constraint FK_Reference_11 foreign key (classDate)
+      references DdclassDate (classDate) on delete cascade on update cascade;
+
+alter table course add constraint FK_Reference_15 foreign key (ID)
+      references personnel (ID) on delete cascade on update cascade;
+
+alter table mark add constraint FK_Reference_8 foreign key (ID)
+      references personnel (ID) on delete cascade on update cascade;
+
+alter table mark add constraint FK_Reference_9 foreign key (courseName)
+      references course (courseName) on delete cascade on update cascade;
+
+alter table personnel add constraint FK_Reference_13 foreign key (role)
+      references Ddrole (role) on delete cascade on update cascade;
+
+alter table personnel add constraint FK_Reference_14 foreign key (major)
+      references Ddmajor (major) on delete cascade on update cascade;
+
+alter table question add constraint FK_Reference_10 foreign key (courseName, ID)
+      references mark (courseName, ID) on delete cascade on update cascade;
+#新建数据库表
+########################################################################################################################
